@@ -616,10 +616,10 @@ export default function Dashboard() {
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center justify-between bg-slate-950/80 p-2 pl-4 rounded-xl border border-slate-700 shadow-inner">
                       <span className="text-xs text-emerald-400 font-mono truncate w-full pr-2 select-all">
-                        {window.location.origin}/register?invite={teamData.inviteCode}
+                        {window.location.href.split('#')[0]}#/register?invite={teamData.inviteCode}
                       </span>
                       <button onClick={() => {
-                          navigator.clipboard.writeText(`${window.location.origin}/register?invite=${teamData.inviteCode}`);
+                          navigator.clipboard.writeText(`${window.location.href.split('#')[0]}#/register?invite=${teamData.inviteCode}`);
                           alert("Link copied to clipboard!");
                         }} className="bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs px-4 py-3 rounded-lg transition-colors whitespace-nowrap">
                         Copy
