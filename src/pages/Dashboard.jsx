@@ -220,7 +220,7 @@ export default function Dashboard() {
       <div className="max-w-7xl mx-auto bg-slate-900/40 backdrop-blur-2xl border border-emerald-500/10 px-6 py-4 flex justify-between items-center rounded-full shadow-[0_8px_32px_rgba(16,185,129,0.05)] transition-all pointer-events-auto">
          <div className="flex items-center gap-4">
            <div className="w-12 h-12 rounded-xl flex items-center justify-center p-1 bg-white/5 border border-white/10 shadow-inner">
-             <img src="/ecotank-logo.png" alt="EcoTank Logo" className="w-full h-full object-contain drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+             <img src="./ecotank-logo.png" alt="EcoTank Logo" className="w-full h-full object-contain drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
            </div>
            <span className="font-black text-2xl tracking-tighter text-white hidden sm:block">EcoTank <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Hub</span></span>
          </div>
