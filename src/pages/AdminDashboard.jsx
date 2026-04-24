@@ -107,7 +107,7 @@ export default function AdminDashboard() {
       <div className="flex justify-between items-center mb-12">
         <div>
           <h1 className="text-4xl font-bold flex items-center gap-3">
-            <img src="./ecotank-logo.png" alt="Logo" className="w-12 h-12 object-contain drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+            <img src={`${import.meta.env.BASE_URL}ecotank-logo.png`} alt="Logo" className="w-12 h-12 object-contain drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
             Administrative Console
           </h1>
           <p className="text-slate-400 mt-2">Managing EcoTank Platform Data</p>

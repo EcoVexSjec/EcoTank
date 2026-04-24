@@ -45,7 +45,7 @@ export default function LandingPage() {
       <nav className="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-5xl z-50 bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.5)] transition-all">
         <div className="px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src="./logo.png" alt="EcoVex Logo" className="w-8 h-8 object-contain" onError={(e) => { e.target.style.display = 'none'; }} />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="EcoVex Logo" className="w-8 h-8 object-contain" onError={(e) => { e.target.style.display = 'none'; }} />
             <span className="text-lg font-bold tracking-wide">EcoTank</span>
           </div>
           <div className="flex gap-6 items-center">
@@ -85,7 +85,7 @@ export default function LandingPage() {
           <div className="hero-golem relative flex justify-center items-center min-h-[400px]">
              <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-cyan-500/20 rounded-full blur-[80px] animate-pulse pointer-events-none"></div>
              <img 
-               src="./mascot-main.webp" 
+               src={`${import.meta.env.BASE_URL}mascot-main.webp`} 
                alt="Main Mascot" 
                className="w-[120%] max-w-[600px] object-contain relative z-10 mix-blend-screen" 
                style={{
@@ -139,28 +139,28 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Earth */}
             <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6 hover:bg-slate-800/50 hover:border-emerald-500/50 transition-all group backdrop-blur-sm">
-                 <img src="./mascot-earth.webp" alt="Earth" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
+                 <img src={`${import.meta.env.BASE_URL}mascot-earth.webp`} alt="Earth" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
                  <h3 className="text-2xl font-bold mb-3 text-emerald-400">Earth Golem</h3>
                  <p className="text-slate-400 text-sm leading-relaxed font-light">Embodying SDG 11 & 15: Sustainable Cities, structure resilience, and Life on Land conservation.</p>
             </div>
             
             {/* Fire */}
             <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6 hover:bg-slate-800/50 hover:border-orange-500/50 transition-all group backdrop-blur-sm">
-                 <img src="./mascot-fire.webp" alt="Fire" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
+                 <img src={`${import.meta.env.BASE_URL}mascot-fire.webp`} alt="Fire" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
                  <h3 className="text-2xl font-bold mb-3 text-orange-400">Fire Golem</h3>
                  <p className="text-slate-400 text-sm leading-relaxed font-light">Championing SDG 7: Access to affordable, reliable, sustainable, and modern renewable energy.</p>
             </div>
 
             {/* Water */}
             <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6 hover:bg-slate-800/50 hover:border-blue-500/50 transition-all group backdrop-blur-sm">
-                 <img src="./mascot-water.webp" alt="Water" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
+                 <img src={`${import.meta.env.BASE_URL}mascot-water.webp`} alt="Water" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
                  <h3 className="text-2xl font-bold mb-3 text-blue-400">Water Golem</h3>
                  <p className="text-slate-400 text-sm leading-relaxed font-light">Guarding SDG 6 & 14: Clean Water filtration networks and the preservation of Life Below Water.</p>
             </div>
 
             {/* Wind */}
             <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6 hover:bg-slate-800/50 hover:border-cyan-500/50 transition-all group backdrop-blur-sm">
-                 <img src="./mascot-wind.webp" alt="Wind" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
+                 <img src={`${import.meta.env.BASE_URL}mascot-wind.webp`} alt="Wind" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
                  <h3 className="text-2xl font-bold mb-3 text-cyan-400">Wind Golem</h3>
                  <p className="text-slate-400 text-sm leading-relaxed font-light">Advocating SDG 13: Urgent climate action, carbon atmosphere capture, and sky purification.</p>
             </div>
@@ -202,7 +202,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20 text-left">
             <div className="lg:col-span-2">
               <div className="flex items-center gap-3 mb-6">
-                 <img src="./logo.png" alt="EcoVex Logo" className="w-10 h-10 object-contain" onError={(e) => { e.target.style.display = 'none'; }} />
+                 <img src={`${import.meta.env.BASE_URL}logo.png`} alt="EcoVex Logo" className="w-10 h-10 object-contain" onError={(e) => { e.target.style.display = 'none'; }} />
                  <span className="text-2xl font-bold tracking-wide text-white">EcoTank</span>
               </div>
               <p className="text-slate-400 font-light leading-relaxed max-w-sm mb-8">
