@@ -79,7 +79,7 @@ export default function Dashboard() {
 
   // Fetch team logic on load
   useEffect(() => {
-    if (currentUser?.email?.toLowerCase().trim() === 'ecoclub@sjec.ac.in') {
+    if (currentUser?.email?.toLowerCase().trim() === '24g54.roy@sjec.ac.in') {
       navigate('/admin');
       return;
     }

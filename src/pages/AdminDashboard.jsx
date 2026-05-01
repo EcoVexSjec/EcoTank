@@ -15,7 +15,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     // Basic protection: Ensure only the designated admin can use this view
-    if (!currentUser || currentUser.email !== 'ecoclub@sjec.ac.in') {
+    if (!currentUser || currentUser.email !== '24g54.roy@sjec.ac.in') {
       navigate('/login');
       return;
     }
