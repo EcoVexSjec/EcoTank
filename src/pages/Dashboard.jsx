@@ -4,7 +4,7 @@ import { db, storage } from '../firebase/firebase';
 import { doc, getDoc, setDoc, updateDoc, collection, query, where, getDocs, deleteDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, Users, Link as LinkIcon, Sparkles, AlertCircle, CheckCircle2, Globe2, Cpu, User, BookOpen, Camera, Trophy, ShieldCheck, Microscope, Zap, Clock } from 'lucide-react';
+import { LogOut, Users, Link as LinkIcon, Sparkles, AlertCircle, CheckCircle2, Globe2, Cpu, User, BookOpen, Camera, Trophy, ShieldCheck, Microscope, Zap, Clock, Leaf, UserCheck } from 'lucide-react';
 import { gsap } from 'gsap';
 
 export default function Dashboard() {
@@ -27,12 +27,30 @@ export default function Dashboard() {
   const [qualifiedTeams, setQualifiedTeams] = useState([]);
   const [platformSettings, setPlatformSettings] = useState({ showLeaderboard: false, showJudges: false });
   const [leaderboardLoading, setLeaderboardLoading] = useState(true);
+  const [dashboardLoading, setDashboardLoading] = useState(true);
 
   // Customization State
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showRuleModal, setShowRuleModal] = useState(false);
   const [newName, setNewName] = useState('');
   const [avatarUploadLoading, setAvatarUploadLoading] = useState(false);
+
+  const calculateTimeLeft = () => {
+    const targetDate = new Date('2026-05-24T09:00:00');
+    const now = new Date();
+    const difference = targetDate - now;
+    
+    if (difference <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    
+    return {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((difference / 1000 / 60) % 60),
+      seconds: Math.floor((difference / 1000) % 60)
+    };
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   
   const baseSDGs = [
     { num: "06", title: "Clean Water", desc: "Designing infrastructure for planetary water purification and scalable sanitation grids." },
@@ -57,25 +75,12 @@ export default function Dashboard() {
 
   // Handle countdown timer
   useEffect(() => {
-    const targetDate = new Date("May 24, 2026 00:00:00").getTime();
-    
-    const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
-      if (distance < 0) {
-        clearInterval(interval);
-        return;
-      }
-      setTimeLeft({
-        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((distance % (1000 * 60)) / 1000)
-      });
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
     }, 1000);
-    
-    return () => clearInterval(interval);
+    return () => clearInterval(timer);
   }, []);
+
 
   // Fetch team logic on load
   useEffect(() => {
@@ -85,45 +90,51 @@ export default function Dashboard() {
     }
 
     async function fetchTeamAndAutoJoin() {
-      // 1. Fetch team if they already have one
-      if (userData?.teamId) {
-        const tDoc = await getDoc(doc(db, 'teams', userData.teamId));
-        if (tDoc.exists()) {
-          const fetchedTeam = tDoc.data();
-          setTeamData(fetchedTeam);
-          if (fetchedTeam.submissionId) {
-            const sDoc = await getDoc(doc(db, 'submissions', fetchedTeam.submissionId));
-            if (sDoc.exists()) setSubmissionData(sDoc.data());
+      try {
+        if (!currentUser || !userData) return;
+        
+        // 1. Fetch team if they already have one
+        if (userData?.teamId) {
+          const tDoc = await getDoc(doc(db, 'teams', userData.teamId));
+          if (tDoc.exists()) {
+            const fetchedTeam = tDoc.data();
+            setTeamData(fetchedTeam);
+            if (fetchedTeam.submissionId) {
+              const sDoc = await getDoc(doc(db, 'submissions', fetchedTeam.submissionId));
+              if (sDoc.exists()) setSubmissionData(sDoc.data());
+            }
+            if (fetchedTeam.members && fetchedTeam.members.length > 0) {
+              const mems = await Promise.all(fetchedTeam.members.map(async mId => {
+                const uDoc = await getDoc(doc(db, 'users', mId));
+                return uDoc.exists() ? { id: mId, ...uDoc.data() } : null;
+              }));
+              setTeamMembersMeta(mems.filter(m => m !== null));
+            }
           }
-          if (fetchedTeam.members && fetchedTeam.members.length > 0) {
-            const mems = await Promise.all(fetchedTeam.members.map(async mId => {
-              const uDoc = await getDoc(doc(db, 'users', mId));
-              return uDoc.exists() ? { id: mId, ...uDoc.data() } : null;
-            }));
-            setTeamMembersMeta(mems.filter(m => m !== null));
-          }
-        }
-      } else {
-        // 2. Auto-join logic if no team
-        const pendingInvite = localStorage.getItem('pendingInvite');
-        if (pendingInvite && userData?.role === 'member') {
-          try {
-            setLoading(true);
+        } else {
+          // 2. Auto-join logic if no team
+          const pendingInvite = localStorage.getItem('pendingInvite');
+          if (pendingInvite && userData?.role === 'member') {
             const tQuery = query(collection(db, 'teams'), where('inviteCode', '==', pendingInvite));
             const tDocs = await getDocs(tQuery);
             if (!tDocs.empty) {
-               const teamDoc = tDocs.docs[0];
-               if (teamDoc.data().members.length < 4) {
-                 await updateDoc(doc(db, 'teams', teamDoc.id), {
-                    members: [...teamDoc.data().members, currentUser.uid]
-                 });
-                 await updateDoc(doc(db, 'users', currentUser.uid), { teamId: teamDoc.id });
-                 localStorage.removeItem('pendingInvite');
-                 window.location.reload();
-               }
+              const teamDoc = tDocs.docs[0];
+              if (teamDoc.data().members.length < 4) {
+                await updateDoc(doc(db, 'teams', teamDoc.id), {
+                  members: [...teamDoc.data().members, currentUser.uid]
+                });
+                await updateDoc(doc(db, 'users', currentUser.uid), { teamId: teamDoc.id });
+                localStorage.removeItem('pendingInvite');
+                window.location.reload();
+                return;
+              }
             }
-          } catch(e) { console.error("Auto-join failed:", e); }
+          }
         }
+      } catch (err) {
+        console.error("Dashboard fetch error:", err);
+      } finally {
+        setDashboardLoading(false);
       }
     }
     fetchTeamAndAutoJoin();
@@ -150,10 +161,19 @@ export default function Dashboard() {
     fetchLeaderboardConfig();
   }, []);
 
-  if (!currentUser || !userData) {
+  if (!currentUser || !userData || dashboardLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500"></div>
+      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center gap-6">
+        <div className="relative">
+          <div className="w-16 h-16 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin"></div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Leaf className="w-6 h-6 text-emerald-500 animate-pulse" />
+          </div>
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <h2 className="text-xl font-bold tracking-[0.2em] text-white uppercase animate-pulse">Initializing Hub</h2>
+          <p className="text-slate-500 text-xs uppercase tracking-widest font-medium">Syncing Planetary Data...</p>
+        </div>
       </div>
     );
   }
@@ -609,11 +629,11 @@ export default function Dashboard() {
                         <img src={userData.photoURL} alt="Avatar" className="w-10 h-10 rounded-full object-cover border border-emerald-500/30" />
                       ) : (
                         <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center font-bold text-emerald-400">
-                          {userData.name.charAt(0).toUpperCase()}
+                          {(userData.name || 'U').charAt(0).toUpperCase()}
                         </div>
                       )}
                       <div className="flex flex-col text-left">
-                        <span className="font-bold text-white">{userData.name}</span>
+                        <span className="font-bold text-white">{userData.name || 'User'}</span>
                         <span className="text-xs text-emerald-500/60">{userData.email}</span>
                       </div>
                     </div>
@@ -629,12 +649,12 @@ export default function Dashboard() {
                            <img src={member.photoURL} alt="Avatar" className="w-10 h-10 rounded-full object-cover border border-slate-600" />
                          ) : (
                            <div className="w-10 h-10 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center font-bold text-slate-400">
-                             {member.name.charAt(0).toUpperCase()}
+                             {(member.name || 'U').charAt(0).toUpperCase()}
                            </div>
                          )}
                          <div className="flex flex-col text-left">
-                           <span className="font-bold text-slate-200">{member.name}</span>
-                           <span className="text-xs text-slate-500">{member.email}</span>
+                           <span className="font-bold text-slate-200">{member.name || 'Member'}</span>
+                           <span className="text-xs text-slate-500">{member.email || 'Anonymous'}</span>
                          </div>
                        </div>
                        <span className="text-xs font-black tracking-widest bg-slate-800 text-slate-300 px-3 py-1 rounded-md uppercase border border-slate-700/50">
@@ -733,8 +753,8 @@ export default function Dashboard() {
            
            <div className="flex w-max" ref={tickerRef}>
               {SDGs.map((sdg, i) => (
-                <div key={i} className="w-48 sm:w-80 min-h-[100px] mx-2 sm:mx-4 bg-slate-900/80 border border-slate-700/50 p-3 sm:p-6 rounded-xl flex flex-col justify-center hover:border-emerald-500/50 transition-colors shadow-2xl shrink-0">
-                   <div className="flex items-center gap-2 sm:gap-4 mb-1 sm:mb-3">
+                <div key={i} className="w-64 sm:w-80 min-h-[140px] mx-2 sm:mx-4 bg-slate-900/80 border border-slate-700/50 p-4 sm:p-6 rounded-2xl flex flex-col justify-center hover:border-emerald-500/50 transition-colors shadow-2xl shrink-0">
+                   <div className="flex items-center gap-3 sm:gap-4 mb-2 sm:mb-3">
                      <div className="text-2xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-b from-emerald-400 to-slate-800 shrink-0">{sdg.num}</div>
                      <div className="text-xs sm:text-base font-bold text-slate-200 uppercase tracking-widest break-words leading-tight">{sdg.title}</div>
                    </div>
@@ -894,22 +914,22 @@ export default function Dashboard() {
          <div className="max-w-7xl mx-auto">
             {/* Judges (Conditionally Revealed) */}
             {platformSettings?.showJudges && (
-              <div className="text-center mb-32 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                 <h3 className="text-sm font-bold mb-16 text-emerald-500 uppercase tracking-[0.5em]">The Grand Jury</h3>
-                 <div className="grid grid-cols-1 sm:grid-cols-5 gap-12 max-w-7xl mx-auto">
+              <div className="text-center mb-24 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                 <h3 className="text-sm font-bold mb-10 text-emerald-500 uppercase tracking-[0.4em]">The Judges</h3>
+                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-6 max-w-5xl mx-auto">
                     {[
-                      { name: "Dr. Elena Vance", role: "Sustainability Expert", icon: <ShieldCheck className="w-16 h-16 text-emerald-400" /> },
-                      { name: "Prof. Marcus Thorne", role: "Renewable Systems", icon: <Zap className="w-16 h-16 text-cyan-400" /> },
-                      { name: "Sarah Mitchell", role: "VC / Eco-Tech", icon: <Sparkles className="w-16 h-16 text-amber-400" /> },
-                      { name: "James Holden", role: "Climate Policy", icon: <Globe2 className="w-16 h-16 text-indigo-400" /> },
-                      { name: "Dr. Anya Kovar", role: "Enviro Scientist", icon: <Microscope className="w-16 h-16 text-rose-400" /> }
+                      { name: "Dr. Elena Vance", role: "Sustainability" },
+                      { name: "Prof. Marcus Thorne", role: "Renewable" },
+                      { name: "Sarah Mitchell", role: "VC / Eco-Tech" },
+                      { name: "James Holden", role: "Policy Advisor" },
+                      { name: "Dr. Anya Kovar", role: "Enviro Scientist" }
                     ].map((judge, i) => (
-                      <div key={i} className="bg-slate-900/40 border border-slate-800 p-12 rounded-[2.5rem] flex flex-col items-center hover:border-emerald-500/30 transition-all group shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-                         <div className="mb-8 p-6 rounded-3xl bg-slate-800/50 group-hover:scale-110 transition-transform duration-500">
-                            {judge.icon}
+                      <div key={i} className="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl flex flex-col items-center hover:border-emerald-500/20 transition-all group">
+                         <div className="w-16 h-16 rounded-full bg-slate-800/50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <UserCheck className="w-6 h-6 text-slate-600 group-hover:text-emerald-500/50" />
                          </div>
-                         <h4 className="text-white font-bold text-lg mb-3">{judge.name}</h4>
-                         <p className="text-slate-500 text-xs uppercase tracking-widest leading-relaxed text-center">{judge.role}</p>
+                         <h4 className="text-white font-bold text-xs mb-1">{judge.name}</h4>
+                         <p className="text-slate-500 text-[9px] uppercase tracking-widest">{judge.role}</p>
                       </div>
                     ))}
                  </div>
@@ -918,35 +938,35 @@ export default function Dashboard() {
 
             {/* Partner */}
             <div className="text-center mb-32">
-               <h3 className="text-sm font-bold mb-12 text-slate-500 uppercase tracking-[0.5em]">Official Partner</h3>
-               <div className="inline-block bg-slate-900/60 border border-slate-800 p-16 rounded-[3rem] backdrop-blur-md shadow-2xl group hover:border-emerald-500/20 transition-all">
+               <h2 className="text-3xl font-bold mb-20 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Our Partner</h2>
+               <div className="inline-block bg-slate-900/60 border border-slate-800 p-8 rounded-3xl backdrop-blur-md shadow-2xl group hover:border-emerald-500/20 transition-all">
                   <img 
                      src={`${import.meta.env.BASE_URL}sceptix.png`} 
                      alt="Sceptix Logo" 
-                     className="w-64 h-auto object-contain transition-all duration-500" 
+                     className="w-40 sm:w-52 h-auto object-contain transition-all duration-500" 
                   />
                </div>
             </div>
 
             {/* Organizers */}
-            <div className="text-center pb-20">
-               <h3 className="text-sm font-bold mb-20 text-slate-500 uppercase tracking-[0.5em]">Organizing Team</h3>
-               <div className="grid grid-cols-1 sm:grid-cols-3 gap-16 max-w-6xl mx-auto">
+            <div className="text-center">
+               <h2 className="text-3xl font-bold mb-24 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Organizers</h2>
+               <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
                   {[
                     { name: "Sarah Jenkins", role: "Community Manager", img: "ashley.png" },
                     { name: "David Miller", role: "Technical Advisor", img: "santhsim.png" },
                     { name: "Michael Chen", role: "Marketing Head", img: "jeethan.png" }
                   ].map((org, i) => (
                     <div key={i} className="flex flex-col items-center group">
-                      <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-slate-800 group-hover:border-emerald-500/50 transition-all mb-8 shadow-2xl">
+                      <div className="w-40 h-40 sm:w-56 sm:h-56 rounded-full overflow-hidden border-2 border-slate-800 group-hover:border-emerald-500/30 transition-all mb-4 shadow-xl">
                         <img 
                           src={`${import.meta.env.BASE_URL}${org.img}`} 
                           alt={org.name} 
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
                         />
                       </div>
-                      <h4 className="text-white font-bold text-xl mb-2">{org.name}</h4>
-                      <p className="text-slate-500 text-sm font-medium uppercase tracking-widest">{org.role}</p>
+                      <h3 className="text-xl font-bold text-white mb-1">{org.name}</h3>
+                      <p className="text-slate-500 text-sm font-medium">{org.role}</p>
                     </div>
                   ))}
                </div>
