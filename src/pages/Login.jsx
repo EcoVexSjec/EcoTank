@@ -19,7 +19,7 @@ export default function Login() {
       setLoading(true);
       await login(email, password);
       // Hard redirect if admin
-      if (email.toLowerCase().trim() === '24g54.roy@sjec.ac.in') {
+      if (email.toLowerCase().trim() === 'ecoclub@sjec.ac.in') {
         navigate('/admin');
       } else {
         navigate('/dashboard');

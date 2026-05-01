@@ -15,7 +15,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     // Basic protection: Ensure only the designated admin can use this view
-    if (!currentUser || currentUser.email !== '24g54.roy@sjec.ac.in') {
+    if (!currentUser || currentUser.email !== 'ecoclub@sjec.ac.in') {
       navigate('/login');
       return;
     }
@@ -35,9 +35,15 @@ export default function AdminDashboard() {
 
         const settingsDoc = await getDoc(doc(db, 'settings', 'platform'));
         if (settingsDoc.exists()) {
-          setPlatformSettings(settingsDoc.data());
+          setPlatformSettings({ 
+            showLeaderboard: false, 
+            showJudges: false, 
+            ...settingsDoc.data() 
+          });
         } else {
-          await setDoc(doc(db, 'settings', 'platform'), { showLeaderboard: false });
+          const defaultSettings = { showLeaderboard: false, showJudges: false };
+          await setDoc(doc(db, 'settings', 'platform'), defaultSettings);
+          setPlatformSettings(defaultSettings);
         }
 
         setData({ users, teams, submissions });
@@ -94,6 +100,17 @@ export default function AdminDashboard() {
     }
   }
 
+  async function toggleJudgesVisibility() {
+    try {
+      const newStatus = !platformSettings.showJudges;
+      await setDoc(doc(db, 'settings', 'platform'), { showJudges: newStatus }, { merge: true });
+      setPlatformSettings({ ...platformSettings, showJudges: newStatus });
+    } catch (e) {
+      console.error(e);
+      alert('Failed to update judges visibility.');
+    }
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center text-emerald-500">
@@ -117,8 +134,15 @@ export default function AdminDashboard() {
             onClick={toggleLeaderboardVisibility} 
             className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all border ${platformSettings.showLeaderboard ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/50 hover:bg-emerald-500/20' : 'bg-slate-800 text-slate-400 border-slate-700 hover:bg-slate-700'}`}
           >
-            {platformSettings.showLeaderboard ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+            {platformSettings.showLeaderboard ? <Trophy className="w-4 h-4" /> : <ShieldAlert className="w-4 h-4" />}
             {platformSettings.showLeaderboard ? 'Leaderboard Public' : 'Leaderboard Hidden'}
+          </button>
+          <button 
+            onClick={toggleJudgesVisibility} 
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all border ${platformSettings.showJudges ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/50 hover:bg-emerald-500/20' : 'bg-slate-800 text-slate-400 border-slate-700 hover:bg-slate-700'}`}
+          >
+            {platformSettings.showJudges ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+            {platformSettings.showJudges ? 'Judges Revealed' : 'Judges Secret'}
           </button>
           <button onClick={() => navigate('/dashboard')} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition">
             Return to Hub

@@ -4,7 +4,7 @@ import { db, storage } from '../firebase/firebase';
 import { doc, getDoc, setDoc, updateDoc, collection, query, where, getDocs, deleteDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, Users, Link as LinkIcon, Sparkles, AlertCircle, CheckCircle2, Globe2, Cpu, User, BookOpen, Camera, Trophy } from 'lucide-react';
+import { LogOut, Users, Link as LinkIcon, Sparkles, AlertCircle, CheckCircle2, Globe2, Cpu, User, BookOpen, Camera, Trophy, ShieldCheck, Microscope, Zap, Clock } from 'lucide-react';
 import { gsap } from 'gsap';
 
 export default function Dashboard() {
@@ -17,6 +17,7 @@ export default function Dashboard() {
   
   // Dashboard state
   const [teamData, setTeamData] = useState(null);
+  const [teamMembersMeta, setTeamMembersMeta] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [fileLink, setFileLink] = useState('');
   const [submissionData, setSubmissionData] = useState(null);
@@ -24,7 +25,7 @@ export default function Dashboard() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   const [qualifiedTeams, setQualifiedTeams] = useState([]);
-  const [platformSettings, setPlatformSettings] = useState({ showLeaderboard: false });
+  const [platformSettings, setPlatformSettings] = useState({ showLeaderboard: false, showJudges: false });
   const [leaderboardLoading, setLeaderboardLoading] = useState(true);
 
   // Customization State
@@ -78,7 +79,7 @@ export default function Dashboard() {
 
   // Fetch team logic on load
   useEffect(() => {
-    if (currentUser?.email?.toLowerCase().trim() === '24g54.roy@sjec.ac.in') {
+    if (currentUser?.email?.toLowerCase().trim() === 'ecoclub@sjec.ac.in') {
       navigate('/admin');
       return;
     }
@@ -88,10 +89,18 @@ export default function Dashboard() {
       if (userData?.teamId) {
         const tDoc = await getDoc(doc(db, 'teams', userData.teamId));
         if (tDoc.exists()) {
-          setTeamData(tDoc.data());
-          if (tDoc.data().submissionId) {
-            const sDoc = await getDoc(doc(db, 'submissions', tDoc.data().submissionId));
+          const fetchedTeam = tDoc.data();
+          setTeamData(fetchedTeam);
+          if (fetchedTeam.submissionId) {
+            const sDoc = await getDoc(doc(db, 'submissions', fetchedTeam.submissionId));
             if (sDoc.exists()) setSubmissionData(sDoc.data());
+          }
+          if (fetchedTeam.members && fetchedTeam.members.length > 0) {
+            const mems = await Promise.all(fetchedTeam.members.map(async mId => {
+              const uDoc = await getDoc(doc(db, 'users', mId));
+              return uDoc.exists() ? { id: mId, ...uDoc.data() } : null;
+            }));
+            setTeamMembersMeta(mems.filter(m => m !== null));
           }
         }
       } else {
@@ -594,12 +603,45 @@ export default function Dashboard() {
             <div className="bg-slate-800/40 border border-slate-700 p-8 rounded-3xl backdrop-blur-sm shadow-xl flex flex-col">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2 drop-shadow-md">Team Matrix</h2>
               <ul className="space-y-3 mb-8">
-                 <li className="p-4 bg-slate-900/50 border border-slate-700/50 rounded-xl flex items-center justify-between">
-                   <span className="font-bold text-white">{userData.name}</span>
-                   <span className="text-xs font-black tracking-widest bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-md">YOU ({userData.role})</span>
+                 <li className="p-4 bg-slate-900/50 border border-emerald-500/30 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-[0_0_20px_rgba(16,185,129,0.05)]">
+                    <div className="flex items-center gap-3">
+                      {userData.photoURL ? (
+                        <img src={userData.photoURL} alt="Avatar" className="w-10 h-10 rounded-full object-cover border border-emerald-500/30" />
+                      ) : (
+                        <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center font-bold text-emerald-400">
+                          {userData.name.charAt(0).toUpperCase()}
+                        </div>
+                      )}
+                      <div className="flex flex-col text-left">
+                        <span className="font-bold text-white">{userData.name}</span>
+                        <span className="text-xs text-emerald-500/60">{userData.email}</span>
+                      </div>
+                    </div>
+                    <span className="text-xs font-black tracking-widest bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-md uppercase border border-emerald-500/30">
+                      YOU ({userData.role === 'leader' ? 'Leader' : 'Member'})
+                    </span>
                  </li>
-                 {teamData?.members.map(memberId => (
-                   memberId !== currentUser.uid && <li key={memberId} className="p-4 bg-slate-900/50 border border-slate-700/30 rounded-xl text-slate-400 font-medium">Member ID: {memberId.substring(0,6)}...</li>
+                 {teamMembersMeta.map(member => (
+                   member.id !== currentUser.uid && (
+                     <li key={member.id} className="p-4 bg-slate-900/50 border border-slate-700/30 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                       <div className="flex items-center gap-3">
+                         {member.photoURL ? (
+                           <img src={member.photoURL} alt="Avatar" className="w-10 h-10 rounded-full object-cover border border-slate-600" />
+                         ) : (
+                           <div className="w-10 h-10 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center font-bold text-slate-400">
+                             {member.name.charAt(0).toUpperCase()}
+                           </div>
+                         )}
+                         <div className="flex flex-col text-left">
+                           <span className="font-bold text-slate-200">{member.name}</span>
+                           <span className="text-xs text-slate-500">{member.email}</span>
+                         </div>
+                       </div>
+                       <span className="text-xs font-black tracking-widest bg-slate-800 text-slate-300 px-3 py-1 rounded-md uppercase border border-slate-700/50">
+                         {member.role === 'leader' ? 'Leader' : 'Member'}
+                       </span>
+                     </li>
+                   )
                  ))}
               </ul>
                
@@ -691,12 +733,12 @@ export default function Dashboard() {
            
            <div className="flex w-max" ref={tickerRef}>
               {SDGs.map((sdg, i) => (
-                <div key={i} className="w-72 sm:w-80 min-h-[160px] mx-2 sm:mx-4 bg-slate-900/80 border border-slate-700/50 p-6 rounded-2xl flex flex-col justify-center hover:border-emerald-500/50 transition-colors shadow-2xl shrink-0">
-                   <div className="flex items-center gap-4 mb-3">
-                     <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-b from-emerald-400 to-slate-800">{sdg.num}</div>
-                     <div className="text-sm sm:text-base font-bold text-slate-200 uppercase tracking-widest whitespace-nowrap">{sdg.title}</div>
+                <div key={i} className="w-48 sm:w-80 min-h-[100px] mx-2 sm:mx-4 bg-slate-900/80 border border-slate-700/50 p-3 sm:p-6 rounded-xl flex flex-col justify-center hover:border-emerald-500/50 transition-colors shadow-2xl shrink-0">
+                   <div className="flex items-center gap-2 sm:gap-4 mb-1 sm:mb-3">
+                     <div className="text-2xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-b from-emerald-400 to-slate-800 shrink-0">{sdg.num}</div>
+                     <div className="text-xs sm:text-base font-bold text-slate-200 uppercase tracking-widest break-words leading-tight">{sdg.title}</div>
                    </div>
-                   <p className="text-sm text-slate-400 leading-relaxed font-light">{sdg.desc}</p>
+                   <p className="text-[10px] sm:text-sm text-slate-400 leading-relaxed font-light line-clamp-3 sm:line-clamp-none">{sdg.desc}</p>
                 </div>
               ))}
            </div>
@@ -847,6 +889,71 @@ export default function Dashboard() {
          </div>
       </section>
       
+      {/* Partners & Organizers Section */}
+      <section className="py-20 px-6 relative z-10 w-full bg-slate-950/50">
+         <div className="max-w-7xl mx-auto">
+            {/* Judges (Conditionally Revealed) */}
+            {platformSettings?.showJudges && (
+              <div className="text-center mb-24 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                 <h3 className="text-sm font-bold mb-10 text-emerald-500 uppercase tracking-[0.4em]">The Grand Jury</h3>
+                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-6 max-w-5xl mx-auto">
+                    {[
+                      { name: "Dr. Elena Vance", role: "Sustainability", icon: <ShieldCheck className="w-6 h-6 text-emerald-400" /> },
+                      { name: "Prof. Marcus Thorne", role: "Renewable", icon: <Zap className="w-6 h-6 text-cyan-400" /> },
+                      { name: "Sarah Mitchell", role: "VC / Eco-Tech", icon: <Sparkles className="w-6 h-6 text-amber-400" /> },
+                      { name: "James Holden", role: "Policy Advisor", icon: <Globe2 className="w-6 h-6 text-indigo-400" /> },
+                      { name: "Dr. Anya Kovar", role: "Enviro Scientist", icon: <Microscope className="w-6 h-6 text-rose-400" /> }
+                    ].map((judge, i) => (
+                      <div key={i} className="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl flex flex-col items-center hover:border-emerald-500/20 transition-all group">
+                         <div className="mb-4 p-3 rounded-xl bg-slate-800/50 group-hover:scale-110 transition-transform">
+                            {judge.icon}
+                         </div>
+                         <h4 className="text-white font-bold text-xs mb-1">{judge.name}</h4>
+                         <p className="text-slate-500 text-[9px] uppercase tracking-widest">{judge.role}</p>
+                      </div>
+                    ))}
+                 </div>
+              </div>
+            )}
+
+            {/* Partner */}
+            <div className="text-center mb-20">
+               <h3 className="text-sm font-bold mb-8 text-slate-500 uppercase tracking-[0.3em]">Official Partner</h3>
+               <div className="inline-block bg-slate-900/60 border border-slate-800 p-8 rounded-3xl backdrop-blur-md shadow-2xl group hover:border-emerald-500/20 transition-all">
+                  <img 
+                     src={`${import.meta.env.BASE_URL}sceptix.png`} 
+                     alt="Sceptix Logo" 
+                     className="w-40 h-auto object-contain transition-all duration-500" 
+                  />
+               </div>
+            </div>
+
+            {/* Organizers */}
+            <div className="text-center">
+               <h3 className="text-sm font-bold mb-12 text-slate-500 uppercase tracking-[0.3em]">Organizing Team</h3>
+               <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                  {[
+                    { name: "Sarah Jenkins", role: "Community Manager", img: "ashley.png" },
+                    { name: "David Miller", role: "Technical Advisor", img: "santhsim.png" },
+                    { name: "Michael Chen", role: "Marketing Head", img: "jeethan.png" }
+                  ].map((org, i) => (
+                    <div key={i} className="flex flex-col items-center group">
+                      <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-slate-800 group-hover:border-emerald-500/30 transition-all mb-4 shadow-xl">
+                        <img 
+                          src={`${import.meta.env.BASE_URL}${org.img}`} 
+                          alt={org.name} 
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                        />
+                      </div>
+                      <h4 className="text-white font-bold text-sm mb-1">{org.name}</h4>
+                      <p className="text-slate-500 text-[10px] font-medium">{org.role}</p>
+                    </div>
+                  ))}
+               </div>
+            </div>
+         </div>
+      </section>
+
       {GlobalModals()}
     </div>
   );
