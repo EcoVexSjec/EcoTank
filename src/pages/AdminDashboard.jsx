@@ -129,22 +129,25 @@ export default function AdminDashboard() {
           </h1>
           <p className="text-slate-400 mt-2">Managing EcoTank Platform Data</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 flex-wrap justify-end">
+          {/* v1.0.2 - Forced Refresh */}
           <button 
             onClick={toggleLeaderboardVisibility} 
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all border ${platformSettings.showLeaderboard ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/50 hover:bg-emerald-500/20' : 'bg-slate-800 text-slate-400 border-slate-700 hover:bg-slate-700'}`}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl font-bold transition-all border ${platformSettings.showLeaderboard ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]' : 'bg-slate-800 text-slate-400 border-slate-700'}`}
           >
             {platformSettings.showLeaderboard ? <Trophy className="w-4 h-4" /> : <ShieldAlert className="w-4 h-4" />}
             {platformSettings.showLeaderboard ? 'Leaderboard Public' : 'Leaderboard Hidden'}
           </button>
+
           <button 
             onClick={toggleJudgesVisibility} 
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all border ${platformSettings.showJudges ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/50 hover:bg-emerald-500/20' : 'bg-slate-800 text-slate-400 border-slate-700 hover:bg-slate-700'}`}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl font-bold transition-all border ${platformSettings.showJudges ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]' : 'bg-slate-800 text-slate-400 border-slate-700'}`}
           >
-            {platformSettings.showJudges ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
-            {platformSettings.showJudges ? 'Judges Revealed' : 'Judges Secret'}
+            {platformSettings?.showJudges ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+            {platformSettings?.showJudges ? 'Judges Revealed' : 'Judges Secret'}
           </button>
-          <button onClick={() => navigate('/dashboard')} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition">
+
+          <button onClick={() => navigate('/dashboard')} className="px-4 py-2 bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-300 rounded-xl transition-all font-medium">
             Return to Hub
           </button>
         </div>
