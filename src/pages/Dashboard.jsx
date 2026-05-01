@@ -895,21 +895,21 @@ export default function Dashboard() {
             {/* Judges (Conditionally Revealed) */}
             {platformSettings?.showJudges && (
               <div className="text-center mb-32 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                 <h3 className="text-sm font-bold mb-12 text-emerald-500 uppercase tracking-[0.4em]">The Grand Jury</h3>
-                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-8 max-w-6xl mx-auto">
+                 <h3 className="text-sm font-bold mb-16 text-emerald-500 uppercase tracking-[0.5em]">The Grand Jury</h3>
+                 <div className="grid grid-cols-1 sm:grid-cols-5 gap-12 max-w-7xl mx-auto">
                     {[
-                      { name: "Dr. Elena Vance", role: "Sustainability", icon: <ShieldCheck className="w-10 h-10 text-emerald-400" /> },
-                      { name: "Prof. Marcus Thorne", role: "Renewable", icon: <Zap className="w-10 h-10 text-cyan-400" /> },
-                      { name: "Sarah Mitchell", role: "VC / Eco-Tech", icon: <Sparkles className="w-10 h-10 text-amber-400" /> },
-                      { name: "James Holden", role: "Policy Advisor", icon: <Globe2 className="w-10 h-10 text-indigo-400" /> },
-                      { name: "Dr. Anya Kovar", role: "Enviro Scientist", icon: <Microscope className="w-10 h-10 text-rose-400" /> }
+                      { name: "Dr. Elena Vance", role: "Sustainability Expert", icon: <ShieldCheck className="w-16 h-16 text-emerald-400" /> },
+                      { name: "Prof. Marcus Thorne", role: "Renewable Systems", icon: <Zap className="w-16 h-16 text-cyan-400" /> },
+                      { name: "Sarah Mitchell", role: "VC / Eco-Tech", icon: <Sparkles className="w-16 h-16 text-amber-400" /> },
+                      { name: "James Holden", role: "Climate Policy", icon: <Globe2 className="w-16 h-16 text-indigo-400" /> },
+                      { name: "Dr. Anya Kovar", role: "Enviro Scientist", icon: <Microscope className="w-16 h-16 text-rose-400" /> }
                     ].map((judge, i) => (
-                      <div key={i} className="bg-slate-900/40 border border-slate-800 p-8 rounded-3xl flex flex-col items-center hover:border-emerald-500/20 transition-all group shadow-2xl">
-                         <div className="mb-6 p-4 rounded-2xl bg-slate-800/50 group-hover:scale-110 transition-transform">
+                      <div key={i} className="bg-slate-900/40 border border-slate-800 p-12 rounded-[2.5rem] flex flex-col items-center hover:border-emerald-500/30 transition-all group shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                         <div className="mb-8 p-6 rounded-3xl bg-slate-800/50 group-hover:scale-110 transition-transform duration-500">
                             {judge.icon}
                          </div>
-                         <h4 className="text-white font-bold text-sm mb-2">{judge.name}</h4>
-                         <p className="text-slate-500 text-[10px] uppercase tracking-widest leading-relaxed">{judge.role}</p>
+                         <h4 className="text-white font-bold text-lg mb-3">{judge.name}</h4>
+                         <p className="text-slate-500 text-xs uppercase tracking-widest leading-relaxed text-center">{judge.role}</p>
                       </div>
                     ))}
                  </div>
@@ -917,36 +917,36 @@ export default function Dashboard() {
             )}
 
             {/* Partner */}
-            <div className="text-center mb-20">
-               <h3 className="text-sm font-bold mb-8 text-slate-500 uppercase tracking-[0.3em]">Official Partner</h3>
-               <div className="inline-block bg-slate-900/60 border border-slate-800 p-8 rounded-3xl backdrop-blur-md shadow-2xl group hover:border-emerald-500/20 transition-all">
+            <div className="text-center mb-32">
+               <h3 className="text-sm font-bold mb-12 text-slate-500 uppercase tracking-[0.5em]">Official Partner</h3>
+               <div className="inline-block bg-slate-900/60 border border-slate-800 p-16 rounded-[3rem] backdrop-blur-md shadow-2xl group hover:border-emerald-500/20 transition-all">
                   <img 
                      src={`${import.meta.env.BASE_URL}sceptix.png`} 
                      alt="Sceptix Logo" 
-                     className="w-40 h-auto object-contain transition-all duration-500" 
+                     className="w-64 h-auto object-contain transition-all duration-500" 
                   />
                </div>
             </div>
 
             {/* Organizers */}
-            <div className="text-center">
-               <h3 className="text-sm font-bold mb-12 text-slate-500 uppercase tracking-[0.3em]">Organizing Team</h3>
-               <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div className="text-center pb-20">
+               <h3 className="text-sm font-bold mb-20 text-slate-500 uppercase tracking-[0.5em]">Organizing Team</h3>
+               <div className="grid grid-cols-1 sm:grid-cols-3 gap-16 max-w-6xl mx-auto">
                   {[
                     { name: "Sarah Jenkins", role: "Community Manager", img: "ashley.png" },
                     { name: "David Miller", role: "Technical Advisor", img: "santhsim.png" },
                     { name: "Michael Chen", role: "Marketing Head", img: "jeethan.png" }
                   ].map((org, i) => (
                     <div key={i} className="flex flex-col items-center group">
-                      <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-slate-800 group-hover:border-emerald-500/30 transition-all mb-4 shadow-xl">
+                      <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-slate-800 group-hover:border-emerald-500/50 transition-all mb-8 shadow-2xl">
                         <img 
                           src={`${import.meta.env.BASE_URL}${org.img}`} 
                           alt={org.name} 
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                         />
                       </div>
-                      <h4 className="text-white font-bold text-sm mb-1">{org.name}</h4>
-                      <p className="text-slate-500 text-[10px] font-medium">{org.role}</p>
+                      <h4 className="text-white font-bold text-xl mb-2">{org.name}</h4>
+                      <p className="text-slate-500 text-sm font-medium uppercase tracking-widest">{org.role}</p>
                     </div>
                   ))}
                </div>

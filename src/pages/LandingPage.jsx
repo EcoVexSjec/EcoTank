@@ -210,25 +210,25 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           {/* Judges Section (Conditionally Revealed) */}
           {platformSettings.showJudges && (
-            <div className="text-center mb-32 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-               <h2 className="text-3xl font-bold mb-4 tracking-tight text-emerald-400 uppercase tracking-[0.3em]">The Grand Jury</h2>
-               <p className="text-slate-400 mb-16 max-w-2xl mx-auto font-light">The panel of experts who will evaluate your breakthrough technologies on the final day.</p>
+            <div className="text-center mb-40 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+               <h2 className="text-3xl font-bold mb-6 tracking-tight text-emerald-400 uppercase tracking-[0.4em]">The Grand Jury</h2>
+               <p className="text-slate-400 mb-20 max-w-2xl mx-auto font-light text-xl">The panel of world-class experts evaluating your breakthrough technologies.</p>
                
-               <div className="grid grid-cols-2 md:grid-cols-5 gap-10">
+               <div className="grid grid-cols-1 md:grid-cols-5 gap-12 max-w-7xl mx-auto">
                  {[
-                   { name: "Dr. Elena Vance", role: "Sustainability Expert", icon: <ShieldCheck className="w-12 h-12 text-emerald-400" /> },
-                   { name: "Prof. Marcus Thorne", role: "Renewable Systems", icon: <Zap className="w-12 h-12 text-cyan-400" /> },
-                   { name: "Sarah Mitchell", role: "VC / Eco-Tech", icon: <Sparkles className="w-12 h-12 text-amber-400" /> },
-                   { name: "James Holden", role: "Policy Advisor", icon: <Globe2 className="w-12 h-12 text-indigo-400" /> },
-                   { name: "Dr. Anya Kovar", role: "Environmental Sci.", icon: <Microscope className="w-12 h-12 text-rose-400" /> }
+                   { name: "Dr. Elena Vance", role: "Sustainability Expert", icon: <ShieldCheck className="w-16 h-16 text-emerald-400" /> },
+                   { name: "Prof. Marcus Thorne", role: "Renewable Systems", icon: <Zap className="w-16 h-16 text-cyan-400" /> },
+                   { name: "Sarah Mitchell", role: "VC / Eco-Tech", icon: <Sparkles className="w-16 h-16 text-amber-400" /> },
+                   { name: "James Holden", role: "Climate Policy", icon: <Globe2 className="w-16 h-16 text-indigo-400" /> },
+                   { name: "Dr. Anya Kovar", role: "Environmental Sci.", icon: <Microscope className="w-16 h-16 text-rose-400" /> }
                  ].map((judge, i) => (
                    <div key={i} className="flex flex-col items-center group">
-                      <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl bg-slate-900 border border-white/10 flex items-center justify-center mb-8 group-hover:border-emerald-500/50 group-hover:bg-slate-800 transition-all duration-500 shadow-2xl relative overflow-hidden">
+                      <div className="w-40 h-40 rounded-[2.5rem] bg-slate-900 border border-white/10 flex items-center justify-center mb-10 group-hover:border-emerald-500/50 group-hover:bg-slate-800 transition-all duration-700 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         {judge.icon}
                       </div>
-                      <h4 className="text-white font-bold text-lg mb-2">{judge.name}</h4>
-                      <p className="text-slate-500 text-xs uppercase tracking-widest">{judge.role}</p>
+                      <h4 className="text-white font-bold text-xl mb-2">{judge.name}</h4>
+                      <p className="text-slate-500 text-sm uppercase tracking-widest text-center">{judge.role}</p>
                    </div>
                  ))}
                </div>
@@ -236,36 +236,36 @@ export default function LandingPage() {
           )}
 
           {/* Partner Singular */}
-          <div className="text-center mb-24">
-            <h2 className="text-3xl font-bold mb-12 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Our Partner</h2>
-            <div className="inline-block bg-slate-900/40 border border-white/5 p-12 rounded-3xl backdrop-blur-sm hover:border-emerald-500/30 transition-all group shadow-2xl">
+          <div className="text-center mb-40">
+            <h2 className="text-3xl font-bold mb-16 tracking-tight text-slate-300 uppercase tracking-[0.4em]">Our Partner</h2>
+            <div className="inline-block bg-slate-900/40 border border-white/5 p-20 rounded-[3.5rem] backdrop-blur-sm hover:border-emerald-500/30 transition-all group shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
               <img 
                 src={`${import.meta.env.BASE_URL}sceptix.png`} 
                 alt="Sceptix Logo" 
-                className="w-48 sm:w-64 h-auto object-contain transition-all duration-500" 
+                className="w-80 h-auto object-contain transition-all duration-500" 
               />
             </div>
           </div>
 
           {/* Organizers */}
-          <div className="text-center">
-            <h2 className="text-3xl font-bold mb-16 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Organizers</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+          <div className="text-center pb-20">
+            <h2 className="text-3xl font-bold mb-20 tracking-tight text-slate-300 uppercase tracking-[0.4em]">Organizers</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-20 max-w-6xl mx-auto">
               {[
                 { name: "Sarah Jenkins", role: "Community Manager", img: "ashley.png" },
                 { name: "David Miller", role: "Technical Advisor", img: "santhsim.png" },
                 { name: "Michael Chen", role: "Marketing Head", img: "jeethan.png" }
               ].map((org, i) => (
                 <div key={i} className="flex flex-col items-center group">
-                  <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-slate-800 group-hover:border-emerald-500/50 transition-all duration-500 mb-6 shadow-2xl">
+                  <div className="w-56 h-56 rounded-full overflow-hidden border-4 border-slate-800 group-hover:border-emerald-500/50 transition-all duration-500 mb-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                     <img 
                       src={`${import.meta.env.BASE_URL}${org.img}`} 
                       alt={org.name} 
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                     />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-1">{org.name}</h3>
-                  <p className="text-slate-500 text-sm font-medium">{org.role}</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">{org.name}</h3>
+                  <p className="text-slate-500 text-base font-medium uppercase tracking-widest">{org.role}</p>
                 </div>
               ))}
             </div>
