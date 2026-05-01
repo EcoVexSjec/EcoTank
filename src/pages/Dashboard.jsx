@@ -4,7 +4,7 @@ import { db, storage } from '../firebase/firebase';
 import { doc, getDoc, setDoc, updateDoc, collection, query, where, getDocs, deleteDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, Users, Link as LinkIcon, Sparkles, AlertCircle, CheckCircle2, Globe2, Cpu, User, BookOpen, Camera, Trophy, ShieldCheck, Microscope, Zap, Clock, Leaf, UserCheck } from 'lucide-react';
+import { LogOut, Users, Link as LinkIcon, Sparkles, AlertCircle, CheckCircle2, Globe2, Cpu, User, BookOpen, Camera, Trophy, ShieldCheck, Microscope, Zap, Clock } from 'lucide-react';
 import { gsap } from 'gsap';
 
 export default function Dashboard() {
@@ -27,30 +27,12 @@ export default function Dashboard() {
   const [qualifiedTeams, setQualifiedTeams] = useState([]);
   const [platformSettings, setPlatformSettings] = useState({ showLeaderboard: false, showJudges: false });
   const [leaderboardLoading, setLeaderboardLoading] = useState(true);
-  const [dashboardLoading, setDashboardLoading] = useState(true);
 
   // Customization State
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showRuleModal, setShowRuleModal] = useState(false);
   const [newName, setNewName] = useState('');
   const [avatarUploadLoading, setAvatarUploadLoading] = useState(false);
-
-  const calculateTimeLeft = () => {
-    const targetDate = new Date('2026-05-24T09:00:00');
-    const now = new Date();
-    const difference = targetDate - now;
-    
-    if (difference <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    
-    return {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((difference / 1000 / 60) % 60),
-      seconds: Math.floor((difference / 1000) % 60)
-    };
-  };
-
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   
   const baseSDGs = [
     { num: "06", title: "Clean Water", desc: "Designing infrastructure for planetary water purification and scalable sanitation grids." },
@@ -75,12 +57,25 @@ export default function Dashboard() {
 
   // Handle countdown timer
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
+    const targetDate = new Date("May 24, 2026 00:00:00").getTime();
+    
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      if (distance < 0) {
+        clearInterval(interval);
+        return;
+      }
+      setTimeLeft({
+        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((distance % (1000 * 60)) / 1000)
+      });
     }, 1000);
-    return () => clearInterval(timer);
+    
+    return () => clearInterval(interval);
   }, []);
-
 
   // Fetch team logic on load
   useEffect(() => {
@@ -90,51 +85,45 @@ export default function Dashboard() {
     }
 
     async function fetchTeamAndAutoJoin() {
-      try {
-        if (!currentUser || !userData) return;
-        
-        // 1. Fetch team if they already have one
-        if (userData?.teamId) {
-          const tDoc = await getDoc(doc(db, 'teams', userData.teamId));
-          if (tDoc.exists()) {
-            const fetchedTeam = tDoc.data();
-            setTeamData(fetchedTeam);
-            if (fetchedTeam.submissionId) {
-              const sDoc = await getDoc(doc(db, 'submissions', fetchedTeam.submissionId));
-              if (sDoc.exists()) setSubmissionData(sDoc.data());
-            }
-            if (fetchedTeam.members && fetchedTeam.members.length > 0) {
-              const mems = await Promise.all(fetchedTeam.members.map(async mId => {
-                const uDoc = await getDoc(doc(db, 'users', mId));
-                return uDoc.exists() ? { id: mId, ...uDoc.data() } : null;
-              }));
-              setTeamMembersMeta(mems.filter(m => m !== null));
-            }
+      // 1. Fetch team if they already have one
+      if (userData?.teamId) {
+        const tDoc = await getDoc(doc(db, 'teams', userData.teamId));
+        if (tDoc.exists()) {
+          const fetchedTeam = tDoc.data();
+          setTeamData(fetchedTeam);
+          if (fetchedTeam.submissionId) {
+            const sDoc = await getDoc(doc(db, 'submissions', fetchedTeam.submissionId));
+            if (sDoc.exists()) setSubmissionData(sDoc.data());
           }
-        } else {
-          // 2. Auto-join logic if no team
-          const pendingInvite = localStorage.getItem('pendingInvite');
-          if (pendingInvite && userData?.role === 'member') {
+          if (fetchedTeam.members && fetchedTeam.members.length > 0) {
+            const mems = await Promise.all(fetchedTeam.members.map(async mId => {
+              const uDoc = await getDoc(doc(db, 'users', mId));
+              return uDoc.exists() ? { id: mId, ...uDoc.data() } : null;
+            }));
+            setTeamMembersMeta(mems.filter(m => m !== null));
+          }
+        }
+      } else {
+        // 2. Auto-join logic if no team
+        const pendingInvite = localStorage.getItem('pendingInvite');
+        if (pendingInvite && userData?.role === 'member') {
+          try {
+            setLoading(true);
             const tQuery = query(collection(db, 'teams'), where('inviteCode', '==', pendingInvite));
             const tDocs = await getDocs(tQuery);
             if (!tDocs.empty) {
-              const teamDoc = tDocs.docs[0];
-              if (teamDoc.data().members.length < 4) {
-                await updateDoc(doc(db, 'teams', teamDoc.id), {
-                  members: [...teamDoc.data().members, currentUser.uid]
-                });
-                await updateDoc(doc(db, 'users', currentUser.uid), { teamId: teamDoc.id });
-                localStorage.removeItem('pendingInvite');
-                window.location.reload();
-                return;
-              }
+               const teamDoc = tDocs.docs[0];
+               if (teamDoc.data().members.length < 4) {
+                 await updateDoc(doc(db, 'teams', teamDoc.id), {
+                    members: [...teamDoc.data().members, currentUser.uid]
+                 });
+                 await updateDoc(doc(db, 'users', currentUser.uid), { teamId: teamDoc.id });
+                 localStorage.removeItem('pendingInvite');
+                 window.location.reload();
+               }
             }
-          }
+          } catch(e) { console.error("Auto-join failed:", e); }
         }
-      } catch (err) {
-        console.error("Dashboard fetch error:", err);
-      } finally {
-        setDashboardLoading(false);
       }
     }
     fetchTeamAndAutoJoin();
@@ -161,19 +150,10 @@ export default function Dashboard() {
     fetchLeaderboardConfig();
   }, []);
 
-  if (!currentUser || !userData || dashboardLoading) {
+  if (!currentUser || !userData) {
     return (
-      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center gap-6">
-        <div className="relative">
-          <div className="w-16 h-16 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin"></div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Leaf className="w-6 h-6 text-emerald-500 animate-pulse" />
-          </div>
-        </div>
-        <div className="flex flex-col items-center gap-2">
-          <h2 className="text-xl font-bold tracking-[0.2em] text-white uppercase animate-pulse">Initializing Hub</h2>
-          <p className="text-slate-500 text-xs uppercase tracking-widest font-medium">Syncing Planetary Data...</p>
-        </div>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500"></div>
       </div>
     );
   }
@@ -629,11 +609,11 @@ export default function Dashboard() {
                         <img src={userData.photoURL} alt="Avatar" className="w-10 h-10 rounded-full object-cover border border-emerald-500/30" />
                       ) : (
                         <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center font-bold text-emerald-400">
-                          {(userData.name || 'U').charAt(0).toUpperCase()}
+                          {userData.name.charAt(0).toUpperCase()}
                         </div>
                       )}
                       <div className="flex flex-col text-left">
-                        <span className="font-bold text-white">{userData.name || 'User'}</span>
+                        <span className="font-bold text-white">{userData.name}</span>
                         <span className="text-xs text-emerald-500/60">{userData.email}</span>
                       </div>
                     </div>
@@ -649,12 +629,12 @@ export default function Dashboard() {
                            <img src={member.photoURL} alt="Avatar" className="w-10 h-10 rounded-full object-cover border border-slate-600" />
                          ) : (
                            <div className="w-10 h-10 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center font-bold text-slate-400">
-                             {(member.name || 'U').charAt(0).toUpperCase()}
+                             {member.name.charAt(0).toUpperCase()}
                            </div>
                          )}
                          <div className="flex flex-col text-left">
-                           <span className="font-bold text-slate-200">{member.name || 'Member'}</span>
-                           <span className="text-xs text-slate-500">{member.email || 'Anonymous'}</span>
+                           <span className="font-bold text-slate-200">{member.name}</span>
+                           <span className="text-xs text-slate-500">{member.email}</span>
                          </div>
                        </div>
                        <span className="text-xs font-black tracking-widest bg-slate-800 text-slate-300 px-3 py-1 rounded-md uppercase border border-slate-700/50">
