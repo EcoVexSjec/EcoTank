@@ -8,7 +8,7 @@ import { LogOut, Users, Link as LinkIcon, Sparkles, AlertCircle, CheckCircle2, G
 import { gsap } from 'gsap';
 
 export default function Dashboard() {
-  const { currentUser, userData, logout } = useAuth();
+  const { currentUser, userData, loading: authLoading, logout } = useAuth();
   const navigate = useNavigate();
   const [teamName, setTeamName] = useState('');
   const [inviteCodeInput, setInviteCodeInput] = useState('');
@@ -77,8 +77,9 @@ export default function Dashboard() {
     return () => clearInterval(interval);
   }, []);
 
-  // Fetch team logic on load
   useEffect(() => {
+    if (authLoading) return;
+
     if (currentUser?.email?.toLowerCase().trim() === '24g54.roy@sjec.ac.in') {
       navigate('/admin');
       return;
@@ -906,7 +907,7 @@ export default function Dashboard() {
                     ].map((judge, i) => (
                       <div key={i} className="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl flex flex-col items-center hover:border-emerald-500/20 transition-all group">
                          <div className="w-16 h-16 rounded-full bg-slate-800/50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                            <UserCheck className="w-6 h-6 text-slate-600 group-hover:text-emerald-500/50" />
+                            <ShieldCheck className="w-6 h-6 text-slate-600 group-hover:text-emerald-500/50" />
                          </div>
                          <h4 className="text-white font-bold text-xs mb-1">{judge.name}</h4>
                          <p className="text-slate-500 text-[9px] uppercase tracking-widest">{judge.role}</p>

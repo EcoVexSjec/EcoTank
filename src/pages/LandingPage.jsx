@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight, Leaf, Globe2, Cpu, Sparkles, UserCheck, ShieldCheck, Microscope, Database, Zap } from 'lucide-react';
+import { ArrowRight, Leaf, Globe2, Cpu, Sparkles, ShieldCheck, Microscope, Database, Zap } from 'lucide-react';
 import { db } from '../firebase/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
@@ -225,7 +225,7 @@ export default function LandingPage() {
                    <div key={i} className="flex flex-col items-center group">
                       <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-900 border border-white/5 flex items-center justify-center mb-6 group-hover:border-emerald-500/50 group-hover:bg-slate-800 transition-all duration-500 shadow-2xl relative overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <UserCheck className="w-10 h-10 text-slate-700 group-hover:text-emerald-500/50 transition-colors" />
+                        <ShieldCheck className="w-10 h-10 text-slate-700 group-hover:text-emerald-500/50 transition-colors" />
                       </div>
                       <h4 className="text-white font-bold text-sm mb-1">{judge.name}</h4>
                       <p className="text-slate-500 text-[10px] uppercase tracking-widest">{judge.role}</p>

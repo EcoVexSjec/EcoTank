@@ -53,14 +53,17 @@ export default function LoadingScreen({ onComplete }) {
       ease: "power1.inOut"
     });
 
-    gsap.to('.hex-code', {
-      y: -100,
-      opacity: 0,
-      duration: 'random(2, 4)',
-      repeat: -1,
-      stagger: 0.1,
-      ease: "none"
-    });
+    const hexElements = document.querySelectorAll('.hex-code');
+    if (hexElements.length > 0) {
+      gsap.to(hexElements, {
+        y: -100,
+        opacity: 0,
+        duration: 'random(2, 4)',
+        repeat: -1,
+        stagger: 0.1,
+        ease: "none"
+      });
+    }
 
     return () => {
       clearInterval(timer);

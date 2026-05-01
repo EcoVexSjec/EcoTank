@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { ShieldAlert, Download, Users, FolderOpen, Trash2, ExternalLink, ChevronDown, ChevronUp, Trophy, Eye, EyeOff } from 'lucide-react';
 
 export default function AdminDashboard() {
-  const { currentUser, userData, logout } = useAuth();
+  const { currentUser, userData, loading: authLoading, logout } = useAuth();
   const navigate = useNavigate();
   const [data, setData] = useState({ users: [], teams: [], submissions: [] });
   const [loading, setLoading] = useState(true);
@@ -14,6 +14,8 @@ export default function AdminDashboard() {
   const [platformSettings, setPlatformSettings] = useState({ showLeaderboard: false });
 
   useEffect(() => {
+    if (authLoading) return;
+
     // Basic protection: Ensure only the designated admin can use this view
     if (!currentUser || currentUser.email !== '24g54.roy@sjec.ac.in') {
       navigate('/login');
