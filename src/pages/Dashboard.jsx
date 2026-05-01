@@ -894,22 +894,22 @@ export default function Dashboard() {
          <div className="max-w-7xl mx-auto">
             {/* Judges (Conditionally Revealed) */}
             {platformSettings?.showJudges && (
-              <div className="text-center mb-24 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                 <h3 className="text-sm font-bold mb-10 text-emerald-500 uppercase tracking-[0.4em]">The Grand Jury</h3>
-                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-6 max-w-5xl mx-auto">
+              <div className="text-center mb-32 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                 <h3 className="text-sm font-bold mb-12 text-emerald-500 uppercase tracking-[0.4em]">The Grand Jury</h3>
+                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-8 max-w-6xl mx-auto">
                     {[
-                      { name: "Dr. Elena Vance", role: "Sustainability", icon: <ShieldCheck className="w-6 h-6 text-emerald-400" /> },
-                      { name: "Prof. Marcus Thorne", role: "Renewable", icon: <Zap className="w-6 h-6 text-cyan-400" /> },
-                      { name: "Sarah Mitchell", role: "VC / Eco-Tech", icon: <Sparkles className="w-6 h-6 text-amber-400" /> },
-                      { name: "James Holden", role: "Policy Advisor", icon: <Globe2 className="w-6 h-6 text-indigo-400" /> },
-                      { name: "Dr. Anya Kovar", role: "Enviro Scientist", icon: <Microscope className="w-6 h-6 text-rose-400" /> }
+                      { name: "Dr. Elena Vance", role: "Sustainability", icon: <ShieldCheck className="w-10 h-10 text-emerald-400" /> },
+                      { name: "Prof. Marcus Thorne", role: "Renewable", icon: <Zap className="w-10 h-10 text-cyan-400" /> },
+                      { name: "Sarah Mitchell", role: "VC / Eco-Tech", icon: <Sparkles className="w-10 h-10 text-amber-400" /> },
+                      { name: "James Holden", role: "Policy Advisor", icon: <Globe2 className="w-10 h-10 text-indigo-400" /> },
+                      { name: "Dr. Anya Kovar", role: "Enviro Scientist", icon: <Microscope className="w-10 h-10 text-rose-400" /> }
                     ].map((judge, i) => (
-                      <div key={i} className="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl flex flex-col items-center hover:border-emerald-500/20 transition-all group">
-                         <div className="mb-4 p-3 rounded-xl bg-slate-800/50 group-hover:scale-110 transition-transform">
+                      <div key={i} className="bg-slate-900/40 border border-slate-800 p-8 rounded-3xl flex flex-col items-center hover:border-emerald-500/20 transition-all group shadow-2xl">
+                         <div className="mb-6 p-4 rounded-2xl bg-slate-800/50 group-hover:scale-110 transition-transform">
                             {judge.icon}
                          </div>
-                         <h4 className="text-white font-bold text-xs mb-1">{judge.name}</h4>
-                         <p className="text-slate-500 text-[9px] uppercase tracking-widest">{judge.role}</p>
+                         <h4 className="text-white font-bold text-sm mb-2">{judge.name}</h4>
+                         <p className="text-slate-500 text-[10px] uppercase tracking-widest leading-relaxed">{judge.role}</p>
                       </div>
                     ))}
                  </div>

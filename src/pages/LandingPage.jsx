@@ -214,21 +214,21 @@ export default function LandingPage() {
                <h2 className="text-3xl font-bold mb-4 tracking-tight text-emerald-400 uppercase tracking-[0.3em]">The Grand Jury</h2>
                <p className="text-slate-400 mb-16 max-w-2xl mx-auto font-light">The panel of experts who will evaluate your breakthrough technologies on the final day.</p>
                
-               <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+               <div className="grid grid-cols-2 md:grid-cols-5 gap-10">
                  {[
-                   { name: "Dr. Elena Vance", role: "Sustainability Expert", icon: <ShieldCheck className="w-8 h-8 text-emerald-400" /> },
-                   { name: "Prof. Marcus Thorne", role: "Renewable Systems", icon: <Zap className="w-8 h-8 text-cyan-400" /> },
-                   { name: "Sarah Mitchell", role: "VC / Eco-Tech", icon: <Sparkles className="w-8 h-8 text-amber-400" /> },
-                   { name: "James Holden", role: "Policy Advisor", icon: <Globe2 className="w-8 h-8 text-indigo-400" /> },
-                   { name: "Dr. Anya Kovar", role: "Environmental Sci.", icon: <Microscope className="w-8 h-8 text-rose-400" /> }
+                   { name: "Dr. Elena Vance", role: "Sustainability Expert", icon: <ShieldCheck className="w-12 h-12 text-emerald-400" /> },
+                   { name: "Prof. Marcus Thorne", role: "Renewable Systems", icon: <Zap className="w-12 h-12 text-cyan-400" /> },
+                   { name: "Sarah Mitchell", role: "VC / Eco-Tech", icon: <Sparkles className="w-12 h-12 text-amber-400" /> },
+                   { name: "James Holden", role: "Policy Advisor", icon: <Globe2 className="w-12 h-12 text-indigo-400" /> },
+                   { name: "Dr. Anya Kovar", role: "Environmental Sci.", icon: <Microscope className="w-12 h-12 text-rose-400" /> }
                  ].map((judge, i) => (
                    <div key={i} className="flex flex-col items-center group">
-                      <div className="w-24 h-24 rounded-3xl bg-slate-900 border border-white/10 flex items-center justify-center mb-6 group-hover:border-emerald-500/50 group-hover:bg-slate-800 transition-all duration-500 shadow-2xl relative overflow-hidden">
+                      <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl bg-slate-900 border border-white/10 flex items-center justify-center mb-8 group-hover:border-emerald-500/50 group-hover:bg-slate-800 transition-all duration-500 shadow-2xl relative overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         {judge.icon}
                       </div>
-                      <h4 className="text-white font-bold text-sm mb-1">{judge.name}</h4>
-                      <p className="text-slate-500 text-[10px] uppercase tracking-widest">{judge.role}</p>
+                      <h4 className="text-white font-bold text-lg mb-2">{judge.name}</h4>
+                      <p className="text-slate-500 text-xs uppercase tracking-widest">{judge.role}</p>
                    </div>
                  ))}
                </div>
