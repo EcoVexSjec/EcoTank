@@ -131,9 +131,19 @@ export default function Dashboard() {
                  await updateDoc(doc(db, 'users', currentUser.uid), { teamId: teamDoc.id });
                  localStorage.removeItem('pendingInvite');
                  window.location.reload();
+               } else {
+                 localStorage.removeItem('pendingInvite');
+                 setLoading(false);
                }
+            } else {
+               localStorage.removeItem('pendingInvite');
+               setLoading(false);
             }
-          } catch(e) { console.error("Auto-join failed:", e); }
+          } catch(e) { 
+             console.error("Auto-join failed:", e); 
+             localStorage.removeItem('pendingInvite');
+             setLoading(false);
+          }
         }
       }
     }
