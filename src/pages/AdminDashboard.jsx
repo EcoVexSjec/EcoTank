@@ -18,7 +18,7 @@ export default function AdminDashboard() {
 
     // Basic protection: Ensure only the designated admin can use this view
     if (!currentUser || currentUser.email !== '24g54.roy@sjec.ac.in') {
-      navigate('/login');
+      navigate('/');
       return;
     }
 

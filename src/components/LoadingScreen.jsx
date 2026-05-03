@@ -19,12 +19,12 @@ export default function LoadingScreen({ onComplete }) {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
-          setTimeout(onComplete, 1200);
+          setTimeout(onComplete, 300);
           return 100;
         }
         return prev + 1;
       });
-    }, 40);
+    }, 15);
 
     const statusMessages = [
       'BOOTING ECO-KERNEL v4.2.0...',
@@ -43,7 +43,7 @@ export default function LoadingScreen({ onComplete }) {
       } else {
         clearInterval(messageTimer);
       }
-    }, 500);
+    }, 250);
 
     // High-energy animations
     gsap.to('.scan-line', {

@@ -4,7 +4,7 @@ import { db, storage } from '../firebase/firebase';
 import { doc, getDoc, setDoc, updateDoc, collection, query, where, getDocs, deleteDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, Users, Link as LinkIcon, Sparkles, AlertCircle, CheckCircle2, Globe2, Cpu, User, BookOpen, Camera, Trophy, ShieldCheck, Microscope, Zap, Clock } from 'lucide-react';
+import { LogOut, Users, Link as LinkIcon, Sparkles, AlertCircle, CheckCircle2, Globe2, Cpu, User, BookOpen, Camera, Trophy, ShieldCheck, Microscope, Zap, Clock, Pencil } from 'lucide-react';
 import { gsap } from 'gsap';
 
 export default function Dashboard() {
@@ -87,6 +87,11 @@ export default function Dashboard() {
 
     async function fetchTeamAndAutoJoin() {
       // 1. Fetch team if they already have one
+      if (!currentUser) {
+        navigate('/');
+        return;
+      }
+      
       if (userData?.teamId) {
         const tDoc = await getDoc(doc(db, 'teams', userData.teamId));
         if (tDoc.exists()) {
@@ -103,6 +108,11 @@ export default function Dashboard() {
             }));
             setTeamMembersMeta(mems.filter(m => m !== null));
           }
+        } else {
+          // Ghost team! The team document was deleted but the user still has the ID.
+          // Self-heal by removing the ghost team ID.
+          await updateDoc(doc(db, 'users', currentUser.uid), { teamId: null, role: 'member' });
+          window.location.reload();
         }
       } else {
         // 2. Auto-join logic if no team
@@ -162,10 +172,11 @@ export default function Dashboard() {
   // Handle the infinite GSAP ticker inside the screen
   useEffect(() => {
     if (tickerRef.current) {
+      const isMobile = window.innerWidth < 768;
       gsap.to(tickerRef.current, {
         x: "-50%",
         ease: "none",
-        duration: 15,
+        duration: isMobile ? 30 : 15, // Slower on phones
         repeat: -1
       });
     }
@@ -174,7 +185,7 @@ export default function Dashboard() {
   async function handleLogout() {
     try {
       await logout();
-      navigate('/login');
+      navigate('/');
     } catch {
       console.error("Failed to log out");
     }
@@ -288,17 +299,23 @@ export default function Dashboard() {
             <h2 className="text-3xl font-black text-white mb-8 text-center drop-shadow-lg">Manager Profile</h2>
             
             <div className="flex flex-col items-center mb-8">
-              <div className="w-24 h-24 rounded-full bg-slate-800 border-2 border-emerald-500/30 overflow-hidden flex items-center justify-center mb-4 relative group cursor-pointer">
-                 {userData.photoURL ? (
-                    <img src={userData.photoURL} alt="Avatar" className="w-full h-full object-cover" />
-                 ) : (
-                    <User className="w-10 h-10 text-emerald-400" />
-                 )}
-                 <label className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
-                    <Camera className="w-6 h-6 text-white mb-1" />
-                    <span className="text-[10px] text-white font-bold uppercase">Upload</span>
-                    <input type="file" accept="image/*" onChange={handleAvatarUpload} className="hidden" disabled={avatarUploadLoading} />
-                 </label>
+              <div className="relative mb-4">
+                <div className="w-24 h-24 rounded-full bg-slate-800 border-2 border-emerald-500/30 overflow-hidden flex items-center justify-center relative group cursor-pointer">
+                   {userData.photoURL ? (
+                      <img src={userData.photoURL} alt="Avatar" className="w-full h-full object-cover" />
+                   ) : (
+                      <User className="w-10 h-10 text-emerald-400" />
+                   )}
+                   <label className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                      <Camera className="w-6 h-6 text-white mb-1" />
+                      <span className="text-[10px] text-white font-bold uppercase">Upload</span>
+                      <input type="file" accept="image/*" onChange={handleAvatarUpload} className="hidden" disabled={avatarUploadLoading} />
+                   </label>
+                </div>
+                {/* Pencil indicator */}
+                <div className="absolute bottom-0 right-0 bg-emerald-500 rounded-full p-1.5 border-2 border-slate-900 pointer-events-none shadow-lg">
+                  <Pencil className="w-3.5 h-3.5 text-slate-950" />
+                </div>
               </div>
               {avatarUploadLoading && <span className="text-xs text-emerald-400 animate-pulse">Uploading Image...</span>}
             </div>
@@ -468,6 +485,7 @@ export default function Dashboard() {
         } else {
           // No members left, leader leaving kills the team
           await deleteDoc(doc(db, 'teams', teamData.teamId));
+          await deleteDoc(doc(db, 'teams', userData.teamId));
           if (teamData.submissionId) {
             await deleteDoc(doc(db, 'submissions', teamData.submissionId));
           }
@@ -475,7 +493,7 @@ export default function Dashboard() {
         }
       } else {
         const updatedMembers = teamData.members.filter(m => m !== currentUser.uid);
-        await updateDoc(doc(db, 'teams', teamData.teamId), {
+        await updateDoc(doc(db, 'teams', userData.teamId), {
           members: updatedMembers
         });
         await updateDoc(doc(db, 'users', currentUser.uid), { teamId: null, role: 'member' });
@@ -501,7 +519,7 @@ export default function Dashboard() {
       await Promise.all(memberPromises);
 
       // Delete docs
-      await deleteDoc(doc(db, 'teams', teamData.teamId));
+      await deleteDoc(doc(db, 'teams', userData.teamId));
       if (teamData.submissionId) {
         await deleteDoc(doc(db, 'submissions', teamData.submissionId));
       }
@@ -541,11 +559,17 @@ export default function Dashboard() {
                       )}
                     </div>
                     {userData.role === 'leader' && (
-                      <label className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer rounded-2xl">
-                         <Camera className="w-6 h-6 text-white mb-1" />
-                         <span className="text-[10px] text-white font-bold uppercase">Change Logo</span>
-                         <input type="file" accept="image/*" onChange={handleTeamLogoUpload} className="hidden" />
-                      </label>
+                      <>
+                        <label className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer rounded-2xl">
+                           <Camera className="w-6 h-6 text-white mb-1" />
+                           <span className="text-[10px] text-white font-bold uppercase">Change Logo</span>
+                           <input type="file" accept="image/*" onChange={handleTeamLogoUpload} className="hidden" />
+                        </label>
+                        {/* Pencil indicator */}
+                        <div className="absolute -bottom-2 -right-2 bg-emerald-500 rounded-full p-1.5 border-2 border-slate-900 pointer-events-none shadow-lg z-10">
+                          <Pencil className="w-3.5 h-3.5 text-slate-950" />
+                        </div>
+                      </>
                     )}
                  </div>
                  

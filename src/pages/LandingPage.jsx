@@ -70,7 +70,7 @@ export default function LandingPage() {
 
       {/* Hero Section */}
       <section className="min-h-screen relative flex items-center pt-24 pb-12">
-        <div className="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center relative z-10">
+        <div className="max-w-6xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center relative z-10">
           
           <div className="hero-content text-left">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 font-semibold mb-6 tracking-wide text-xs uppercase shadow-[0_0_15px_rgba(16,185,129,0.15)]">
@@ -143,7 +143,7 @@ export default function LandingPage() {
 
       {/* Guardians */}
       <section className="py-24 relative">
-        <div className="max-w-7xl mx-auto px-6" ref={el => sectionsRef.current[1] = el}>
+        <div className="max-w-6xl mx-auto px-6" ref={el => sectionsRef.current[1] = el}>
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">The Elemental Guardians</h2>
             <p className="text-slate-400 text-lg max-w-2xl mx-auto font-light">Meet our mascots. They represent the primal forces defending the 17 Sustainable Development Goals.</p>
@@ -207,7 +207,7 @@ export default function LandingPage() {
 
       {/* Partners & Organizers */}
       <section className="py-24 relative overflow-hidden bg-slate-950">
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
           {/* Judges Section (Conditionally Revealed) */}
           {platformSettings.showJudges && (
             <div className="text-center mb-32 animate-in fade-in slide-in-from-bottom-8 duration-1000">
@@ -279,7 +279,7 @@ export default function LandingPage() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[300px] bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none"></div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20 text-left">
             <div className="lg:col-span-2">
               <div className="flex items-center gap-3 mb-6">
