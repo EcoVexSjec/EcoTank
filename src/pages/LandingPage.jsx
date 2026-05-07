@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Leaf, Globe2, Cpu, Sparkles, ShieldCheck, Microscope, Database, Zap } from 'lucide-react';
 import { db } from '../firebase/firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 
 gsap.registerPlugin(ScrollTrigger);
 
