@@ -8,10 +8,12 @@ import { ShieldAlert, Download, Users, FolderOpen, Trash2, ExternalLink, Chevron
 export default function AdminDashboard() {
   const { currentUser, userData, loading: authLoading, logout } = useAuth();
   const navigate = useNavigate();
-  const [data, setData] = useState({ users: [], teams: [], submissions: [] });
+  const [data, setData] = useState({ users: [], teams: [], submissions: [], judges: [] });
   const [loading, setLoading] = useState(true);
   const [expandedTeamId, setExpandedTeamId] = useState(null);
-  const [platformSettings, setPlatformSettings] = useState({ showLeaderboard: false });
+  const [platformSettings, setPlatformSettings] = useState({ showLeaderboard: false, showJudges: false });
+  const [newJudge, setNewJudge] = useState({ name: '', role: '' });
+  const [isAddingJudge, setIsAddingJudge] = useState(false);
 
   useEffect(() => {
     if (authLoading) return;
@@ -29,10 +31,11 @@ export default function AdminDashboard() {
           return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         };
 
-        const [users, teams, submissions] = await Promise.all([
+        const [users, teams, submissions, judges] = await Promise.all([
           fetchCollection('users'),
           fetchCollection('teams'),
-          fetchCollection('submissions')
+          fetchCollection('submissions'),
+          fetchCollection('judges')
         ]);
 
         const settingsDoc = await getDoc(doc(db, 'settings', 'platform'));
@@ -48,7 +51,7 @@ export default function AdminDashboard() {
           setPlatformSettings(defaultSettings);
         }
 
-        setData({ users, teams, submissions });
+        setData({ users, teams, submissions, judges });
       } catch (err) {
         console.error("Admin fetch error", err);
       } finally {
@@ -113,6 +116,34 @@ export default function AdminDashboard() {
     }
   }
 
+  async function handleAddJudge(e) {
+    e.preventDefault();
+    if (!newJudge.name || !newJudge.role) return;
+    setIsAddingJudge(true);
+    try {
+      const judgeId = `judge_${Date.now()}`;
+      await setDoc(doc(db, 'judges', judgeId), { ...newJudge, id: judgeId });
+      setData(prev => ({ ...prev, judges: [...prev.judges, { ...newJudge, id: judgeId }] }));
+      setNewJudge({ name: '', role: '' });
+    } catch (e) {
+      console.error(e);
+      alert('Failed to add judge');
+    } finally {
+      setIsAddingJudge(false);
+    }
+  }
+
+  async function handleDeleteJudge(id) {
+    if (!window.confirm('Delete this judge?')) return;
+    try {
+      await deleteDoc(doc(db, 'judges', id));
+      setData(prev => ({ ...prev, judges: prev.judges.filter(j => j.id !== id) }));
+    } catch (e) {
+      console.error(e);
+      alert('Failed to delete judge');
+    }
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center text-emerald-500">
@@ -155,7 +186,7 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
         <div className="bg-slate-900 border border-slate-700 p-6 rounded-2xl flex items-center gap-4">
            <Users className="w-10 h-10 text-emerald-500 opacity-50" />
            <div>
@@ -173,9 +204,66 @@ export default function AdminDashboard() {
         <div className="bg-slate-900 border border-slate-700 p-6 rounded-2xl flex items-center gap-4">
            <FolderOpen className="w-10 h-10 text-emerald-500 opacity-50" />
            <div>
-             <p className="text-slate-400 text-sm">Pitch Decks Received</p>
-             <h3 className="text-3xl font-bold">{data.submissions.length} Submissions</h3>
+             <p className="text-slate-400 text-sm">Pitch Decks</p>
+             <h3 className="text-3xl font-bold">{data.submissions.length}</h3>
            </div>
+        </div>
+        <div className="bg-slate-900 border border-slate-700 p-6 rounded-2xl flex items-center gap-4">
+           <ShieldAlert className="w-10 h-10 text-orange-500 opacity-50" />
+           <div>
+             <p className="text-slate-400 text-sm">Active Judges</p>
+             <h3 className="text-3xl font-bold">{data.judges.length}</h3>
+           </div>
+        </div>
+      </div>
+
+      {/* Judges Management Section */}
+      <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl mb-12">
+        <div className="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-800/20">
+          <h2 className="text-xl font-bold">Judges Panel</h2>
+        </div>
+        <div className="p-6">
+          <form onSubmit={handleAddJudge} className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <input 
+              type="text" 
+              placeholder="Judge Name" 
+              className="bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500"
+              value={newJudge.name}
+              onChange={(e) => setNewJudge({ ...newJudge, name: e.target.value })}
+              required
+            />
+            <input 
+              type="text" 
+              placeholder="Role (e.g. Sustainability Expert)" 
+              className="bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500"
+              value={newJudge.role}
+              onChange={(e) => setNewJudge({ ...newJudge, role: e.target.value })}
+              required
+            />
+            <button 
+              disabled={isAddingJudge}
+              className="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold rounded-xl transition-all shadow-lg disabled:opacity-50"
+            >
+              {isAddingJudge ? 'Adding...' : 'Add Judge'}
+            </button>
+          </form>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {data.judges.map(judge => (
+              <div key={judge.id} className="bg-slate-800/50 border border-slate-700 p-4 rounded-xl flex justify-between items-center group">
+                <div>
+                  <h4 className="font-bold text-slate-200">{judge.name}</h4>
+                  <p className="text-xs text-slate-500 uppercase tracking-widest">{judge.role}</p>
+                </div>
+                <button 
+                  onClick={() => handleDeleteJudge(judge.id)}
+                  className="text-red-500 opacity-0 group-hover:opacity-100 p-2 hover:bg-red-500/10 rounded-lg transition-all"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

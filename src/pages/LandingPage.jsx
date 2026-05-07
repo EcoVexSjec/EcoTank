@@ -11,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function LandingPage() {
   const sectionsRef = useRef([]);
   const [platformSettings, setPlatformSettings] = React.useState({ showJudges: false });
+  const [judges, setJudges] = React.useState([]);
 
   useEffect(() => {
     // Elegant fade-ins
@@ -39,6 +40,9 @@ export default function LandingPage() {
       try {
         const sDoc = await getDoc(doc(db, 'settings', 'platform'));
         if (sDoc.exists()) setPlatformSettings(sDoc.data());
+
+        const jSnapshot = await getDocs(collection(db, 'judges'));
+        setJudges(jSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
       } catch (e) { console.error(e); }
     }
     fetchSettings();
@@ -215,14 +219,8 @@ export default function LandingPage() {
                <p className="text-slate-400 mb-16 max-w-2xl mx-auto font-light">The panel of experts who will evaluate your breakthrough technologies on the final day.</p>
                
                <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
-                 {[
-                   { name: "Dr. Elena Vance", role: "Sustainability Expert" },
-                   { name: "Prof. Marcus Thorne", role: "Renewable Systems" },
-                   { name: "Sarah Mitchell", role: "VC / Eco-Tech" },
-                   { name: "James Holden", role: "Policy Advisor" },
-                   { name: "Dr. Anya Kovar", role: "Environmental Sci." }
-                 ].map((judge, i) => (
-                   <div key={i} className="flex flex-col items-center group">
+                 {judges.map((judge, i) => (
+                   <div key={judge.id || i} className="flex flex-col items-center group">
                       <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-900 border border-white/5 flex items-center justify-center mb-6 group-hover:border-emerald-500/50 group-hover:bg-slate-800 transition-all duration-500 shadow-2xl relative overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <ShieldCheck className="w-10 h-10 text-slate-700 group-hover:text-emerald-500/50 transition-colors" />
@@ -235,15 +233,29 @@ export default function LandingPage() {
             </div>
           )}
 
+
+
           {/* Partner Singular */}
           <div className="text-center mb-32">
             <h2 className="text-3xl font-bold mb-20 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Our Partner</h2>
-            <div className="inline-block bg-slate-900/40 border border-white/5 p-12 rounded-3xl backdrop-blur-sm hover:border-emerald-500/30 transition-all group shadow-2xl">
-              <img 
-                src={`${import.meta.env.BASE_URL}sceptix.png`} 
-                alt="Sceptix Logo" 
-                className="w-40 sm:w-52 h-auto object-contain transition-all duration-500" 
-              />
+            <div className="relative inline-block bg-slate-900/40 border border-white/5 rounded-3xl backdrop-blur-sm hover:border-emerald-500/30 transition-all group shadow-2xl overflow-hidden">
+              {/* Logo Container */}
+              <div className="p-12 transition-all duration-500 group-hover:blur-sm group-hover:scale-95 group-hover:opacity-20">
+                <img 
+                  src={`${import.meta.env.BASE_URL}sceptix.png`} 
+                  alt="Sceptix Logo" 
+                  className="w-40 sm:w-52 h-auto object-contain" 
+                />
+              </div>
+              
+              {/* Info Overlay */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center p-8 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+                <h3 className="text-emerald-400 font-bold text-xl mb-3 tracking-tight">Sceptix</h3>
+                <p className="text-slate-300 text-sm leading-relaxed max-w-[280px]">
+                  The official Technical Club of SJEC. Fostering innovation, coding excellence, and technical leadership since its inception.
+                </p>
+                <div className="mt-4 w-12 h-1 bg-emerald-500/50 rounded-full"></div>
+              </div>
             </div>
           </div>
 

@@ -26,6 +26,7 @@ export default function Dashboard() {
 
   const [qualifiedTeams, setQualifiedTeams] = useState([]);
   const [platformSettings, setPlatformSettings] = useState({ showLeaderboard: false, showJudges: false });
+  const [judges, setJudges] = useState([]);
   const [leaderboardLoading, setLeaderboardLoading] = useState(true);
 
   // Customization State
@@ -162,6 +163,9 @@ export default function Dashboard() {
           const snap = await getDocs(q);
           setQualifiedTeams(snap.docs.map(d => ({ id: d.id, ...d.data() })));
         }
+
+        const jSnapshot = await getDocs(collection(db, 'judges'));
+        setJudges(jSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
       } catch (err) {
         console.error("Failed to fetch leaderboard config", err);
       } finally {
@@ -932,14 +936,8 @@ export default function Dashboard() {
               <div className="text-center mb-24 animate-in fade-in slide-in-from-bottom-4 duration-700">
                  <h3 className="text-sm font-bold mb-10 text-emerald-500 uppercase tracking-[0.4em]">The Judges</h3>
                  <div className="grid grid-cols-2 sm:grid-cols-5 gap-6 max-w-5xl mx-auto">
-                    {[
-                      { name: "Dr. Elena Vance", role: "Sustainability" },
-                      { name: "Prof. Marcus Thorne", role: "Renewable" },
-                      { name: "Sarah Mitchell", role: "VC / Eco-Tech" },
-                      { name: "James Holden", role: "Policy Advisor" },
-                      { name: "Dr. Anya Kovar", role: "Enviro Scientist" }
-                    ].map((judge, i) => (
-                      <div key={i} className="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl flex flex-col items-center hover:border-emerald-500/20 transition-all group">
+                    {judges.map((judge, i) => (
+                      <div key={judge.id || i} className="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl flex flex-col items-center hover:border-emerald-500/20 transition-all group">
                          <div className="w-16 h-16 rounded-full bg-slate-800/50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <ShieldCheck className="w-6 h-6 text-slate-600 group-hover:text-emerald-500/50" />
                          </div>
@@ -954,12 +952,24 @@ export default function Dashboard() {
             {/* Partner */}
             <div className="text-center mb-32">
                <h2 className="text-3xl font-bold mb-20 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Our Partner</h2>
-               <div className="inline-block bg-slate-900/60 border border-slate-800 p-8 rounded-3xl backdrop-blur-md shadow-2xl group hover:border-emerald-500/20 transition-all">
-                  <img 
-                     src={`${import.meta.env.BASE_URL}sceptix.png`} 
-                     alt="Sceptix Logo" 
-                     className="w-40 sm:w-52 h-auto object-contain transition-all duration-500" 
-                  />
+               <div className="relative inline-block bg-slate-900/60 border border-slate-800 rounded-3xl backdrop-blur-md shadow-2xl group hover:border-emerald-500/20 transition-all overflow-hidden">
+                  {/* Logo Container */}
+                  <div className="p-8 transition-all duration-500 group-hover:blur-sm group-hover:scale-95 group-hover:opacity-20">
+                     <img 
+                        src={`${import.meta.env.BASE_URL}sceptix.png`} 
+                        alt="Sceptix Logo" 
+                        className="w-40 sm:w-52 h-auto object-contain" 
+                     />
+                  </div>
+                  
+                  {/* Info Overlay */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+                     <h3 className="text-emerald-400 font-bold text-lg mb-2 tracking-tight">Sceptix</h3>
+                     <p className="text-slate-300 text-xs leading-relaxed max-w-[240px]">
+                        The official Technical Club of SJEC. Fostering innovation, coding excellence, and technical leadership.
+                     </p>
+                     <div className="mt-3 w-10 h-0.5 bg-emerald-500/50 rounded-full"></div>
+                  </div>
                </div>
             </div>
 
