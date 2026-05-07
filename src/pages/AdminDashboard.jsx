@@ -267,30 +267,29 @@ export default function AdminDashboard() {
               />
             </div>
             <div className="md:col-span-2">
-              <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Photo (Upload or URL)</label>
-              <div className="flex gap-2">
-                <div className="relative flex-1">
-                  <input 
-                    type="url" 
-                    placeholder="https://image-url.com/..." 
-                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500 pr-10"
-                    value={newJudge.photoURL}
-                    onChange={(e) => setNewJudge({ ...newJudge, photoURL: e.target.value })}
-                  />
-                  {newJudge.photoURL && (
-                    <div className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full overflow-hidden border border-emerald-500/50">
-                      <img src={newJudge.photoURL} alt="" className="w-full h-full object-cover" />
-                    </div>
-                  )}
-                </div>
-                <label className={`cursor-pointer flex items-center justify-center p-3 rounded-xl border transition-all ${uploadingImage ? 'bg-slate-800 border-slate-700' : 'bg-slate-900 border-slate-700 hover:border-emerald-500/50 hover:bg-slate-800'}`}>
+              <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Judge Photo</label>
+              <div className="flex items-center gap-4">
+                <label className={`cursor-pointer flex items-center gap-3 px-6 py-3 rounded-xl border transition-all ${uploadingImage ? 'bg-slate-800 border-slate-700' : 'bg-slate-900 border-slate-700 hover:border-emerald-500/50 hover:bg-slate-800'}`}>
                   {uploadingImage ? (
-                    <div className="w-6 h-6 border-2 border-emerald-500 border-t-transparent animate-spin rounded-full"></div>
+                    <div className="w-5 h-5 border-2 border-emerald-500 border-t-transparent animate-spin rounded-full"></div>
                   ) : (
-                    <Camera className="w-6 h-6 text-emerald-500" />
+                    <Camera className="w-5 h-5 text-emerald-500" />
                   )}
+                  <span className="text-sm font-medium text-slate-300">{uploadingImage ? 'Uploading...' : newJudge.photoURL ? 'Change Photo' : 'Upload Photo'}</span>
                   <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" disabled={uploadingImage} />
                 </label>
+                
+                {newJudge.photoURL && (
+                  <div className="flex items-center gap-2 px-3 py-2 bg-slate-900/50 border border-slate-800 rounded-xl">
+                    <div className="w-8 h-8 rounded-full overflow-hidden border border-emerald-500/30">
+                      <img src={newJudge.photoURL} alt="" className="w-full h-full object-cover" />
+                    </div>
+                    <span className="text-[10px] text-emerald-500 font-bold uppercase">Ready</span>
+                    <button type="button" onClick={() => setNewJudge({ ...newJudge, photoURL: '' })} className="text-slate-500 hover:text-red-400 p-1">
+                      <Trash2 className="w-3 h-3" />
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
             <button 
