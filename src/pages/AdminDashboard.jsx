@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { db } from '../firebase/firebase';
+import { db, storage } from '../firebase/firebase';
 import { collection, getDocs, doc, updateDoc, deleteDoc, getDoc, setDoc } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
-import { ShieldAlert, Download, Users, FolderOpen, Trash2, ExternalLink, ChevronDown, ChevronUp, Trophy, Eye, EyeOff } from 'lucide-react';
+import { ShieldAlert, Download, Users, FolderOpen, Trash2, ExternalLink, ChevronDown, ChevronUp, Trophy, Eye, EyeOff, Camera, Image as ImageIcon } from 'lucide-react';
 
 export default function AdminDashboard() {
   const { currentUser, userData, loading: authLoading, logout } = useAuth();
@@ -14,6 +15,7 @@ export default function AdminDashboard() {
   const [platformSettings, setPlatformSettings] = useState({ showLeaderboard: false, showJudges: false });
   const [newJudge, setNewJudge] = useState({ name: '', role: '', photoURL: '' });
   const [isAddingJudge, setIsAddingJudge] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   useEffect(() => {
     if (authLoading) return;
@@ -113,6 +115,23 @@ export default function AdminDashboard() {
     } catch (e) {
       console.error(e);
       alert('Failed to update judges visibility.');
+    }
+  }
+
+  async function handleImageUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    setUploadingImage(true);
+    try {
+      const storageRef = ref(storage, `judges/${Date.now()}_${file.name}`);
+      await uploadBytes(storageRef, file);
+      const url = await getDownloadURL(storageRef);
+      setNewJudge({ ...newJudge, photoURL: url });
+    } catch (e) {
+      console.error(e);
+      alert('Failed to upload image');
+    } finally {
+      setUploadingImage(false);
     }
   }
 
@@ -224,35 +243,61 @@ export default function AdminDashboard() {
           <h2 className="text-xl font-bold">Judges Panel</h2>
         </div>
         <div className="p-6">
-          <form onSubmit={handleAddJudge} className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-            <input 
-              type="text" 
-              placeholder="Judge Name" 
-              className="bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500"
-              value={newJudge.name}
-              onChange={(e) => setNewJudge({ ...newJudge, name: e.target.value })}
-              required
-            />
-            <input 
-              type="text" 
-              placeholder="Role" 
-              className="bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500"
-              value={newJudge.role}
-              onChange={(e) => setNewJudge({ ...newJudge, role: e.target.value })}
-              required
-            />
-            <input 
-              type="url" 
-              placeholder="Photo URL (Optional)" 
-              className="bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500"
-              value={newJudge.photoURL}
-              onChange={(e) => setNewJudge({ ...newJudge, photoURL: e.target.value })}
-            />
+          <form onSubmit={handleAddJudge} className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8 items-end">
+            <div>
+              <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Name</label>
+              <input 
+                type="text" 
+                placeholder="Judge Name" 
+                className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500"
+                value={newJudge.name}
+                onChange={(e) => setNewJudge({ ...newJudge, name: e.target.value })}
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Role</label>
+              <input 
+                type="text" 
+                placeholder="Role" 
+                className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500"
+                value={newJudge.role}
+                onChange={(e) => setNewJudge({ ...newJudge, role: e.target.value })}
+                required
+              />
+            </div>
+            <div className="md:col-span-2">
+              <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Photo (Upload or URL)</label>
+              <div className="flex gap-2">
+                <div className="relative flex-1">
+                  <input 
+                    type="url" 
+                    placeholder="https://image-url.com/..." 
+                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500 pr-10"
+                    value={newJudge.photoURL}
+                    onChange={(e) => setNewJudge({ ...newJudge, photoURL: e.target.value })}
+                  />
+                  {newJudge.photoURL && (
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full overflow-hidden border border-emerald-500/50">
+                      <img src={newJudge.photoURL} alt="" className="w-full h-full object-cover" />
+                    </div>
+                  )}
+                </div>
+                <label className={`cursor-pointer flex items-center justify-center p-3 rounded-xl border transition-all ${uploadingImage ? 'bg-slate-800 border-slate-700' : 'bg-slate-900 border-slate-700 hover:border-emerald-500/50 hover:bg-slate-800'}`}>
+                  {uploadingImage ? (
+                    <div className="w-6 h-6 border-2 border-emerald-500 border-t-transparent animate-spin rounded-full"></div>
+                  ) : (
+                    <Camera className="w-6 h-6 text-emerald-500" />
+                  )}
+                  <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" disabled={uploadingImage} />
+                </label>
+              </div>
+            </div>
             <button 
-              disabled={isAddingJudge}
-              className="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold rounded-xl transition-all shadow-lg disabled:opacity-50"
+              disabled={isAddingJudge || uploadingImage}
+              className="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black h-[50px] rounded-xl transition-all shadow-lg disabled:opacity-50"
             >
-              {isAddingJudge ? 'Adding...' : 'Add Judge'}
+              {isAddingJudge ? 'Saving...' : 'Add Judge'}
             </button>
           </form>
 
