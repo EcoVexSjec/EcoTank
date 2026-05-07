@@ -12,7 +12,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [expandedTeamId, setExpandedTeamId] = useState(null);
   const [platformSettings, setPlatformSettings] = useState({ showLeaderboard: false, showJudges: false });
-  const [newJudge, setNewJudge] = useState({ name: '', role: '' });
+  const [newJudge, setNewJudge] = useState({ name: '', role: '', photoURL: '' });
   const [isAddingJudge, setIsAddingJudge] = useState(false);
 
   useEffect(() => {
@@ -122,9 +122,10 @@ export default function AdminDashboard() {
     setIsAddingJudge(true);
     try {
       const judgeId = `judge_${Date.now()}`;
-      await setDoc(doc(db, 'judges', judgeId), { ...newJudge, id: judgeId });
-      setData(prev => ({ ...prev, judges: [...prev.judges, { ...newJudge, id: judgeId }] }));
-      setNewJudge({ name: '', role: '' });
+      const judgeData = { ...newJudge, id: judgeId };
+      await setDoc(doc(db, 'judges', judgeId), judgeData);
+      setData(prev => ({ ...prev, judges: [...prev.judges, judgeData] }));
+      setNewJudge({ name: '', role: '', photoURL: '' });
     } catch (e) {
       console.error(e);
       alert('Failed to add judge');
@@ -223,7 +224,7 @@ export default function AdminDashboard() {
           <h2 className="text-xl font-bold">Judges Panel</h2>
         </div>
         <div className="p-6">
-          <form onSubmit={handleAddJudge} className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <form onSubmit={handleAddJudge} className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
             <input 
               type="text" 
               placeholder="Judge Name" 
@@ -234,11 +235,18 @@ export default function AdminDashboard() {
             />
             <input 
               type="text" 
-              placeholder="Role (e.g. Sustainability Expert)" 
+              placeholder="Role" 
               className="bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500"
               value={newJudge.role}
               onChange={(e) => setNewJudge({ ...newJudge, role: e.target.value })}
               required
+            />
+            <input 
+              type="url" 
+              placeholder="Photo URL (Optional)" 
+              className="bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500"
+              value={newJudge.photoURL}
+              onChange={(e) => setNewJudge({ ...newJudge, photoURL: e.target.value })}
             />
             <button 
               disabled={isAddingJudge}
@@ -251,9 +259,20 @@ export default function AdminDashboard() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {data.judges.map(judge => (
               <div key={judge.id} className="bg-slate-800/50 border border-slate-700 p-4 rounded-xl flex justify-between items-center group">
-                <div>
-                  <h4 className="font-bold text-slate-200">{judge.name}</h4>
-                  <p className="text-xs text-slate-500 uppercase tracking-widest">{judge.role}</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-slate-700 overflow-hidden border border-slate-600 shrink-0">
+                    {judge.photoURL ? (
+                      <img src={judge.photoURL} alt="" className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-emerald-500/10">
+                        <ShieldAlert className="w-5 h-5 text-emerald-500/50" />
+                      </div>
+                    )}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-200 text-sm">{judge.name}</h4>
+                    <p className="text-[10px] text-slate-500 uppercase tracking-widest">{judge.role}</p>
+                  </div>
                 </div>
                 <button 
                   onClick={() => handleDeleteJudge(judge.id)}

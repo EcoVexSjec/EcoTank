@@ -935,11 +935,15 @@ export default function Dashboard() {
             {platformSettings?.showJudges && (
               <div className="text-center mb-24 animate-in fade-in slide-in-from-bottom-4 duration-700">
                  <h3 className="text-sm font-bold mb-10 text-emerald-500 uppercase tracking-[0.4em]">The Judges</h3>
-                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-6 max-w-5xl mx-auto">
+                 <div className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto">
                     {judges.map((judge, i) => (
-                      <div key={judge.id || i} className="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl flex flex-col items-center hover:border-emerald-500/20 transition-all group">
-                         <div className="w-16 h-16 rounded-full bg-slate-800/50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                            <ShieldCheck className="w-6 h-6 text-slate-600 group-hover:text-emerald-500/50" />
+                      <div key={judge.id || i} className="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl flex flex-col items-center hover:border-emerald-500/20 transition-all group w-40 sm:w-48">
+                         <div className="w-16 h-16 rounded-full bg-slate-800/50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform overflow-hidden">
+                            {judge.photoURL ? (
+                               <img src={judge.photoURL} alt={judge.name} className="w-full h-full object-cover" />
+                            ) : (
+                               <ShieldCheck className="w-6 h-6 text-slate-600 group-hover:text-emerald-500/50" />
+                            )}
                          </div>
                          <h4 className="text-white font-bold text-xs mb-1">{judge.name}</h4>
                          <p className="text-slate-500 text-[9px] uppercase tracking-widest">{judge.role}</p>
