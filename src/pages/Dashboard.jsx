@@ -567,7 +567,7 @@ export default function Dashboard() {
   }
 
   const renderAssignedTeamPanel = () => (
-    <section className="py-20 px-6 relative z-10 w-full min-h-screen flex items-center justify-center">
+    <section className="py-12 sm:py-20 px-2 sm:px-6 relative z-10 w-full min-h-screen flex items-center justify-center">
       <div className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
       
       <div className="flex-1 w-full relative z-10">
@@ -578,12 +578,12 @@ export default function Dashboard() {
           </p>
 
           <div className="grid lg:grid-cols-3 gap-8 relative z-10">
-            <div className="lg:col-span-2 bg-slate-800/40 border border-slate-700 p-4 sm:p-8 rounded-3xl backdrop-blur-sm shadow-xl flex flex-col">
+            <div className="lg:col-span-2 bg-slate-800/40 border border-slate-700 p-3 sm:p-8 rounded-2xl sm:rounded-3xl backdrop-blur-sm shadow-xl flex flex-col overflow-hidden">
               <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
                 <Users className="w-6 h-6 text-emerald-500" /> My Team Overview
               </h2>
               
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 sm:gap-8 mb-8 p-4 sm:p-6 bg-slate-900/50 rounded-2xl border border-slate-700/50 flex-1">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-4 sm:gap-8 mb-8 p-3 sm:p-6 bg-slate-900/50 rounded-xl sm:rounded-2xl border border-slate-700/50 flex-1">
                  <div className="relative group w-32 h-32 shrink-0">
                     <div className="w-full h-full rounded-2xl bg-slate-800 border-2 border-emerald-500/20 overflow-hidden flex items-center justify-center shadow-lg">
                       {teamData?.teamLogoUrl ? (
@@ -659,10 +659,10 @@ export default function Dashboard() {
               )}
             </div>
 
-            <div className="bg-slate-800/40 border border-slate-700 p-4 sm:p-8 rounded-3xl backdrop-blur-sm shadow-xl flex flex-col">
+            <div className="bg-slate-800/40 border border-slate-700 p-3 sm:p-8 rounded-2xl sm:rounded-3xl backdrop-blur-sm shadow-xl flex flex-col overflow-hidden">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2 drop-shadow-md">Team Matrix</h2>
               <ul className="space-y-3 mb-8">
-                 <li className="p-4 bg-slate-900/50 border border-emerald-500/30 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-[0_0_20px_rgba(16,185,129,0.05)]">
+                 <li className="p-3 sm:p-4 bg-slate-900/50 border border-emerald-500/30 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-[0_0_20px_rgba(16,185,129,0.05)]">
                     <div className="flex items-center gap-3">
                       {userData.photoURL ? (
                         <img src={userData.photoURL} alt="Avatar" className="w-10 h-10 rounded-full object-cover border border-emerald-500/30" />
@@ -682,7 +682,7 @@ export default function Dashboard() {
                  </li>
                  {teamMembersMeta.map(member => (
                    member.id !== currentUser.uid && (
-                     <li key={member.id} className="p-4 bg-slate-900/50 border border-slate-700/30 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                     <li key={member.id} className="p-3 sm:p-4 bg-slate-900/50 border border-slate-700/30 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                        <div className="flex items-center gap-3">
                          {member.photoURL ? (
                            <img src={member.photoURL} alt="Avatar" className="w-10 h-10 rounded-full object-cover border border-slate-600" />
