@@ -4,7 +4,7 @@ import { db, storage } from '../firebase/firebase';
 import { doc, getDoc, setDoc, updateDoc, collection, query, where, getDocs, deleteDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, Users, Link as LinkIcon, Sparkles, AlertCircle, CheckCircle2, Globe2, Cpu, User, BookOpen, Camera, Trophy, ShieldCheck, Microscope, Zap, Clock, Pencil } from 'lucide-react';
+import { LogOut, Users, Link as LinkIcon, Sparkles, AlertCircle, CheckCircle2, Globe2, Cpu, User, BookOpen, Camera, Trophy, ShieldCheck, Microscope, Zap, Clock, Pencil, Download } from 'lucide-react';
 import { gsap } from 'gsap';
 
 export default function Dashboard() {
