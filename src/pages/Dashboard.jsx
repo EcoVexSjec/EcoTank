@@ -978,7 +978,7 @@ export default function Dashboard() {
                   {[
                     { name: "Melroy Almeida", role: "President", img: "ashley.png" },
                     { name: "Roy Prince Veigas", role: "Tech Lead", img: "santhsim.png" },
-                    { name: "Nair Keerthana", role: "Tresurer", img: "jeethan.png" }
+                    { name: "Keerthana Nair", role: "Treasurer", img: "jeethan.png" }
                   ].map((org, i) => (
                     <div key={i} className="flex flex-col items-center group">
                       <div className="w-40 h-40 sm:w-56 sm:h-56 rounded-full overflow-hidden border-2 border-slate-800 group-hover:border-emerald-500/30 transition-all mb-4 shadow-xl">
