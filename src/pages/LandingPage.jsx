@@ -245,9 +245,9 @@ export default function LandingPage() {
             <h2 className="text-3xl font-bold mb-24 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Organizers</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
               {[
-                { name: "Sarah Jenkins", role: "Community Manager", img: "ashley.png" },
-                { name: "David Miller", role: "Technical Advisor", img: "santhsim.png" },
-                { name: "Michael Chen", role: "Marketing Head", img: "jeethan.png" }
+                  { name: "Melroy Almeida", role: "President", img: "ashley.png" },
+                  { name: "Roy Prince Veigas", role: "Tech Lead", img: "santhsim.png" },
+                  { name: "Nair Keerthana", role: "Tresurer", img: "jeethan.png" }
               ].map((org, i) => (
                 <div key={i} className="flex flex-col items-center group">
                   <div className="w-40 h-40 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-slate-800 group-hover:border-emerald-500/50 transition-all duration-500 mb-6 shadow-2xl">
