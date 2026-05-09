@@ -433,7 +433,8 @@ export default function Dashboard() {
 
       // Update user document
       await updateDoc(doc(db, 'users', currentUser.uid), {
-        teamId: teamDoc.id
+        teamId: teamDoc.id,
+        role: 'member'
       });
 
       window.location.reload();
@@ -676,7 +677,7 @@ export default function Dashboard() {
                       </div>
                     </div>
                     <span className="text-xs font-black tracking-widest bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-md uppercase border border-emerald-500/30">
-                      YOU ({userData.role === 'leader' ? 'Leader' : 'Member'})
+                      YOU ({currentUser.uid === teamData?.leaderId ? 'Leader' : 'Member'})
                     </span>
                  </li>
                  {teamMembersMeta.map(member => (
@@ -697,9 +698,9 @@ export default function Dashboard() {
                        </div>
                        <div className="flex items-center gap-2">
                          <span className="text-xs font-black tracking-widest bg-slate-800 text-slate-300 px-3 py-1 rounded-md uppercase border border-slate-700/50">
-                           {member.role === 'leader' ? 'Leader' : 'Member'}
+                           {member.id === teamData?.leaderId ? 'Leader' : 'Member'}
                          </span>
-                         {userData.role === 'leader' && (
+                         {currentUser.uid === teamData?.leaderId && (
                            <button 
                              onClick={() => handleRemoveMember(member.id)}
                              className="p-1.5 text-slate-500 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all"
