@@ -212,30 +212,7 @@ export default function LandingPage() {
       {/* Partners & Organizers */}
       <section className="py-24 relative overflow-hidden bg-slate-950">
         <div className="max-w-6xl mx-auto px-6 relative z-10">
-          {/* Judges Section (Conditionally Revealed) */}
-          {platformSettings.showJudges && (
-            <div className="text-center mb-32 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-               <h2 className="text-3xl font-bold mb-4 tracking-tight text-emerald-400 uppercase tracking-[0.3em]">The Judges</h2>
-               <p className="text-slate-400 mb-16 max-w-2xl mx-auto font-light">The panel of experts who will evaluate your breakthrough technologies on the final day.</p>
-               
-               <div className="flex flex-wrap justify-center gap-8">
-                 {judges.map((judge, i) => (
-                   <div key={judge.id || i} className="flex flex-col items-center group w-40 sm:w-48">
-                      <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-900 border border-white/5 flex items-center justify-center mb-6 group-hover:border-emerald-500/50 group-hover:bg-slate-800 transition-all duration-500 shadow-2xl relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        {judge.photoURL ? (
-                          <img src={judge.photoURL} alt={judge.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                        ) : (
-                          <ShieldCheck className="w-10 h-10 text-slate-700 group-hover:text-emerald-500/50 transition-colors" />
-                        )}
-                      </div>
-                      <h4 className="text-white font-bold text-sm mb-1">{judge.name}</h4>
-                      <p className="text-slate-500 text-[10px] uppercase tracking-widest">{judge.role}</p>
-                   </div>
-                 ))}
-               </div>
-            </div>
-          )}
+
 
 
 

@@ -49,7 +49,7 @@ export default function Dashboard() {
     { date: "Current - April 30", title: "Team Registration", desc: "Build your team of exactly 1-4 members. The clock is ticking to securely lock in your roster." },
     { date: "May 1 - May 15", title: "Pitch Deck Drafting", desc: "Submit a comprehensive PDF outlining exactly how your team plans to tackle the SDGs. Technical diagrams required." },
     { date: "May 16 - May 23", title: "Panel Review", desc: "Elite judges evaluate all submissions. Only the top teams advance to the finals." },
-    { date: "May 24, 2026", title: "Grand Finale", desc: "Live offline presentations. Defend your eco-tech proposals in front of the master panel and forge your legacy." }
+    { date: "June 2, 2026", title: "Grand Finale", desc: "Live offline presentations. Defend your eco-tech proposals in front of the master panel and forge your legacy." }
   ];
 
   useEffect(() => {
@@ -58,7 +58,7 @@ export default function Dashboard() {
 
   // Handle countdown timer
   useEffect(() => {
-    const targetDate = new Date("May 24, 2026 00:00:00").getTime();
+    const targetDate = new Date("June 2, 2026 00:00:00").getTime();
     
     const interval = setInterval(() => {
       const now = new Date().getTime();
@@ -753,7 +753,7 @@ export default function Dashboard() {
         {/* Hero Content */}
         <div className="flex flex-col justify-center items-center text-center px-4 md:px-6 w-full max-w-5xl mx-auto relative z-10 pt-8 sm:pt-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 border border-emerald-500/20 text-emerald-400 rounded-full text-xs font-bold uppercase tracking-widest mb-8 shadow-lg shadow-emerald-500/10">
-             <Sparkles className="w-4 h-4" /> Grand Finale: May 24, 2026
+             <Sparkles className="w-4 h-4" /> Grand Finale: June 2, 2026
           </div>
           
           <h1 className="text-5xl sm:text-6xl md:text-8xl font-black mb-6 tracking-tighter drop-shadow-2xl">
@@ -931,27 +931,7 @@ export default function Dashboard() {
       {/* Partners & Organizers Section */}
       <section className="py-20 px-6 relative z-10 w-full bg-slate-950/50">
          <div className="max-w-7xl mx-auto">
-            {/* Judges (Conditionally Revealed) */}
-            {platformSettings?.showJudges && (
-              <div className="text-center mb-24 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                 <h3 className="text-sm font-bold mb-10 text-emerald-500 uppercase tracking-[0.4em]">The Judges</h3>
-                 <div className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto">
-                    {judges.map((judge, i) => (
-                      <div key={judge.id || i} className="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl flex flex-col items-center hover:border-emerald-500/20 transition-all group w-40 sm:w-48">
-                         <div className="w-16 h-16 rounded-full bg-slate-800/50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform overflow-hidden">
-                            {judge.photoURL ? (
-                               <img src={judge.photoURL} alt={judge.name} className="w-full h-full object-cover" />
-                            ) : (
-                               <ShieldCheck className="w-6 h-6 text-slate-600 group-hover:text-emerald-500/50" />
-                            )}
-                         </div>
-                         <h4 className="text-white font-bold text-xs mb-1">{judge.name}</h4>
-                         <p className="text-slate-500 text-[9px] uppercase tracking-widest">{judge.role}</p>
-                      </div>
-                    ))}
-                 </div>
-              </div>
-            )}
+
 
             {/* Partner */}
             <div className="text-center mb-32">
