@@ -556,12 +556,12 @@ export default function Dashboard() {
           </p>
 
           <div className="grid lg:grid-cols-3 gap-8 relative z-10">
-            <div className="lg:col-span-2 bg-slate-800/40 border border-slate-700 p-8 rounded-3xl backdrop-blur-sm shadow-xl flex flex-col">
+            <div className="lg:col-span-2 bg-slate-800/40 border border-slate-700 p-4 sm:p-8 rounded-3xl backdrop-blur-sm shadow-xl flex flex-col">
               <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
                 <Users className="w-6 h-6 text-emerald-500" /> My Team Overview
               </h2>
               
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8 p-6 bg-slate-900/50 rounded-2xl border border-slate-700/50 flex-1">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 sm:gap-8 mb-8 p-4 sm:p-6 bg-slate-900/50 rounded-2xl border border-slate-700/50 flex-1">
                  <div className="relative group w-32 h-32 shrink-0">
                     <div className="w-full h-full rounded-2xl bg-slate-800 border-2 border-emerald-500/20 overflow-hidden flex items-center justify-center shadow-lg">
                       {teamData?.teamLogoUrl ? (
@@ -586,8 +586,8 @@ export default function Dashboard() {
                  </div>
                  
                  <div className="text-center md:text-left flex-1">
-                   <p className="text-slate-400 text-sm font-bold uppercase tracking-widest mb-1">Squad Designation</p>
-                   <h3 className="text-3xl md:text-4xl font-black text-white mb-4 drop-shadow-md">{teamData ? teamData.teamName : 'Loading...'}</h3>
+                    <p className="text-slate-400 text-[10px] sm:text-sm font-bold uppercase tracking-widest mb-1">Squad Designation</p>
+                   <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-4 drop-shadow-md break-words">{teamData ? teamData.teamName : 'Loading...'}</h3>
                    <span className="inline-block bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-lg text-xs font-bold self-start">Active Team</span>
                  </div>
               </div>
@@ -762,35 +762,35 @@ export default function Dashboard() {
             The ultimate ideathon platform designed to solve ecological crises. Gather your team of engineers, review the roadmap below, and prepare your breakthrough pitch deck.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-6 mt-12 mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mt-12 mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
              <button 
                onClick={() => setShowRuleModal(true)}
-               className="group relative px-8 py-4 bg-slate-900 border border-emerald-500/30 rounded-2xl transition-all duration-500 hover:border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.1)] hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden"
+               className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 border border-emerald-500/30 rounded-2xl transition-all duration-500 hover:border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.1)] hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden"
              >
                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                <div className="relative flex items-center gap-3">
-                 <div className="p-2 bg-emerald-500/10 rounded-lg">
-                   <BookOpen className="w-6 h-6 text-emerald-400 group-hover:scale-110 transition-transform" />
+                 <div className="p-2 bg-emerald-500/10 rounded-lg shrink-0">
+                   <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400 group-hover:scale-110 transition-transform" />
                  </div>
                  <div className="text-left">
-                   <span className="block text-xs font-bold text-emerald-500/60 uppercase tracking-widest">Resource</span>
-                   <span className="block text-lg font-black text-slate-100 tracking-tight">Official Rulebook</span>
+                   <span className="block text-[10px] font-bold text-emerald-500/60 uppercase tracking-widest">Resource</span>
+                   <span className="block text-base sm:text-lg font-black text-slate-100 tracking-tight">Official Rulebook</span>
                  </div>
                </div>
              </button>
 
              <a 
                href="#" 
-               className="group relative px-8 py-4 bg-slate-900 border border-cyan-500/30 rounded-2xl transition-all duration-500 hover:border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.2)] overflow-hidden"
+               className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 border border-cyan-500/30 rounded-2xl transition-all duration-500 hover:border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.2)] overflow-hidden"
              >
                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                <div className="relative flex items-center gap-3">
-                 <div className="p-2 bg-cyan-500/10 rounded-lg">
-                   <Download className="w-6 h-6 text-cyan-400 group-hover:scale-110 transition-transform" />
+                 <div className="p-2 bg-cyan-500/10 rounded-lg shrink-0">
+                   <Download className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400 group-hover:scale-110 transition-transform" />
                  </div>
                  <div className="text-left">
-                   <span className="block text-xs font-bold text-cyan-500/60 uppercase tracking-widest">Download</span>
-                   <span className="block text-lg font-black text-slate-100 tracking-tight">PPT Template</span>
+                   <span className="block text-[10px] font-bold text-cyan-500/60 uppercase tracking-widest">Download</span>
+                   <span className="block text-base sm:text-lg font-black text-slate-100 tracking-tight">PPT Template</span>
                  </div>
                </div>
              </a>
