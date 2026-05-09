@@ -267,7 +267,7 @@ export default function Dashboard() {
            <div className="w-px h-8 bg-slate-700/50 hidden sm:block mx-2"></div>
            
            <button onClick={() => setShowProfileModal(true)} className="flex items-center gap-3 bg-slate-800/50 hover:bg-slate-700/80 p-2 pr-5 rounded-full transition-all border border-slate-700/50 hover:border-emerald-500/50 shadow-sm group">
-             <div className="w-9 h-9 rounded-full bg-slate-700 overflow-hidden flex items-center justify-center shrink-0 border-2 border-emerald-500/30 group-hover:border-emerald-400 transition-colors shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+             <div className="w-9 h-9 rounded-full bg-slate-700 overflow-hidden flex items-center justify-center shrink-0 transition-colors shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                {userData.photoURL ? (
                   <img src={userData.photoURL} alt="Avatar" className="w-full h-full object-cover" />
                ) : (
@@ -313,7 +313,7 @@ export default function Dashboard() {
             
             <div className="flex flex-col items-center mb-8">
               <div className="relative mb-4">
-                <div className="w-24 h-24 rounded-full bg-slate-800 border-2 border-emerald-500/30 overflow-hidden flex items-center justify-center relative shadow-lg">
+                <div className="w-24 h-24 rounded-full bg-slate-800 overflow-hidden flex items-center justify-center relative shadow-lg">
                    {userData.photoURL ? (
                       <img src={userData.photoURL} alt="Avatar" className="w-full h-full object-cover" />
                    ) : (
@@ -583,19 +583,7 @@ export default function Dashboard() {
                          <Globe2 className="w-12 h-12 text-slate-600" />
                       )}
                     </div>
-                    {userData.role === 'leader' && (
-                      <>
-                        <label className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer rounded-2xl">
-                           <Camera className="w-6 h-6 text-white mb-1" />
-                           <span className="text-[10px] text-white font-bold uppercase">Change Logo</span>
-                           <input type="file" accept="image/*" onChange={handleTeamLogoUpload} className="hidden" />
-                        </label>
-                        {/* Pencil indicator */}
-                        <div className="absolute -bottom-2 -right-2 bg-emerald-500 rounded-full p-1.5 border-2 border-slate-900 pointer-events-none shadow-lg z-10">
-                          <Pencil className="w-3.5 h-3.5 text-slate-950" />
-                        </div>
-                      </>
-                    )}
+
                  </div>
                  
                  <div className="text-center md:text-left flex-1">
@@ -656,9 +644,9 @@ export default function Dashboard() {
                  <li className="p-3 sm:p-4 bg-slate-900/50 border border-emerald-500/30 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-[0_0_20px_rgba(16,185,129,0.05)]">
                     <div className="flex items-center gap-3">
                       {userData.photoURL ? (
-                        <img src={userData.photoURL} alt="Avatar" className="w-10 h-10 rounded-full object-cover border border-emerald-500/30" />
+                        <img src={userData.photoURL} alt="Avatar" className="w-10 h-10 rounded-full object-cover" />
                       ) : (
-                        <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center font-bold text-emerald-400">
+                        <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center font-bold text-emerald-400">
                           {userData.name.charAt(0).toUpperCase()}
                         </div>
                       )}
@@ -676,9 +664,9 @@ export default function Dashboard() {
                      <li key={member.id} className="p-3 sm:p-4 bg-slate-900/50 border border-slate-700/30 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                        <div className="flex items-center gap-3">
                          {member.photoURL ? (
-                           <img src={member.photoURL} alt="Avatar" className="w-10 h-10 rounded-full object-cover border border-slate-600" />
+                           <img src={member.photoURL} alt="Avatar" className="w-10 h-10 rounded-full object-cover" />
                          ) : (
-                           <div className="w-10 h-10 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center font-bold text-slate-400">
+                           <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center font-bold text-slate-400">
                              {member.name.charAt(0).toUpperCase()}
                            </div>
                          )}
