@@ -968,7 +968,7 @@ export default function Dashboard() {
                    className="relative group transition-all cursor-pointer"
                  >
                     {/* Logo Container */}
-                    <div className={`w-48 h-48 sm:w-60 sm:h-60 rounded-full overflow-hidden flex items-center justify-center bg-white/5 backdrop-blur-sm border border-white/5 transition-all duration-500 ${revealPartner ? 'blur-md scale-95 opacity-20' : 'group-hover:blur-md group-hover:scale-95 group-hover:opacity-20'}`}>
+                    <div className={`w-48 h-48 sm:w-60 sm:h-60 rounded-full overflow-hidden flex items-center justify-center bg-slate-900/40 backdrop-blur-sm border-2 border-emerald-500/20 transition-all duration-500 ${revealPartner ? 'blur-md scale-95 opacity-20' : 'group-hover:blur-md group-hover:scale-95 group-hover:opacity-20'}`}>
                        <img 
                           src={`${import.meta.env.BASE_URL}ecotank-logo.png`} 
                           alt="EcoTank Logo" 
