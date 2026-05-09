@@ -659,7 +659,7 @@ export default function Dashboard() {
               )}
             </div>
 
-            <div className="bg-slate-800/40 border border-slate-700 p-8 rounded-3xl backdrop-blur-sm shadow-xl flex flex-col">
+            <div className="bg-slate-800/40 border border-slate-700 p-4 sm:p-8 rounded-3xl backdrop-blur-sm shadow-xl flex flex-col">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2 drop-shadow-md">Team Matrix</h2>
               <ul className="space-y-3 mb-8">
                  <li className="p-4 bg-slate-900/50 border border-emerald-500/30 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-[0_0_20px_rgba(16,185,129,0.05)]">
@@ -677,7 +677,7 @@ export default function Dashboard() {
                       </div>
                     </div>
                     <span className="text-xs font-black tracking-widest bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-md uppercase border border-emerald-500/30">
-                      YOU ({currentUser.uid === teamData?.leaderId ? 'Leader' : 'Member'})
+                      YOU ({teamData?.leaderId === currentUser.uid ? 'Leader' : 'Member'})
                     </span>
                  </li>
                  {teamMembersMeta.map(member => (
@@ -700,7 +700,7 @@ export default function Dashboard() {
                          <span className="text-xs font-black tracking-widest bg-slate-800 text-slate-300 px-3 py-1 rounded-md uppercase border border-slate-700/50">
                            {member.id === teamData?.leaderId ? 'Leader' : 'Member'}
                          </span>
-                         {currentUser.uid === teamData?.leaderId && (
+                         {teamData?.leaderId === currentUser.uid && (
                            <button 
                              onClick={() => handleRemoveMember(member.id)}
                              className="p-1.5 text-slate-500 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all"
