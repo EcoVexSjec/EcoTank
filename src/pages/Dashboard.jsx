@@ -47,10 +47,10 @@ export default function Dashboard() {
   const SDGs = [...baseSDGs, ...baseSDGs]; // Double for seamless loop
 
   const timelinePhases = [
-    { date: "Current - April 30", title: "Team Registration", desc: "Build your team of exactly 1-4 members. The clock is ticking to securely lock in your roster." },
-    { date: "May 1 - May 15", title: "Pitch Deck Drafting", desc: "Submit a comprehensive PDF outlining exactly how your team plans to tackle the SDGs. Technical diagrams required." },
-    { date: "May 16 - May 23", title: "Panel Review", desc: "Elite judges evaluate all submissions. Only the top teams advance to the finals." },
-    { date: "June 2, 2026", title: "Grand Finale", desc: "Live offline presentations. Defend your eco-tech proposals in front of the master panel and forge your legacy." }
+    { date: "Current - May 12", title: "Team Registration", desc: "Build your team of exactly 1-4 members. The clock is ticking to securely lock in your roster." },
+    { date: "May 12 - May 20", title: "PPT Submission", desc: "Submit your comprehensive pitch deck outlining your breakthrough ideas and technical diagrams." },
+    { date: "May 25", title: "Phase 1 Result", desc: "Shortlisted teams will be announced. Only the most innovative solutions advance to the finale." },
+    { date: "June 2, 2026", title: "Grand Finale", desc: "Final offline presentation and Q&A. Pitch your legacy and defend your vision before the master panel." }
   ];
 
   useEffect(() => {
