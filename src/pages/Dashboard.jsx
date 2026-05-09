@@ -973,8 +973,10 @@ export default function Dashboard() {
                        />
                     </div>
                     <div className="mt-8">
-                       <h3 className="text-emerald-400 font-black text-2xl tracking-tighter">EcoTank</h3>
-                       <p className="text-slate-500 text-sm font-bold uppercase tracking-widest">Primary Hub</p>
+                       <h3 className="text-emerald-400 font-black text-2xl tracking-tighter">EcoVex</h3>
+                       <p className="text-slate-500 text-sm font-medium leading-relaxed max-w-[200px] mx-auto">
+                          Advancing ecological solutions through engineering excellence and sustainable innovation.
+                       </p>
                     </div>
                  </div>
                </div>
