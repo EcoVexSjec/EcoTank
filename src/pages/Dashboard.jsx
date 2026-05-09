@@ -961,41 +961,20 @@ export default function Dashboard() {
 
             {/* Partners */}
             <div className="text-center mb-32">
-               <h2 className="text-3xl font-bold mb-20 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Our Partners</h2>
-               <div className="flex flex-wrap justify-center gap-12 sm:gap-20">
-                 {/* Sceptix */}
-                 <div 
-                   onClick={() => setRevealPartner(!revealPartner)}
-                   className={`relative bg-transparent group transition-all cursor-pointer`}
-                 >
-                    <div className={`w-40 h-40 sm:w-52 sm:h-52 rounded-full overflow-hidden transition-all duration-500 ${revealPartner ? 'blur-sm scale-95 opacity-20' : 'group-hover:blur-sm group-hover:scale-95 group-hover:opacity-20'}`}>
-                       <img 
-                          src={`${import.meta.env.BASE_URL}sceptix.png`} 
-                          alt="Sceptix Logo" 
-                          className="w-full h-full object-cover" 
-                       />
-                    </div>
-                    
-                    <div className={`absolute inset-0 flex flex-col items-center justify-center p-6 transition-all duration-500 ${revealPartner ? 'opacity-100 translate-y-0' : 'opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0'}`}>
-                       <h3 className="text-emerald-400 font-bold text-lg mb-2 tracking-tight">Sceptix</h3>
-                       <p className="text-slate-300 text-[10px] leading-relaxed max-w-[150px]">
-                          Official Technical Club of SJEC.
-                       </p>
-                    </div>
-                 </div>
-
+               <h2 className="text-3xl font-bold mb-16 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Our Partner</h2>
+               <div className="flex justify-center">
                  {/* EcoTank / EcoVex */}
-                 <div className="relative bg-transparent group transition-all">
-                    <div className="w-40 h-40 sm:w-52 sm:h-52 rounded-full overflow-hidden flex items-center justify-center bg-white/5 backdrop-blur-sm border border-white/10 shadow-2xl transition-all duration-500 group-hover:scale-110">
+                 <div className="relative group transition-all">
+                    <div className="w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden flex items-center justify-center bg-white/5 backdrop-blur-sm border border-white/5 transition-all duration-500 hover:scale-105">
                        <img 
                           src={`${import.meta.env.BASE_URL}ecotank-logo.png`} 
                           alt="EcoTank Logo" 
-                          className="w-24 sm:w-32 h-auto object-contain drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]" 
+                          className="w-40 sm:w-52 h-auto object-contain" 
                        />
                     </div>
-                    <div className="mt-6">
-                       <h3 className="text-emerald-400 font-bold text-lg tracking-tight">EcoTank</h3>
-                       <p className="text-slate-500 text-xs font-medium">Primary Hub</p>
+                    <div className="mt-8">
+                       <h3 className="text-emerald-400 font-black text-2xl tracking-tighter">EcoTank</h3>
+                       <p className="text-slate-500 text-sm font-bold uppercase tracking-widest">Primary Hub</p>
                     </div>
                  </div>
                </div>
