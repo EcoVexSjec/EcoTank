@@ -14,6 +14,7 @@ export default function Dashboard() {
   const [inviteCodeInput, setInviteCodeInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [revealPartner, setRevealPartner] = useState(false);
   
   // Dashboard state
   const [teamData, setTeamData] = useState(null);
@@ -973,9 +974,12 @@ export default function Dashboard() {
             {/* Partner */}
             <div className="text-center mb-32">
                <h2 className="text-3xl font-bold mb-20 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Our Partner</h2>
-               <div className="relative inline-block bg-slate-900/60 border border-slate-800 rounded-3xl backdrop-blur-md shadow-2xl group hover:border-emerald-500/20 transition-all overflow-hidden">
+               <div 
+                 onClick={() => setRevealPartner(!revealPartner)}
+                 className={`relative inline-block bg-slate-900/60 rounded-3xl backdrop-blur-md shadow-2xl group transition-all overflow-hidden cursor-pointer ${revealPartner ? 'ring-2 ring-emerald-500/20' : ''}`}
+               >
                   {/* Logo Container */}
-                  <div className="p-8 transition-all duration-500 group-hover:blur-sm group-hover:scale-95 group-hover:opacity-20">
+                  <div className={`p-8 transition-all duration-500 ${revealPartner ? 'blur-sm scale-95 opacity-20' : 'group-hover:blur-sm group-hover:scale-95 group-hover:opacity-20'}`}>
                      <img 
                         src={`${import.meta.env.BASE_URL}sceptix.png`} 
                         alt="Sceptix Logo" 
@@ -984,7 +988,7 @@ export default function Dashboard() {
                   </div>
                   
                   {/* Info Overlay */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+                  <div className={`absolute inset-0 flex flex-col items-center justify-center p-6 transition-all duration-500 ${revealPartner ? 'opacity-100 translate-y-0' : 'opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0'}`}>
                      <h3 className="text-emerald-400 font-bold text-lg mb-2 tracking-tight">Sceptix</h3>
                      <p className="text-slate-300 text-xs leading-relaxed max-w-[240px]">
                         The official Technical Club of SJEC. Fostering innovation, coding excellence, and technical leadership.
@@ -1003,8 +1007,8 @@ export default function Dashboard() {
                     { name: "Roy Prince Veigas", role: "Tech Lead", img: "santhsim.png" },
                     { name: "Keerthana Nair", role: "Treasurer", img: "jeethan.png" }
                   ].map((org, i) => (
-                    <div key={i} className="flex flex-col items-center group">
-                      <div className="w-40 h-40 sm:w-56 sm:h-56 rounded-full overflow-hidden border-2 border-slate-800 group-hover:border-emerald-500/30 transition-all mb-4 shadow-xl">
+                    <div key={i} className="flex flex-col items-center group cursor-pointer">
+                      <div className="w-40 h-40 sm:w-56 sm:h-56 rounded-full overflow-hidden transition-all mb-4 shadow-xl">
                         <img 
                           src={`${import.meta.env.BASE_URL}${org.img}`} 
                           alt={org.name} 
