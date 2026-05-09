@@ -763,24 +763,23 @@ export default function Dashboard() {
           <p className="text-lg md:text-xl text-slate-400 font-light max-w-3xl mx-auto leading-relaxed">
             The ultimate ideathon platform designed to solve ecological crises. Gather your team of engineers, review the roadmap below, and prepare your breakthrough pitch deck.
           </p>
-        </div>
 
-        {/* GSAP Moving SDG Ticker */}
-        <div className="w-full relative z-20 mt-16 overflow-hidden">
-           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none"></div>
-           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none"></div>
-           
-           <div className="flex w-max" ref={tickerRef}>
-              {SDGs.map((sdg, i) => (
-                <div key={i} className="w-64 sm:w-80 min-h-[140px] mx-2 sm:mx-4 bg-slate-900/80 border border-slate-700/50 p-4 sm:p-6 rounded-2xl flex flex-col justify-center hover:border-emerald-500/50 transition-colors shadow-2xl shrink-0">
-                   <div className="flex items-center gap-3 sm:gap-4 mb-2 sm:mb-3">
-                     <div className="text-2xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-b from-emerald-400 to-slate-800 shrink-0">{sdg.num}</div>
-                     <div className="text-xs sm:text-base font-bold text-slate-200 uppercase tracking-widest break-words leading-tight">{sdg.title}</div>
-                   </div>
-                   <p className="text-[10px] sm:text-sm text-slate-400 leading-relaxed font-light line-clamp-3 sm:line-clamp-none">{sdg.desc}</p>
-                </div>
-              ))}
-           </div>
+          <div className="flex flex-wrap justify-center gap-4 mt-8 mb-12">
+             <button 
+               onClick={() => setShowRuleModal(true)}
+               className="flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 hover:border-emerald-500/30 rounded-2xl text-slate-300 hover:text-emerald-400 transition-all group backdrop-blur-md"
+             >
+               <BookOpen className="w-5 h-5 group-hover:scale-110 transition-transform" />
+               <span className="font-bold">Official Rulebook</span>
+             </button>
+             <a 
+               href="#" 
+               className="flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 hover:border-cyan-500/30 rounded-2xl text-slate-300 hover:text-cyan-400 transition-all group backdrop-blur-md"
+             >
+               <Download className="w-5 h-5 group-hover:scale-110 transition-transform" />
+               <span className="font-bold">PPT Template</span>
+             </a>
+          </div>
         </div>
       </section>
 
