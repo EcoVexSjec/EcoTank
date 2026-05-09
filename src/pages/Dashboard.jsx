@@ -4,7 +4,7 @@ import { db, storage } from '../firebase/firebase';
 import { doc, getDoc, setDoc, updateDoc, collection, query, where, getDocs, deleteDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, Users, Link as LinkIcon, Sparkles, AlertCircle, CheckCircle2, Globe2, Cpu, User, BookOpen, Camera, Trophy, ShieldCheck, Microscope, Zap, Clock, Pencil, Download } from 'lucide-react';
+import { LogOut, Users, Link as LinkIcon, Sparkles, AlertCircle, CheckCircle2, Globe2, Cpu, User, BookOpen, Camera, Trophy, ShieldCheck, Microscope, Zap, Clock, Pencil, Download, UserMinus } from 'lucide-react';
 import { gsap } from 'gsap';
 
 export default function Dashboard() {
@@ -478,6 +478,27 @@ export default function Dashboard() {
     }
   }
 
+  async function handleRemoveMember(memberId) {
+    if (!window.confirm("Are you sure you want to remove this member from the team?")) return;
+    setLoading(true);
+    try {
+      const remainingMembers = teamData.members.filter(m => m !== memberId);
+      await updateDoc(doc(db, 'teams', teamData.teamId), {
+        members: remainingMembers
+      });
+      await updateDoc(doc(db, 'users', memberId), {
+        teamId: null,
+        role: 'member'
+      });
+      window.location.reload();
+    } catch (err) {
+      console.error(err);
+      alert('Failed to remove member');
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function handleLeaveTeam() {
     if (!window.confirm("Are you sure you want to leave this team?")) return;
     setLoading(true);
@@ -674,9 +695,20 @@ export default function Dashboard() {
                            <span className="text-xs text-slate-500">{member.email}</span>
                          </div>
                        </div>
-                       <span className="text-xs font-black tracking-widest bg-slate-800 text-slate-300 px-3 py-1 rounded-md uppercase border border-slate-700/50">
-                         {member.role === 'leader' ? 'Leader' : 'Member'}
-                       </span>
+                       <div className="flex items-center gap-2">
+                         <span className="text-xs font-black tracking-widest bg-slate-800 text-slate-300 px-3 py-1 rounded-md uppercase border border-slate-700/50">
+                           {member.role === 'leader' ? 'Leader' : 'Member'}
+                         </span>
+                         {userData.role === 'leader' && (
+                           <button 
+                             onClick={() => handleRemoveMember(member.id)}
+                             className="p-1.5 text-slate-500 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all"
+                             title="Remove from team"
+                           >
+                             <UserMinus className="w-4 h-4" />
+                           </button>
+                         )}
+                       </div>
                      </li>
                    )
                  ))}
