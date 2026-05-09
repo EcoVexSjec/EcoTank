@@ -261,9 +261,7 @@ export default function Dashboard() {
          </div>
 
          <div className="flex items-center gap-2 md:gap-6">
-           <button onClick={() => setShowRuleModal(true)} className="flex items-center gap-2 text-sm font-bold text-slate-300 hover:text-emerald-400 bg-white/5 hover:bg-white/10 px-5 py-2.5 rounded-full transition-all border border-transparent hover:border-emerald-500/20">
-              <BookOpen className="w-5 h-5" /> <span className="hidden sm:block">Rule Book</span>
-           </button>
+
            
            <div className="w-px h-8 bg-slate-700/50 hidden sm:block mx-2"></div>
            
@@ -764,20 +762,37 @@ export default function Dashboard() {
             The ultimate ideathon platform designed to solve ecological crises. Gather your team of engineers, review the roadmap below, and prepare your breakthrough pitch deck.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 mt-8 mb-12">
+          <div className="flex flex-wrap justify-center gap-6 mt-12 mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
              <button 
                onClick={() => setShowRuleModal(true)}
-               className="flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 hover:border-emerald-500/30 rounded-2xl text-slate-300 hover:text-emerald-400 transition-all group backdrop-blur-md"
+               className="group relative px-8 py-4 bg-slate-900 border border-emerald-500/30 rounded-2xl transition-all duration-500 hover:border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.1)] hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden"
              >
-               <BookOpen className="w-5 h-5 group-hover:scale-110 transition-transform" />
-               <span className="font-bold">Official Rulebook</span>
+               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+               <div className="relative flex items-center gap-3">
+                 <div className="p-2 bg-emerald-500/10 rounded-lg">
+                   <BookOpen className="w-6 h-6 text-emerald-400 group-hover:scale-110 transition-transform" />
+                 </div>
+                 <div className="text-left">
+                   <span className="block text-xs font-bold text-emerald-500/60 uppercase tracking-widest">Resource</span>
+                   <span className="block text-lg font-black text-slate-100 tracking-tight">Official Rulebook</span>
+                 </div>
+               </div>
              </button>
+
              <a 
                href="#" 
-               className="flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 hover:border-cyan-500/30 rounded-2xl text-slate-300 hover:text-cyan-400 transition-all group backdrop-blur-md"
+               className="group relative px-8 py-4 bg-slate-900 border border-cyan-500/30 rounded-2xl transition-all duration-500 hover:border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.2)] overflow-hidden"
              >
-               <Download className="w-5 h-5 group-hover:scale-110 transition-transform" />
-               <span className="font-bold">PPT Template</span>
+               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+               <div className="relative flex items-center gap-3">
+                 <div className="p-2 bg-cyan-500/10 rounded-lg">
+                   <Download className="w-6 h-6 text-cyan-400 group-hover:scale-110 transition-transform" />
+                 </div>
+                 <div className="text-left">
+                   <span className="block text-xs font-bold text-cyan-500/60 uppercase tracking-widest">Download</span>
+                   <span className="block text-lg font-black text-slate-100 tracking-tight">PPT Template</span>
+                 </div>
+               </div>
              </a>
           </div>
         </div>
