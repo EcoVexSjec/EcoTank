@@ -965,11 +965,11 @@ export default function Dashboard() {
                <div className="flex justify-center">
                  {/* EcoTank / EcoVex */}
                  <div className="relative group transition-all">
-                    <div className="w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden flex items-center justify-center bg-white/5 backdrop-blur-sm border border-white/5 transition-all duration-500 hover:scale-105">
+                    <div className="w-48 h-48 sm:w-60 sm:h-60 rounded-full overflow-hidden flex items-center justify-center bg-white/5 backdrop-blur-sm border border-white/5 transition-all duration-500 hover:scale-105">
                        <img 
                           src={`${import.meta.env.BASE_URL}ecotank-logo.png`} 
                           alt="EcoTank Logo" 
-                          className="w-40 sm:w-52 h-auto object-contain" 
+                          className="w-32 sm:w-40 h-auto object-contain" 
                        />
                     </div>
                     <div className="mt-8">
