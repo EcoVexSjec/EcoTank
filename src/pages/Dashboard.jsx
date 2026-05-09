@@ -959,24 +959,33 @@ export default function Dashboard() {
          <div className="max-w-7xl mx-auto">
 
 
-            {/* Partners */}
+            {/* Partner */}
             <div className="text-center mb-32">
                <h2 className="text-3xl font-bold mb-16 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Our Partner</h2>
                <div className="flex justify-center">
-                 {/* EcoTank / EcoVex */}
-                 <div className="relative group transition-all">
-                    <div className="w-48 h-48 sm:w-60 sm:h-60 rounded-full overflow-hidden flex items-center justify-center bg-white/5 backdrop-blur-sm border border-white/5 transition-all duration-500 hover:scale-105">
+                 <div 
+                   onClick={() => setRevealPartner(!revealPartner)}
+                   className="relative group transition-all cursor-pointer"
+                 >
+                    {/* Logo Container */}
+                    <div className={`w-48 h-48 sm:w-60 sm:h-60 rounded-full overflow-hidden flex items-center justify-center bg-white/5 backdrop-blur-sm border border-white/5 transition-all duration-500 ${revealPartner ? 'blur-md scale-95 opacity-20' : 'group-hover:blur-md group-hover:scale-95 group-hover:opacity-20'}`}>
                        <img 
                           src={`${import.meta.env.BASE_URL}ecotank-logo.png`} 
                           alt="EcoTank Logo" 
                           className="w-32 sm:w-40 h-auto object-contain" 
                        />
                     </div>
-                    <div className="mt-8">
-                       <h3 className="text-emerald-400 font-black text-2xl tracking-tighter">EcoVex</h3>
-                       <p className="text-slate-500 text-sm font-medium leading-relaxed max-w-[200px] mx-auto">
+
+                    {/* Detail Reveal Overlay */}
+                    <div className={`absolute inset-0 flex items-center justify-center p-6 transition-all duration-500 ${revealPartner ? 'opacity-100 translate-y-0' : 'opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0'}`}>
+                       <p className="text-emerald-400 text-xs sm:text-sm font-bold leading-relaxed max-w-[140px] sm:max-w-[180px]">
                           Advancing ecological solutions through engineering excellence and sustainable innovation.
                        </p>
+                    </div>
+
+                    {/* Always Visible Name */}
+                    <div className="mt-8">
+                       <h3 className="text-emerald-400 font-black text-2xl tracking-tighter">EcoVex</h3>
                     </div>
                  </div>
                </div>
