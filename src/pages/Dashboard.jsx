@@ -766,7 +766,7 @@ export default function Dashboard() {
 
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mt-12 mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
              <a 
-               href="https://drive.google.com/drive/folders/1UMKuOAQxJPV6AtSM2XZKlGpLPQyF0222" 
+               href="https://drive.google.com/drive/folders/1UMKuOAQxJPV6AtSM2XZKlGpLPQyF0222?usp=drive_link" 
                target="_blank"
                rel="noopener noreferrer"
                className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 border border-emerald-500/30 rounded-2xl transition-all duration-500 hover:border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.1)] hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden"
@@ -784,7 +784,7 @@ export default function Dashboard() {
              </a>
 
              <a 
-               href="https://drive.google.com/drive/folders/1UMKuOAQxJPV6AtSM2XZKlGpLPQyF0222" 
+               href="https://drive.google.com/drive/folders/1UMKuOAQxJPV6AtSM2XZKlGpLPQyF0222?usp=drive_link" 
                target="_blank"
                rel="noopener noreferrer"
                className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 border border-cyan-500/30 rounded-2xl transition-all duration-500 hover:border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.2)] overflow-hidden"

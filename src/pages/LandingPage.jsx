@@ -75,7 +75,7 @@ export default function LandingPage() {
             <span className="text-lg font-bold tracking-wide">EcoTank</span>
           </div>
           <div className="flex gap-6 items-center">
-            <a href="https://drive.google.com/drive/folders/1UMKuOAQxJPV6AtSM2XZKlGpLPQyF0222" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-slate-300 hover:text-white transition">Rulebook</a>
+            <a href="https://drive.google.com/drive/folders/1UMKuOAQxJPV6AtSM2XZKlGpLPQyF0222?usp=drive_link" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-slate-300 hover:text-white transition">Rulebook</a>
             <Link to="/login" className="text-sm font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 text-slate-950 hover:from-emerald-300 hover:to-cyan-300 rounded-full px-6 py-2 transition-all shadow-[0_0_20px_rgba(16,185,129,0.4)]">Log In</Link>
           </div>
         </div>
@@ -281,7 +281,7 @@ export default function LandingPage() {
               <ul className="space-y-4">
                 <li><Link to="/login" className="text-slate-400 hover:text-emerald-400 transition-colors">Login to Hub</Link></li>
                 <li><Link to="/register" className="text-slate-400 hover:text-emerald-400 transition-colors">Sign Up</Link></li>
-                <li><a href="https://drive.google.com/drive/folders/1UMKuOAQxJPV6AtSM2XZKlGpLPQyF0222" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-emerald-400 transition-colors">Read Rulebook</a></li>
+                <li><a href="https://drive.google.com/drive/folders/1UMKuOAQxJPV6AtSM2XZKlGpLPQyF0222?usp=drive_link" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-emerald-400 transition-colors">Read Rulebook</a></li>
               </ul>
             </div>
 
