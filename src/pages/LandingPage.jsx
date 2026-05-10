@@ -123,57 +123,26 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* The 17 SDGs */}
-      <section ref={el => sectionsRef.current[0] = el} className="py-24 relative">
-         <div className="max-w-4xl mx-auto px-6 text-center">
-            <Globe2 className="w-16 h-16 text-cyan-400 mx-auto mb-6 opacity-90" />
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">The 17 <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">SDGs</span></h2>
-            <p className="text-xl text-slate-400 font-light leading-relaxed mb-12">
-              EcoTank challenges you to design sustainable infrastructure, renewable energy systems, and climate action technologies.
-            </p>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-              <div className="bg-slate-900/40 p-6 border border-emerald-500/20 rounded-2xl hover:border-emerald-500/50 transition-colors">
-                 <div className="text-emerald-400 font-black text-4xl mb-2">06</div>
-                 <div className="text-sm font-medium text-slate-300 uppercase tracking-wide">Clean Water & Sanitation</div>
-              </div>
-              <div className="bg-slate-900/40 p-6 border border-orange-500/20 rounded-2xl hover:border-orange-500/50 transition-colors">
-                 <div className="text-orange-400 font-black text-4xl mb-2">07</div>
-                 <div className="text-sm font-medium text-slate-300 uppercase tracking-wide">Clean<br/>Energy</div>
-              </div>
-              <div className="bg-slate-900/40 p-6 border border-cyan-500/20 rounded-2xl hover:border-cyan-500/50 transition-colors">
-                 <div className="text-cyan-400 font-black text-4xl mb-2">13</div>
-                 <div className="text-sm font-medium text-slate-300 uppercase tracking-wide">Climate<br/>Action</div>
-              </div>
-              <div className="bg-slate-900/40 p-6 border border-lime-500/20 rounded-2xl hover:border-lime-500/50 transition-colors">
-                 <div className="text-lime-400 font-black text-4xl mb-2">15</div>
-                 <div className="text-sm font-medium text-slate-300 uppercase tracking-wide">Life on<br/>Land</div>
-              </div>
-            </div>
-         </div>
-      </section>
-
       {/* Guardians */}
       <section className="py-24 relative">
-        <div className="max-w-6xl mx-auto px-6" ref={el => sectionsRef.current[1] = el}>
+        <div className="max-w-6xl mx-auto px-6" ref={el => sectionsRef.current[0] = el}>
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">The Elemental Guardians</h2>
-            <p className="text-slate-400 text-lg max-w-2xl mx-auto font-light">Meet our mascots. They represent the primal forces defending the 17 Sustainable Development Goals.</p>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto font-light">Meet the guardians of our vision, each representing a core pillar of our mission to save the planet.</p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Earth */}
             <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6 hover:bg-slate-800/50 hover:border-emerald-500/50 transition-all group backdrop-blur-sm">
                  <img src={`${import.meta.env.BASE_URL}mascot-earth.webp`} alt="Earth" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
                  <h3 className="text-2xl font-bold mb-3 text-emerald-400">Earth Golem</h3>
-                 <p className="text-slate-400 text-sm leading-relaxed font-light">Embodying SDG 11 & 15: Sustainable Cities, structure resilience, and Life on Land conservation.</p>
+                 <p className="text-slate-400 text-sm leading-relaxed font-light">Representing SDG 15: Protecting Life on Land through soil restoration and ecosystem architecture.</p>
             </div>
             
             {/* Fire */}
             <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6 hover:bg-slate-800/50 hover:border-orange-500/50 transition-all group backdrop-blur-sm">
                  <img src={`${import.meta.env.BASE_URL}mascot-fire.webp`} alt="Fire" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
                  <h3 className="text-2xl font-bold mb-3 text-orange-400">Fire Golem</h3>
-                 <p className="text-slate-400 text-sm leading-relaxed font-light">Championing SDG 7: Access to affordable, reliable, sustainable, and modern renewable energy.</p>
+                 <p className="text-slate-400 text-sm leading-relaxed font-light">Championing SDG 7: Harnessing clean energy and thermal innovation for a fossil-free future.</p>
             </div>
 
             {/* Water */}
@@ -194,7 +163,7 @@ export default function LandingPage() {
       </section>
 
       {/* Timeline Section */}
-      <section ref={el => sectionsRef.current[2] = el} className="py-24">
+      <section ref={el => sectionsRef.current[1] = el} className="py-24">
         <div className="max-w-4xl mx-auto px-6 text-center">
             <Cpu className="w-16 h-16 text-emerald-400 mx-auto mb-6 opacity-90" />
             <h2 className="text-4xl md:text-5xl font-bold mb-16 tracking-tight">Timeline</h2>
