@@ -12,7 +12,7 @@ export default function LandingPage() {
   const sectionsRef = useRef([]);
   const [platformSettings, setPlatformSettings] = React.useState({ showJudges: false });
   const [judges, setJudges] = React.useState([]);
-  const [revealPartner, setRevealPartner] = React.useState(false);
+  const [revealPartner, setRevealPartner] = React.useState(null);
 
   useEffect(() => {
     // Elegant fade-ins
@@ -74,7 +74,7 @@ export default function LandingPage() {
             <span className="text-lg font-bold tracking-wide">EcoTank</span>
           </div>
           <div className="flex gap-6 items-center">
-            <Link to="/rulebook" className="text-sm font-medium text-slate-300 hover:text-white transition">Rulebook</Link>
+            <a href="https://drive.google.com/drive/folders/1UMKuOAQxJPV6AtSM2XZKlGpLPQyF0222" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-slate-300 hover:text-white transition">Rulebook</a>
             <Link to="/login" className="text-sm font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 text-slate-950 hover:from-emerald-300 hover:to-cyan-300 rounded-full px-6 py-2 transition-all shadow-[0_0_20px_rgba(16,185,129,0.4)]">Log In</Link>
           </div>
         </div>
@@ -226,32 +226,36 @@ export default function LandingPage() {
           {/* Partner */}
           <div className="text-center mb-32">
              <h2 className="text-3xl font-bold mb-16 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Our Partner</h2>
-             <div className="flex justify-center">
-               <div 
-                 onClick={() => setRevealPartner(!revealPartner)}
-                 className="relative group transition-all cursor-pointer"
-               >
-                  {/* Logo Container */}
-                  <div className="w-48 h-48 sm:w-60 sm:h-60 rounded-full flex items-center justify-center bg-slate-900/40 backdrop-blur-sm border-2 border-emerald-500/20 transition-all duration-500 relative overflow-hidden">
-                     <img 
-                        src={`${import.meta.env.BASE_URL}ecotank-logo.png`} 
-                        alt="EcoTank Logo" 
-                        className={`w-32 sm:w-40 h-auto object-contain transition-all duration-500 ${revealPartner ? 'blur-md scale-95 opacity-20' : 'group-hover:blur-md group-hover:scale-95 group-hover:opacity-20'}`} 
-                     />
-                     
-                     {/* Detail Reveal Overlay */}
-                     <div className={`absolute inset-0 flex items-center justify-center p-6 transition-all duration-500 ${revealPartner ? 'opacity-100 translate-y-0' : 'opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0'}`}>
-                        <p className="text-emerald-400 text-xs sm:text-sm font-bold leading-relaxed max-w-[140px] sm:max-w-[180px]">
-                           Advancing ecological solutions through engineering excellence and sustainable innovation.
-                        </p>
-                     </div>
-                  </div>
+             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto px-6">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="flex flex-col items-center">
+                    <div 
+                      onClick={() => setRevealPartner(revealPartner === i ? null : i)}
+                      className="relative group transition-all cursor-pointer"
+                    >
+                       {/* Logo Container */}
+                       <div className="w-32 h-32 sm:w-44 sm:h-44 rounded-full flex items-center justify-center bg-slate-900/40 backdrop-blur-sm border-2 border-emerald-500/20 transition-all duration-500 relative overflow-hidden">
+                          <img 
+                             src={`${import.meta.env.BASE_URL}ecotank-logo.png`} 
+                             alt="Partner Logo" 
+                             className={`w-20 sm:w-28 h-auto object-contain transition-all duration-500 ${revealPartner === i ? 'blur-md scale-95 opacity-20' : 'group-hover:blur-md group-hover:scale-95 group-hover:opacity-20'}`} 
+                          />
+                          
+                          {/* Detail Reveal Overlay */}
+                          <div className={`absolute inset-0 flex items-center justify-center p-4 transition-all duration-500 ${revealPartner === i ? 'opacity-100 translate-y-0' : 'opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0'}`}>
+                             <p className="text-emerald-400 text-[10px] sm:text-xs font-bold leading-relaxed">
+                                Advancing ecological solutions through engineering excellence.
+                             </p>
+                          </div>
+                       </div>
 
-                  {/* Always Visible Name */}
-                  <div className="mt-8">
-                     <h3 className="text-emerald-400 font-black text-2xl tracking-tighter">EcoVex</h3>
+                       {/* Always Visible Name */}
+                       <div className="mt-6">
+                          <h3 className="text-emerald-400 font-black text-base sm:text-xl tracking-tighter">EcoVex</h3>
+                       </div>
+                    </div>
                   </div>
-               </div>
+                ))}
              </div>
           </div>
 
@@ -307,7 +311,7 @@ export default function LandingPage() {
               <ul className="space-y-4">
                 <li><Link to="/login" className="text-slate-400 hover:text-emerald-400 transition-colors">Login to Hub</Link></li>
                 <li><Link to="/register" className="text-slate-400 hover:text-emerald-400 transition-colors">Sign Up</Link></li>
-                <li><Link to="/rulebook" className="text-slate-400 hover:text-emerald-400 transition-colors">Read Rulebook</Link></li>
+                <li><a href="https://drive.google.com/drive/folders/1UMKuOAQxJPV6AtSM2XZKlGpLPQyF0222" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-emerald-400 transition-colors">Read Rulebook</a></li>
               </ul>
             </div>
 
