@@ -12,6 +12,7 @@ export default function LandingPage() {
   const sectionsRef = useRef([]);
   const [platformSettings, setPlatformSettings] = React.useState({ showJudges: false });
   const [judges, setJudges] = React.useState([]);
+  const [revealPartner, setRevealPartner] = React.useState(false);
 
   useEffect(() => {
     // Elegant fade-ins
@@ -51,6 +52,13 @@ export default function LandingPage() {
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
   }, []);
+
+  const timelinePhases = [
+    { phase: "01", date: "Current - May 12", title: "Team Registration", desc: "Build your team of exactly 1-4 members. The clock is ticking to securely lock in your roster." },
+    { phase: "02", date: "May 12 - May 20", title: "PPT Submission", desc: "Submit your comprehensive pitch deck outlining your breakthrough ideas and technical diagrams." },
+    { phase: "03", date: "May 24 - May 25", title: "Phase 1 Result", desc: "Shortlisted teams will be announced. Only the most innovative solutions advance to the finale." },
+    { phase: "04", date: "June 2, 2026", title: "Grand Finale", desc: "Final offline presentation and Q&A. Pitch your legacy and defend your vision before the master panel." }
+  ];
 
   return (
     <div className="bg-slate-950 text-slate-50 overflow-hidden font-sans min-h-screen">
@@ -192,20 +200,19 @@ export default function LandingPage() {
             <h2 className="text-4xl md:text-5xl font-bold mb-16 tracking-tight">Timeline</h2>
             
             <div className="space-y-6">
-               {[
-                 { phase: "01", title: "Registration Opens", desc: "Team formation phase begins. Gather your leaders and members in the central hub." },
-                 { phase: "02", title: "Draft Submissions", desc: "Submit your initial pitch deck (PDF) outlining the problem and proposed eco-tech solution." },
-                 { phase: "03", title: "Grand Finale", desc: "Live offline presentations and intense Q&A sessions with the judging panel." }
-               ].map((item, idx) => (
-                 <div key={idx} className="flex flex-col md:flex-row text-left gap-6 items-center bg-slate-900/50 border border-white/10 rounded-2xl p-8 hover:border-emerald-500/50 transition-all backdrop-blur-sm">
-                    <div className="text-emerald-500/20 text-5xl md:text-6xl font-black">{item.phase}</div>
-                    <div className="flex-1">
-                       <h3 className="text-2xl font-bold mb-2 tracking-tight">{item.title}</h3>
-                       <p className="text-slate-400 font-light text-lg">{item.desc}</p>
-                    </div>
-                 </div>
-               ))}
-            </div>
+                {timelinePhases.map((item, idx) => (
+                  <div key={idx} className="flex flex-col md:flex-row text-left gap-6 items-center bg-slate-900/50 border border-white/10 rounded-2xl p-8 hover:border-emerald-500/50 transition-all backdrop-blur-sm">
+                     <div className="flex flex-col items-center justify-center min-w-[80px]">
+                        <div className="text-emerald-500/20 text-5xl md:text-6xl font-black leading-none">{item.phase}</div>
+                        <div className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">{item.date}</div>
+                     </div>
+                     <div className="flex-1">
+                        <h3 className="text-2xl font-bold mb-2 tracking-tight text-white">{item.title}</h3>
+                        <p className="text-slate-400 font-light text-lg">{item.desc}</p>
+                     </div>
+                  </div>
+                ))}
+             </div>
         </div>
       </section>
 
@@ -216,28 +223,36 @@ export default function LandingPage() {
 
 
 
-          {/* Partner Singular */}
+          {/* Partner */}
           <div className="text-center mb-32">
-            <h2 className="text-3xl font-bold mb-20 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Our Partner</h2>
-            <div className="relative inline-block bg-slate-900/40 border border-white/5 rounded-3xl backdrop-blur-sm hover:border-emerald-500/30 transition-all group shadow-2xl overflow-hidden">
-              {/* Logo Container */}
-              <div className="p-12 transition-all duration-500 group-hover:blur-sm group-hover:scale-95 group-hover:opacity-20">
-                <img 
-                  src={`${import.meta.env.BASE_URL}sceptix.png`} 
-                  alt="Sceptix Logo" 
-                  className="w-40 sm:w-52 h-auto object-contain" 
-                />
-              </div>
-              
-              {/* Info Overlay */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-8 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                <h3 className="text-emerald-400 font-bold text-xl mb-3 tracking-tight">Sceptix</h3>
-                <p className="text-slate-300 text-sm leading-relaxed max-w-[280px]">
-                  The official Technical Club of SJEC. Fostering innovation, coding excellence, and technical leadership since its inception.
-                </p>
-                <div className="mt-4 w-12 h-1 bg-emerald-500/50 rounded-full"></div>
-              </div>
-            </div>
+             <h2 className="text-3xl font-bold mb-16 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Our Partner</h2>
+             <div className="flex justify-center">
+               <div 
+                 onClick={() => setRevealPartner(!revealPartner)}
+                 className="relative group transition-all cursor-pointer"
+               >
+                  {/* Logo Container */}
+                  <div className="w-48 h-48 sm:w-60 sm:h-60 rounded-full flex items-center justify-center bg-slate-900/40 backdrop-blur-sm border-2 border-emerald-500/20 transition-all duration-500 relative overflow-hidden">
+                     <img 
+                        src={`${import.meta.env.BASE_URL}ecotank-logo.png`} 
+                        alt="EcoTank Logo" 
+                        className={`w-32 sm:w-40 h-auto object-contain transition-all duration-500 ${revealPartner ? 'blur-md scale-95 opacity-20' : 'group-hover:blur-md group-hover:scale-95 group-hover:opacity-20'}`} 
+                     />
+                     
+                     {/* Detail Reveal Overlay */}
+                     <div className={`absolute inset-0 flex items-center justify-center p-6 transition-all duration-500 ${revealPartner ? 'opacity-100 translate-y-0' : 'opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0'}`}>
+                        <p className="text-emerald-400 text-xs sm:text-sm font-bold leading-relaxed max-w-[140px] sm:max-w-[180px]">
+                           Advancing ecological solutions through engineering excellence and sustainable innovation.
+                        </p>
+                     </div>
+                  </div>
+
+                  {/* Always Visible Name */}
+                  <div className="mt-8">
+                     <h3 className="text-emerald-400 font-black text-2xl tracking-tighter">EcoVex</h3>
+                  </div>
+               </div>
+             </div>
           </div>
 
           {/* Organizers */}
@@ -249,8 +264,8 @@ export default function LandingPage() {
                   { name: "Roy Prince Veigas", role: "Tech Lead", img: "santhsim.png" },
                   { name: "Keerthana Nair", role: "Treasurer", img: "jeethan.png" }
               ].map((org, i) => (
-                <div key={i} className="flex flex-col items-center group">
-                  <div className="w-40 h-40 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-slate-800 group-hover:border-emerald-500/50 transition-all duration-500 mb-6 shadow-2xl">
+                <div key={i} className="flex flex-col items-center group cursor-pointer">
+                  <div className="w-40 h-40 sm:w-56 sm:h-56 rounded-full overflow-hidden transition-all duration-500 mb-6 shadow-2xl">
                     <img 
                       src={`${import.meta.env.BASE_URL}${org.img}`} 
                       alt={org.name} 
@@ -300,6 +315,7 @@ export default function LandingPage() {
               <h4 className="text-white font-bold mb-6 tracking-wide">Contact</h4>
               <ul className="space-y-4">
                 <li><a href="mailto:ecoclub@sjec.ac.in" className="text-slate-400 hover:text-emerald-400 transition-colors">ecoclub@sjec.ac.in</a></li>
+                <li><a href="https://www.instagram.com/ecovex.sjec/" className="text-slate-400 hover:text-emerald-400 transition-colors">ecovex.sjec</a></li>
                 <li className="text-slate-400">St Joseph Engineering College</li>
                 <li className="text-slate-400">Mangaluru, Karnataka</li>
               </ul>
