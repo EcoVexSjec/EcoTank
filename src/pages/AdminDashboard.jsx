@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import * as XLSX from 'xlsx';
 import { useAuth } from '../contexts/AuthContext';
 import { db, storage } from '../firebase/firebase';
 import { collection, getDocs, doc, updateDoc, deleteDoc, getDoc, setDoc } from 'firebase/firestore';
@@ -164,6 +165,31 @@ export default function AdminDashboard() {
     }
   }
 
+  const exportToExcel = () => {
+    const exportData = data.teams.map(team => {
+      const sub = data.submissions.find(s => s.submissionId === team.submissionId);
+      const leaderUser = data.users.find(u => u.id === team.leaderId);
+      const membersNames = team.members.map(mId => {
+        const m = data.users.find(u => u.id === mId);
+        return m ? (m.name || m.email) : 'Unknown';
+      }).join(', ');
+
+      return {
+        'Team Name': team.teamName,
+        'Team Leader': leaderUser ? (leaderUser.name || leaderUser.email) : 'Unknown',
+        'Members': membersNames,
+        'Invite Code': team.inviteCode,
+        'Qualified Round 1': team.isRound1Qualified ? 'Yes' : 'No',
+        'PPT Link': sub ? sub.fileURL : 'Pending'
+      };
+    });
+
+    const worksheet = XLSX.utils.json_to_sheet(exportData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Teams");
+    XLSX.writeFile(workbook, "EcoTank_Teams_Data.xlsx");
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center text-emerald-500">
@@ -242,6 +268,12 @@ export default function AdminDashboard() {
       <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
         <div className="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-800/20">
           <h2 className="text-xl font-bold">Teams Database</h2>
+          <button 
+            onClick={exportToExcel}
+            className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-4 py-2 rounded-xl font-black transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+          >
+            <Download className="w-4 h-4" /> Export to Excel
+          </button>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm text-slate-400">
