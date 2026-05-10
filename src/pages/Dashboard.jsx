@@ -575,17 +575,6 @@ export default function Dashboard() {
               </h2>
               
               <div className="flex flex-col md:flex-row items-center md:items-start gap-4 sm:gap-8 mb-8 p-3 sm:p-6 bg-slate-900/50 rounded-xl sm:rounded-2xl border border-slate-700/50 flex-1">
-                 <div className="relative group w-32 h-32 shrink-0">
-                    <div className="w-full h-full rounded-2xl bg-slate-800 border-2 border-emerald-500/20 overflow-hidden flex items-center justify-center shadow-lg">
-                      {teamData?.teamLogoUrl ? (
-                         <img src={teamData.teamLogoUrl} alt="Team Logo" className="w-full h-full object-cover" />
-                      ) : (
-                         <Globe2 className="w-12 h-12 text-slate-600" />
-                      )}
-                    </div>
-
-                 </div>
-                 
                  <div className="text-center md:text-left flex-1">
                     <p className="text-slate-400 text-[10px] sm:text-sm font-bold uppercase tracking-widest mb-1">Squad Designation</p>
                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-4 drop-shadow-md break-words">{teamData ? teamData.teamName : 'Loading...'}</h3>
