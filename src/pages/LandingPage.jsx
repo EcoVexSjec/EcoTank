@@ -56,8 +56,9 @@ export default function LandingPage() {
   const timelinePhases = [
     { phase: "01", date: "Current - May 12", title: "Team Registration", desc: "Build your team of exactly 1-4 members. The clock is ticking to securely lock in your roster." },
     { phase: "02", date: "May 12 - May 20", title: "PPT Submission", desc: "Submit your comprehensive pitch deck outlining your breakthrough ideas and technical diagrams." },
-    { phase: "03", date: "May 24 - May 25", title: "Phase 1 Result", desc: "Shortlisted teams will be announced. Only the most innovative solutions advance to the finale." },
-    { phase: "04", date: "June 2, 2026", title: "Grand Finale", desc: "Final offline presentation and Q&A. Pitch your legacy and defend your vision before the master panel." }
+    { phase: "03", date: "May 24 - May 25", title: "Phase 1 Result", desc: "Shortlisted teams will be announced. Only the most innovative solutions advance to the next stage." },
+    { phase: "04", date: "May 26 - June 1", title: "Solution Designing", desc: "Finalists refine their prototypes and prepare for the big stage. Time to build your legacy." },
+    { phase: "05", date: "June 2, 2026", title: "Grand Finale", desc: "Final offline presentation and Q&A. Pitch your legacy and defend your vision before the master panel." }
   ];
 
   return (
@@ -87,17 +88,17 @@ export default function LandingPage() {
           <div className="hero-content text-left">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 font-semibold mb-6 tracking-wide text-xs uppercase shadow-[0_0_15px_rgba(16,185,129,0.15)]">
                <Sparkles className="w-4 h-4" />
-               Ideathon 2026
+               PITCH ARENA 2026
             </div>
             
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 tracking-tight leading-[1.1]">
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-lime-300">Innovate.</span>
-              <span className="block text-slate-100">Sustain.</span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Conquer.</span>
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-lime-300">PITCH.</span>
+              <span className="block text-slate-100">IMPACT.</span>
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">INSPIRE.</span>
             </h1>
             
             <p className="text-lg sm:text-xl text-slate-400 max-w-xl mb-10 leading-relaxed font-light">
-              Join the ultimate team-based ideathon. Pitch your breakthrough eco-tech solutions and forge a legacy perfectly aligned with the 17 SDGs.
+               A dynamic Shark Tank-style ideathon designed to foster innovation in sustainability and green engineering.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 items-start">
