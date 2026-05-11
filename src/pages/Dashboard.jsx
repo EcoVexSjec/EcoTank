@@ -564,7 +564,7 @@ export default function Dashboard() {
       
       <div className="flex-1 w-full relative z-10">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-black text-white text-center mb-2">Command Center</h1>
+          <h1 className="text-4xl md:text-5xl font-black text-white text-center mb-2">Team Formation</h1>
           <p className="text-emerald-400 mt-2 flex items-center justify-center gap-2 mb-12 font-bold tracking-widest uppercase text-sm">
             <Sparkles className="w-4 h-4" /> Welcome back, {userData.name}
           </p>
@@ -577,7 +577,7 @@ export default function Dashboard() {
               
               <div className="flex flex-col md:flex-row items-center md:items-start gap-4 sm:gap-8 mb-8 p-3 sm:p-6 bg-slate-900/50 rounded-xl sm:rounded-2xl border border-slate-700/50 flex-1">
                  <div className="text-center md:text-left flex-1">
-                    <p className="text-slate-400 text-[10px] sm:text-sm font-bold uppercase tracking-widest mb-1">Squad Designation</p>
+                    <p className="text-slate-400 text-[10px] sm:text-sm font-bold uppercase tracking-widest mb-1">Team Name</p>
                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-4 drop-shadow-md break-words">{teamData ? teamData.teamName : 'Loading...'}</h3>
                    <span className="inline-block bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-lg text-xs font-bold self-start">Active Team</span>
                  </div>
@@ -757,11 +757,11 @@ export default function Dashboard() {
           </div>
           
           <h1 className="text-5xl sm:text-6xl md:text-8xl font-black mb-6 tracking-tighter drop-shadow-2xl">
-             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">EcoTank Command</span>
+             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">EcoTank 1.0</span>
           </h1>
 
           <p className="text-lg md:text-xl text-slate-400 font-light max-w-3xl mx-auto leading-relaxed">
-            The ultimate ideathon platform designed to solve ecological crises. Gather your team of engineers, review the roadmap below, and prepare your breakthrough pitch deck.
+            Innovate, pitch, and build solutions for real-world ecological crises inspired by the 17 SDGs.
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mt-12 mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
@@ -994,9 +994,9 @@ export default function Dashboard() {
                <h2 className="text-3xl font-bold mb-24 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Organizers</h2>
                <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
                   {[
-                    { name: "Melroy Almeida", role: "President", img: "ashley.png" },
-                    { name: "Roy Prince Veigas", role: "Tech Lead", img: "santhsim.png" },
-                    { name: "Keerthana Nair", role: "Treasurer", img: "jeethan.png" }
+                    { name: "Melroy Almeida", role: "President", img: "President.png" },
+                    { name: "Roy Prince Veigas", role: "Tech Lead", img: "Tech Lead.jpeg" },
+                    { name: "Keerthana Nair", role: "Treasurer", img: "Treasurer.jpeg" }
                   ].map((org, i) => (
                     <div key={i} className="flex flex-col items-center group cursor-pointer">
                       <div className="w-40 h-40 sm:w-56 sm:h-56 rounded-full overflow-hidden transition-all mb-4 shadow-xl">
