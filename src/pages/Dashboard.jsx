@@ -766,7 +766,7 @@ export default function Dashboard() {
 
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mt-12 mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
              <a 
-               href="https://drive.google.com/drive/folders/1UMKuOAQxJPV6AtSM2XZKlGpLPQyF0222?usp=drive_link" 
+               href="https://drive.google.com/file/d/1pBjXIHc-5ULU4DivjXUr058erMp_covp/view?usp=drivesdk" 
                target="_blank"
                rel="noopener noreferrer"
                className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 border border-emerald-500/30 rounded-2xl transition-all duration-500 hover:border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.1)] hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden"
@@ -959,8 +959,8 @@ export default function Dashboard() {
              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto px-6">
                 {[
                   { name: "EcoVex", logo: "ecotank-logo.png", info: "A student-led initiative for sustainability & environmental action." },
-                  { name: "Shilpa", logo: null, info: null },
-                  { name: "AgentBlazer Club", logo: null, info: "A student-driven tech club fostering innovation in AI, prompt engineering, LLMs, and the Salesforce ecosystem through hands-on learning." },
+                  { name: "NexCon", logo: null, info: null },
+                  { name: "AgentBlazer Club", logo:"Agent_blaser.png", info: "A student-driven tech club fostering innovation in AI, prompt engineering, LLMs, and the Salesforce ecosystem through hands-on learning." },
                   { name: "NSS SJEC Unit", logo: "nss-logo.png", info: "Empowering students to serve society through community outreach, social awareness, and impactful welfare initiatives." }
                 ].map((partner, i) => {
                   const partnerIdx = i + 1;
