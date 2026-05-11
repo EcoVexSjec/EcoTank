@@ -6,12 +6,12 @@ import { getStorage } from 'firebase/storage';
 // Your web app's Firebase configuration
 // Replace these with your environment variables or actual keys later
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "dummy-api-key",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "dummy-auth-domain",
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "dummy-project-id",
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "dummy-storage-bucket",
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "dummy-sender-id",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || "dummy-app-id"
+  apiKey: "AIzaSyCqW0_Gy0Cd2iPf8yAI3po5qrHE7OwWZFI",
+  authDomain: "ecotank-e4b07.firebaseapp.com",
+  projectId: "ecotank-e4b07",
+  storageBucket: "ecotank-e4b07.firebasestorage.app",
+  messagingSenderId: "626382445553",
+  appId: "1:626382445553:web:b3ce83afd79ab435290250"
 };
 
 // Initialize Firebase
