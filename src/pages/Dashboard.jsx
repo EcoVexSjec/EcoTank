@@ -256,7 +256,7 @@ export default function Dashboard() {
     <div className="w-full absolute top-0 left-0 z-50 px-4 pt-6 pb-2 md:px-8 pointer-events-none">
       <div className="max-w-7xl mx-auto bg-slate-900/40 backdrop-blur-2xl border border-emerald-500/10 px-6 py-4 flex justify-between items-center rounded-full shadow-[0_8px_32px_rgba(16,185,129,0.05)] transition-all pointer-events-auto">
          <div className="flex items-center gap-4">
-           <div className="w-12 h-12 rounded-2xl flex items-center justify-center p-1 bg-white/5 border border-white/10 shadow-inner">
+           <div className="w-12 h-12 rounded-xl flex items-center justify-center p-1 bg-white/5 border border-white/10 shadow-inner">
              <img src={`${import.meta.env.BASE_URL}ecotank-logo.png`} alt="EcoTank Logo" className="w-full h-full object-contain drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
            </div>
            <span className="font-black text-2xl tracking-tighter text-white hidden sm:block">EcoTank <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Hub</span></span>
@@ -299,7 +299,7 @@ export default function Dashboard() {
               <p><strong>3. Elimination:</strong> Plagiarized models or duplicate submissions result in immediate team deletion. "Exit Event" allows a leader to nuke the team entirely before the deadline.</p>
               <p><strong>4. Selection:</strong> Only the elite advance to offline presentations. Prepare to defend your concepts aggressively.</p>
             </div>
-            <button onClick={() => setShowRuleModal(false)} className="mt-8 w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 rounded-2xl transition-colors">Acknowledge Rules</button>
+            <button onClick={() => setShowRuleModal(false)} className="mt-8 w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 rounded-xl transition-colors">Acknowledge Rules</button>
           </div>
         </div>
       )}
@@ -570,12 +570,12 @@ export default function Dashboard() {
           </p>
 
           <div className="grid lg:grid-cols-3 gap-8 relative z-10">
-            <div className="lg:col-span-2 bg-slate-800/40 border border-slate-700 p-3 sm:p-8 rounded-3xl sm:rounded-3xl backdrop-blur-sm shadow-xl flex flex-col overflow-hidden">
+            <div className="lg:col-span-2 bg-slate-800/40 border border-slate-700 p-3 sm:p-8 rounded-2xl sm:rounded-3xl backdrop-blur-sm shadow-xl flex flex-col overflow-hidden">
               <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
                 <Users className="w-6 h-6 text-emerald-500" /> My Team Overview
               </h2>
               
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-4 sm:gap-8 mb-8 p-3 sm:p-6 bg-slate-900/50 rounded-2xl sm:rounded-3xl border border-slate-700/50 flex-1">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-4 sm:gap-8 mb-8 p-3 sm:p-6 bg-slate-900/50 rounded-xl sm:rounded-2xl border border-slate-700/50 flex-1">
                  <div className="text-center md:text-left flex-1">
                     <p className="text-slate-400 text-[10px] sm:text-sm font-bold uppercase tracking-widest mb-1">Team Name</p>
                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-4 drop-shadow-md break-words">{teamData ? teamData.teamName : 'Loading...'}</h3>
@@ -586,7 +586,7 @@ export default function Dashboard() {
               <div className="mb-6">
                 <h3 className="text-lg font-semibold text-slate-200 mb-3">Submission Status</h3>
                 {submissionData ? (
-                   <div className="flex items-center gap-4 p-4 border border-emerald-500/50 rounded-2xl bg-emerald-500/10 shadow-inner">
+                   <div className="flex items-center gap-4 p-4 border border-emerald-500/50 rounded-xl bg-emerald-500/10 shadow-inner">
                      <CheckCircle2 className="w-8 h-8 text-emerald-500 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                      <div>
                        <p className="font-bold text-emerald-400 text-lg">Pitch Deck Submitted!</p>
@@ -594,7 +594,7 @@ export default function Dashboard() {
                      </div>
                    </div>
                 ) : (
-                   <div className="flex items-center gap-4 p-4 border border-slate-700/50 rounded-2xl bg-slate-800/30">
+                   <div className="flex items-center gap-4 p-4 border border-slate-700/50 rounded-xl bg-slate-800/30">
                      <AlertCircle className="w-6 h-6 text-yellow-500 shrink-0" />
                      <div>
                        <p className="font-medium text-slate-200">Pending Pitch Deck</p>
@@ -615,9 +615,9 @@ export default function Dashboard() {
                       placeholder="https://drive.google.com/..." 
                       value={fileLink}
                       onChange={(e) => setFileLink(e.target.value)} 
-                      className="block w-full bg-slate-900 border border-slate-700 rounded-2xl py-4 px-5 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all shadow-inner"
+                      className="block w-full bg-slate-900 border border-slate-700 rounded-xl py-4 px-5 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all shadow-inner"
                     />
-                    <button onClick={handleLinkSubmit} disabled={uploading || !fileLink} className="flex shrink-0 items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 disabled:opacity-50 text-slate-950 font-black py-4 px-8 rounded-2xl transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+                    <button onClick={handleLinkSubmit} disabled={uploading || !fileLink} className="flex shrink-0 items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 disabled:opacity-50 text-slate-950 font-black py-4 px-8 rounded-xl transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)]">
                       {uploading ? 'Validating...' : <><LinkIcon className="w-5 h-5" /> Submit Link</>}
                     </button>
                   </div>
@@ -628,10 +628,10 @@ export default function Dashboard() {
               )}
             </div>
 
-            <div className="bg-slate-800/40 border border-slate-700 p-3 sm:p-8 rounded-3xl sm:rounded-3xl backdrop-blur-sm shadow-xl flex flex-col overflow-hidden">
+            <div className="bg-slate-800/40 border border-slate-700 p-3 sm:p-8 rounded-2xl sm:rounded-3xl backdrop-blur-sm shadow-xl flex flex-col overflow-hidden">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-2 drop-shadow-md">Team Matrix</h2>
               <ul className="space-y-3 mb-8">
-                 <li className="p-3 sm:p-4 bg-slate-900/50 border border-emerald-500/30 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-[0_0_20px_rgba(16,185,129,0.05)]">
+                 <li className="p-3 sm:p-4 bg-slate-900/50 border border-emerald-500/30 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-[0_0_20px_rgba(16,185,129,0.05)]">
                     <div className="flex items-center gap-3">
                       {userData.photoURL ? (
                         <img src={userData.photoURL} alt="Avatar" className="w-10 h-10 rounded-full object-cover" />
@@ -651,7 +651,7 @@ export default function Dashboard() {
                  </li>
                  {teamMembersMeta.map(member => (
                    member.id !== currentUser.uid && (
-                     <li key={member.id} className="p-3 sm:p-4 bg-slate-900/50 border border-slate-700/30 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                     <li key={member.id} className="p-3 sm:p-4 bg-slate-900/50 border border-slate-700/30 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                        <div className="flex items-center gap-3">
                          {member.photoURL ? (
                            <img src={member.photoURL} alt="Avatar" className="w-10 h-10 rounded-full object-cover" />
@@ -688,14 +688,14 @@ export default function Dashboard() {
                 <div className="mt-4 border-t border-slate-700/50 pt-8">
                   <div className="mb-8 text-center">
                     <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">Team Code</p>
-                    <div className="bg-slate-950/80 border border-emerald-500/40 rounded-3xl px-8 py-4 inline-block shadow-inner drop-shadow-lg">
+                    <div className="bg-slate-950/80 border border-emerald-500/40 rounded-2xl px-8 py-4 inline-block shadow-inner drop-shadow-lg">
                       <span className="font-mono text-3xl font-black text-emerald-400 tracking-[0.3em]">{teamData.inviteCode}</span>
                     </div>
                   </div>
 
                   <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">Share Direct Link</p>
                   <div className="flex flex-col gap-2">
-                    <div className="flex items-center justify-between bg-slate-950/80 p-2 pl-4 rounded-2xl border border-slate-700 shadow-inner">
+                    <div className="flex items-center justify-between bg-slate-950/80 p-2 pl-4 rounded-xl border border-slate-700 shadow-inner">
                       <span className="text-xs text-emerald-400 font-mono truncate w-full pr-2 select-all">
                         {window.location.href.split('#')[0]}#/register?invite={teamData.inviteCode}
                       </span>
@@ -715,7 +715,7 @@ export default function Dashboard() {
                   <button 
                     onClick={handleLeaveTeam} 
                     disabled={loading}
-                    className="w-full bg-slate-800 border border-slate-600 hover:border-red-500 hover:bg-red-500/10 text-slate-300 hover:text-red-400 font-bold py-4 px-4 rounded-2xl transition-all"
+                    className="w-full bg-slate-800 border border-slate-600 hover:border-red-500 hover:bg-red-500/10 text-slate-300 hover:text-red-400 font-bold py-4 px-4 rounded-xl transition-all"
                   >
                     Leave Team
                   </button>
@@ -724,7 +724,7 @@ export default function Dashboard() {
                     <button 
                       onClick={handleDisbandTeam}
                       disabled={loading}
-                      className="w-full bg-red-500/10 border border-red-500/50 hover:bg-red-600 hover:text-white text-red-500 font-black py-4 px-4 rounded-2xl transition-all drop-shadow-md"
+                      className="w-full bg-red-500/10 border border-red-500/50 hover:bg-red-600 hover:text-white text-red-500 font-black py-4 px-4 rounded-xl transition-all drop-shadow-md"
                     >
                       Delete Team Setup
                     </button>
@@ -769,7 +769,7 @@ export default function Dashboard() {
                href="https://drive.google.com/drive/folders/1UMKuOAQxJPV6AtSM2XZKlGpLPQyF0222?usp=drive_link" 
                target="_blank"
                rel="noopener noreferrer"
-               className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 border border-emerald-500/30 rounded-3xl transition-all duration-500 hover:border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.1)] hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden"
+               className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 border border-emerald-500/30 rounded-2xl transition-all duration-500 hover:border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.1)] hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden"
              >
                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                <div className="relative flex items-center gap-3">
@@ -787,7 +787,7 @@ export default function Dashboard() {
                href="https://drive.google.com/drive/folders/1UMKuOAQxJPV6AtSM2XZKlGpLPQyF0222?usp=drive_link" 
                target="_blank"
                rel="noopener noreferrer"
-               className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 border border-cyan-500/30 rounded-3xl transition-all duration-500 hover:border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.2)] overflow-hidden"
+               className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 border border-cyan-500/30 rounded-2xl transition-all duration-500 hover:border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.2)] overflow-hidden"
              >
                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                <div className="relative flex items-center gap-3">
@@ -827,13 +827,13 @@ export default function Dashboard() {
                       <input 
                         type="text" 
                         required
-                        className="w-full bg-slate-900/80 border border-slate-700 text-slate-100 rounded-3xl px-6 py-5 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all font-medium text-lg placeholder:text-slate-600"
+                        className="w-full bg-slate-900/80 border border-slate-700 text-slate-100 rounded-2xl px-6 py-5 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all font-medium text-lg placeholder:text-slate-600"
                         value={teamName}
                         onChange={(e) => setTeamName(e.target.value)}
                         placeholder="Enter Team Name"
                       />
                     </div>
-                    <button disabled={loading} className="w-full bg-gradient-to-r from-emerald-400 to-cyan-400 hover:from-emerald-300 hover:to-cyan-300 text-slate-950 font-black text-lg py-5 rounded-3xl shadow-[0_0_30px_rgba(16,185,129,0.3)] transition-all">
+                    <button disabled={loading} className="w-full bg-gradient-to-r from-emerald-400 to-cyan-400 hover:from-emerald-300 hover:to-cyan-300 text-slate-950 font-black text-lg py-5 rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.3)] transition-all">
                       {loading ? 'Creating...' : 'Create Team'}
                     </button>
                   </form>
@@ -849,14 +849,14 @@ export default function Dashboard() {
                       <input 
                         type="text" 
                         required
-                        className="w-full bg-slate-900/80 border border-slate-700 text-slate-100 rounded-3xl px-6 py-5 font-mono tracking-[0.3em] text-center text-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all uppercase placeholder:tracking-normal placeholder:text-slate-600"
+                        className="w-full bg-slate-900/80 border border-slate-700 text-slate-100 rounded-2xl px-6 py-5 font-mono tracking-[0.3em] text-center text-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all uppercase placeholder:tracking-normal placeholder:text-slate-600"
                         value={inviteCodeInput}
                         onChange={(e) => setInviteCodeInput(e.target.value.toUpperCase())}
                         placeholder="ENTER 6 DIGIT CODE"
                         maxLength={6}
                       />
                     </div>
-                    <button disabled={loading} className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-black text-lg py-5 rounded-3xl shadow-[0_0_30px_rgba(6,182,212,0.3)] transition-all">
+                    <button disabled={loading} className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-black text-lg py-5 rounded-2xl shadow-[0_0_30px_rgba(6,182,212,0.3)] transition-all">
                       {loading ? 'Joining...' : 'Secure Your Spot'}
                     </button>
                   </form>
@@ -881,9 +881,9 @@ export default function Dashboard() {
                <div className="text-center py-10 text-emerald-500 animate-pulse font-mono tracking-widest text-sm uppercase">Accessing Neural Net...</div>
              ) : qualifiedTeams.length > 0 ? (
                qualifiedTeams.map((team, idx) => (
-                 <div key={team.id} className="flex flex-col md:flex-row items-center gap-6 bg-slate-800/60 border border-emerald-500/30 p-6 rounded-3xl shadow-[0_4px_20px_rgba(16,185,129,0.1)] hover:border-emerald-500 transition-colors">
+                 <div key={team.id} className="flex flex-col md:flex-row items-center gap-6 bg-slate-800/60 border border-emerald-500/30 p-6 rounded-2xl shadow-[0_4px_20px_rgba(16,185,129,0.1)] hover:border-emerald-500 transition-colors">
                     <div className="text-3xl font-black text-emerald-500 w-12 text-center">#{idx + 1}</div>
-                    <div className="w-16 h-16 shrink-0 rounded-3xl bg-slate-700/50 flex items-center justify-center overflow-hidden border border-slate-600">
+                    <div className="w-16 h-16 shrink-0 rounded-2xl bg-slate-700/50 flex items-center justify-center overflow-hidden border border-slate-600">
                       {team.teamLogoUrl ? <img src={team.teamLogoUrl} alt="Logo" className="w-full h-full object-cover" /> : <Users className="w-6 h-6 text-slate-500" />}
                     </div>
                     <div className="flex-1 text-center md:text-left">
@@ -923,7 +923,7 @@ export default function Dashboard() {
                    { label: 'Seconds', value: timeLeft.seconds }
                  ].map((unit, idx) => (
                    <div key={idx} className="flex flex-col items-center">
-                      <div className="bg-slate-900/80 border border-slate-700/50 backdrop-blur-md rounded-2xl sm:rounded-3xl w-16 h-20 sm:w-24 sm:h-28 md:w-36 md:h-40 flex items-center justify-center shadow-[0_0_40px_rgba(16,185,129,0.15)] mb-4">
+                      <div className="bg-slate-900/80 border border-slate-700/50 backdrop-blur-md rounded-xl sm:rounded-2xl w-16 h-20 sm:w-24 sm:h-28 md:w-36 md:h-40 flex items-center justify-center shadow-[0_0_40px_rgba(16,185,129,0.15)] mb-4">
                          <span className="text-3xl sm:text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500">{unit.value.toString().padStart(2, '0')}</span>
                       </div>
                       <span className="text-slate-500 text-[10px] sm:text-sm font-bold uppercase tracking-[0.2em]">{unit.label}</span>
@@ -936,7 +936,7 @@ export default function Dashboard() {
                {timelinePhases.map((item, idx) => (
                  <div key={idx} className="flex flex-col md:flex-row text-left gap-8 items-center bg-slate-800/40 w-full max-w-full border border-slate-700/50 rounded-3xl p-8 hover:border-emerald-500/40 transition-all shadow-xl hover:shadow-emerald-500/5">
                     <div className="w-full md:w-64 shrink-0">
-                      <span className="inline-block bg-slate-900 border border-emerald-500/20 text-emerald-400 text-sm font-black px-6 py-3 uppercase tracking-widest rounded-3xl shadow-inner">{item.date}</span>
+                      <span className="inline-block bg-slate-900 border border-emerald-500/20 text-emerald-400 text-sm font-black px-6 py-3 uppercase tracking-widest rounded-2xl shadow-inner">{item.date}</span>
                     </div>
                     <div className="w-full overflow-hidden text-clip md:border-l border-slate-700/50 md:pl-8">
                        <h3 className="text-3xl font-bold text-white mb-3">{item.title}</h3>
