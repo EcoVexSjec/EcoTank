@@ -191,10 +191,10 @@ export default function LandingPage() {
              <h2 className="text-3xl font-bold mb-16 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Our Partners</h2>
              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto px-6">
                 {[
-                  { name: "EcoVex", logo: "ecotank-logo.png", info: "A student-led initiative for sustainability & environmental action." },
-                  { name: "NexCon", logo: null, info: null },
-                  { name: "AgentBlazer Club", logo: "Agent_blaser.png", info: "A student-driven tech club fostering innovation in AI, prompt engineering, LLMs, and the Salesforce ecosystem through hands-on learning." },
-                  { name: "NSS SJEC Unit", logo: "nss-logo.png", info: "Empowering students to serve society through community outreach, social awareness, and impactful welfare initiatives." }
+                  { name: "EcoVex", logo: "ecotank-logo.png", color: "text-emerald-400", info: "A student-led initiative for sustainability & environmental action." },
+                  { name: "NexCon", logo: null, color: "text-emerald-400", info: null },
+                  { name: "AgentBlazer Club", logo: "Agent_blaser.png", color: "text-purple-400", info: "A student-driven tech club fostering innovation in AI, prompt engineering, LLMs, and the Salesforce ecosystem through hands-on learning." },
+                  { name: "NSS SJEC Unit", logo: "nss-logo.png", color: "text-blue-400", info: "Empowering students to serve society through community outreach, social awareness, and impactful welfare initiatives." }
                 ].map((partner, i) => {
                   const partnerIdx = i + 1;
                   return (
@@ -220,7 +220,7 @@ export default function LandingPage() {
                             {/* Detail Reveal Overlay */}
                             {partner.info && (
                               <div className={`absolute inset-0 flex items-center justify-center p-4 transition-all duration-500 ${revealPartner === partnerIdx ? 'opacity-100 translate-y-0' : 'opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0'}`}>
-                                 <p className="text-emerald-400 text-[10px] sm:text-xs font-bold leading-relaxed text-center">
+                                 <p className={`${partner.color} text-[10px] sm:text-xs font-bold leading-relaxed text-center`}>
                                     {partner.info}
                                  </p>
                               </div>
@@ -229,7 +229,7 @@ export default function LandingPage() {
   
                          {/* Always Visible Name */}
                          <div className="mt-6 text-center">
-                            <h3 className="text-emerald-400 font-black text-base sm:text-xl tracking-tighter">{partner.name}</h3>
+                            <h3 className={`${partner.color} font-black text-base sm:text-xl tracking-tighter`}>{partner.name}</h3>
                          </div>
                       </div>
                     </div>
