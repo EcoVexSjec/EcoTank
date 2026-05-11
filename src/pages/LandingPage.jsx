@@ -75,7 +75,7 @@ export default function LandingPage() {
             <span className="text-lg font-bold tracking-wide">EcoTank</span>
           </div>
           <div className="flex gap-6 items-center">
-            <a href="https://drive.google.com/drive/folders/1UMKuOAQxJPV6AtSM2XZKlGpLPQyF0222?usp=drive_link" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-slate-300 hover:text-white transition">Rulebook</a>
+            <a href="https://drive.google.com/file/d/1pBjXIHc-5ULU4DivjXUr058erMp_covp/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-slate-300 hover:text-white transition">Rulebook</a>
             <Link to="/login" className="text-sm font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 text-slate-950 hover:from-emerald-300 hover:to-cyan-300 rounded-full px-6 py-2 transition-all shadow-[0_0_20px_rgba(16,185,129,0.4)]">Log In</Link>
           </div>
         </div>
@@ -192,7 +192,7 @@ export default function LandingPage() {
              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto px-6">
                 {[
                   { name: "EcoVex", logo: "ecotank-logo.png", color: "text-emerald-400", info: "A student-led initiative for sustainability & environmental action." },
-                  { name: "NexCon", logo: null, color: "text-emerald-400", info: null },
+                  { name: "NexCon", logo: null, color: "text-blue-500 shadow-blue-500/50", info: null },
                   { name: "AgentBlazer Club", logo: "Agent_blaser.png", color: "text-purple-500 shadow-purple-500/50", info: "A student-driven tech club fostering innovation in AI, prompt engineering, LLMs, and the Salesforce ecosystem through hands-on learning." },
                   { name: "NSS SJEC Unit", logo: "nss-logo.png", color: "text-blue-500 shadow-blue-500/50", info: "Empowering students to serve society through community outreach, social awareness, and impactful welfare initiatives." }
                 ].map((partner, i) => {
