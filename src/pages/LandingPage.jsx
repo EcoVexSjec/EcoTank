@@ -186,42 +186,55 @@ export default function LandingPage() {
       <section className="py-24 relative overflow-hidden bg-slate-950">
         <div className="max-w-6xl mx-auto px-6 relative z-10">
 
-
-
-
           {/* Partner */}
           <div className="text-center mb-32">
              <h2 className="text-3xl font-bold mb-16 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Our Partners</h2>
              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto px-6">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="flex flex-col items-center">
-                    <div 
-                      onClick={() => setRevealPartner(revealPartner === i ? null : i)}
-                      className="relative group transition-all cursor-pointer"
-                    >
-                       {/* Logo Container */}
-                       <div className="w-32 h-32 sm:w-44 sm:h-44 rounded-full flex items-center justify-center bg-slate-900/40 backdrop-blur-sm border-2 border-emerald-500/20 transition-all duration-500 relative overflow-hidden">
-                          <img 
-                             src={`${import.meta.env.BASE_URL}ecotank-logo.png`} 
-                             alt="Partner Logo" 
-                             className={`w-20 sm:w-28 h-auto object-contain transition-all duration-500 ${revealPartner === i ? 'blur-md scale-95 opacity-20' : 'group-hover:blur-md group-hover:scale-95 group-hover:opacity-20'}`} 
-                          />
-                          
-                          {/* Detail Reveal Overlay */}
-                          <div className={`absolute inset-0 flex items-center justify-center p-4 transition-all duration-500 ${revealPartner === i ? 'opacity-100 translate-y-0' : 'opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0'}`}>
-                             <p className="text-emerald-400 text-[10px] sm:text-xs font-bold leading-relaxed">
-                                Advancing ecological solutions through engineering excellence.
-                             </p>
-                          </div>
-                       </div>
-
-                       {/* Always Visible Name */}
-                       <div className="mt-6">
-                          <h3 className="text-emerald-400 font-black text-base sm:text-xl tracking-tighter">EcoVex</h3>
-                       </div>
+                {[
+                  { name: "EcoVex", logo: "ecotank-logo.png", info: "Advancing ecological solutions through engineering excellence." },
+                  { name: "Shilpa", logo: null, info: null },
+                  { name: "Agent Blazer", logo: null, info: null },
+                  { name: "NSS", logo: null, info: null }
+                ].map((partner, i) => {
+                  const partnerIdx = i + 1;
+                  return (
+                    <div key={i} className="flex flex-col items-center">
+                      <div 
+                        onClick={() => partner.info && setRevealPartner(revealPartner === partnerIdx ? null : partnerIdx)}
+                        className={`relative group transition-all ${partner.info ? 'cursor-pointer' : 'cursor-default'}`}
+                      >
+                         {/* Logo Container */}
+                         <div className="w-32 h-32 sm:w-44 sm:h-44 rounded-full flex items-center justify-center bg-slate-900/40 backdrop-blur-sm border-2 border-emerald-500/20 transition-all duration-500 relative overflow-hidden">
+                            {partner.logo ? (
+                              <img 
+                                 src={`${import.meta.env.BASE_URL}${partner.logo}`} 
+                                 alt={partner.name} 
+                                 className={`w-20 sm:w-28 h-auto object-contain transition-all duration-500 ${revealPartner === partnerIdx ? 'blur-md scale-95 opacity-20' : 'group-hover:blur-md group-hover:scale-95 group-hover:opacity-20'}`} 
+                              />
+                            ) : (
+                              <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20">
+                                 <span className="text-3xl sm:text-4xl font-black text-emerald-500/30">{partner.name[0]}</span>
+                              </div>
+                            )}
+                            
+                            {/* Detail Reveal Overlay */}
+                            {partner.info && (
+                              <div className={`absolute inset-0 flex items-center justify-center p-4 transition-all duration-500 ${revealPartner === partnerIdx ? 'opacity-100 translate-y-0' : 'opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0'}`}>
+                                 <p className="text-emerald-400 text-[10px] sm:text-xs font-bold leading-relaxed text-center">
+                                    {partner.info}
+                                 </p>
+                              </div>
+                            )}
+                         </div>
+  
+                         {/* Always Visible Name */}
+                         <div className="mt-6 text-center">
+                            <h3 className="text-emerald-400 font-black text-base sm:text-xl tracking-tighter">{partner.name}</h3>
+                         </div>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
              </div>
           </div>
 
