@@ -958,7 +958,7 @@ export default function Dashboard() {
                <h2 className="text-3xl font-bold mb-16 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Our Partners</h2>
              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto px-6">
                 {[
-                  { name: "EcoVex", logo: "ecotank-logo.png", info: "Advancing ecological solutions through engineering excellence." },
+                  { name: "EcoVex", logo: "ecotank-logo.png", info: "A student-led initiative for sustainability & environmental action." },
                   { name: "Shilpa", logo: null, info: null },
                   { name: "Agent Blazer", logo: null, info: null },
                   { name: "NSS", logo: null, info: null }
