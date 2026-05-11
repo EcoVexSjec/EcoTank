@@ -102,7 +102,7 @@ export default function LandingPage() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 items-start">
-              <Link to="/login" className="flex justify-center items-center gap-2 bg-gradient-to-r from-emerald-400 to-cyan-400 text-slate-950 font-extrabold px-8 py-4 rounded-xl text-lg transition-all hover:scale-[1.02] hover:opacity-90 shadow-[0_0_30px_rgba(16,185,129,0.4)] w-full sm:w-auto">
+              <Link to="/login" className="flex justify-center items-center gap-2 bg-gradient-to-r from-emerald-400 to-cyan-400 text-slate-950 font-extrabold px-8 py-4 rounded-2xl text-lg transition-all hover:scale-[1.02] hover:opacity-90 shadow-[0_0_30px_rgba(16,185,129,0.4)] w-full sm:w-auto">
                  Log In <ArrowRight className="w-5 h-5 ml-1" />
               </Link>
             </div>
@@ -129,28 +129,28 @@ export default function LandingPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Earth */}
-            <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6 hover:bg-slate-800/50 hover:border-emerald-500/50 transition-all group backdrop-blur-sm">
+            <div className="bg-slate-900/50 border border-white/10 rounded-3xl p-6 hover:bg-slate-800/50 hover:border-emerald-500/50 transition-all group backdrop-blur-sm">
                  <img src={`${import.meta.env.BASE_URL}mascot-earth.png`} alt="Earth" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
                  <h3 className="text-2xl font-bold mb-3 text-emerald-400">Earth Golem</h3>
                  <p className="text-slate-400 text-sm leading-relaxed font-light">Deforestation, soil pollution, and loss of green cover are damaging ecosystems and threatening biodiversity across the planet.</p>
             </div>
             
             {/* Fire */}
-            <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6 hover:bg-slate-800/50 hover:border-orange-500/50 transition-all group backdrop-blur-sm">
+            <div className="bg-slate-900/50 border border-white/10 rounded-3xl p-6 hover:bg-slate-800/50 hover:border-orange-500/50 transition-all group backdrop-blur-sm">
                  <img src={`${import.meta.env.BASE_URL}mascot-fire.png`} alt="Fire" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
                  <h3 className="text-2xl font-bold mb-3 text-orange-400">Fire Golem</h3>
                  <p className="text-slate-400 text-sm leading-relaxed font-light">Rising temperatures, extreme heatwaves, and carbon emissions are accelerating global warming and climate change.</p>
             </div>
 
             {/* Water */}
-            <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6 hover:bg-slate-800/50 hover:border-blue-500/50 transition-all group backdrop-blur-sm">
+            <div className="bg-slate-900/50 border border-white/10 rounded-3xl p-6 hover:bg-slate-800/50 hover:border-blue-500/50 transition-all group backdrop-blur-sm">
                  <img src={`${import.meta.env.BASE_URL}mascot_water.png`} alt="Water" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
                  <h3 className="text-2xl font-bold mb-3 text-blue-400">Water Golem</h3>
                  <p className="text-slate-400 text-sm leading-relaxed font-light">Melting glaciers and shrinking polar ice caps are raising sea levels and disturbing Earth’s climate balance.</p>
             </div>
 
             {/* Wind */}
-            <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6 hover:bg-slate-800/50 hover:border-cyan-500/50 transition-all group backdrop-blur-sm">
+            <div className="bg-slate-900/50 border border-white/10 rounded-3xl p-6 hover:bg-slate-800/50 hover:border-cyan-500/50 transition-all group backdrop-blur-sm">
                  <img src={`${import.meta.env.BASE_URL}mascot-wind.png`} alt="Wind" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
                  <h3 className="text-2xl font-bold mb-3 text-cyan-400">Wind Golem</h3>
                  <p className="text-slate-400 text-sm leading-relaxed font-light">Air pollution and harmful emissions are reducing air quality, affecting human health, and harming the environment.</p>
@@ -167,7 +167,7 @@ export default function LandingPage() {
             
             <div className="space-y-6">
                 {timelinePhases.map((item, idx) => (
-                  <div key={idx} className="flex flex-col md:flex-row text-left gap-6 items-center bg-slate-900/50 border border-white/10 rounded-2xl p-8 hover:border-emerald-500/50 transition-all backdrop-blur-sm">
+                  <div key={idx} className="flex flex-col md:flex-row text-left gap-6 items-center bg-slate-900/50 border border-white/10 rounded-3xl p-8 hover:border-emerald-500/50 transition-all backdrop-blur-sm">
                      <div className="flex flex-col items-center justify-center min-w-[80px]">
                         <div className="text-emerald-500/20 text-5xl md:text-6xl font-black leading-none">{item.phase}</div>
                         <div className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">{item.date}</div>
@@ -267,7 +267,7 @@ export default function LandingPage() {
               <p className="text-slate-400 font-light leading-relaxed max-w-sm mb-8">
                The ultimate pitch arena for innovative engineers to solve ecological crises and build solutions aligned with the 17 SDGs.
               </p>
-              <Link to="/login" className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-400 to-cyan-400 text-slate-950 font-extrabold px-8 py-4 rounded-xl hover:from-emerald-300 hover:to-cyan-300 transition-all shadow-[0_0_30px_rgba(16,185,129,0.4)]">
+              <Link to="/login" className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-400 to-cyan-400 text-slate-950 font-extrabold px-8 py-4 rounded-2xl hover:from-emerald-300 hover:to-cyan-300 transition-all shadow-[0_0_30px_rgba(16,185,129,0.4)]">
                 Log In <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
