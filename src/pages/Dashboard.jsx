@@ -955,7 +955,7 @@ export default function Dashboard() {
 
             {/* Partner */}
             <div className="text-center mb-32">
-               <h2 className="text-3xl font-bold mb-16 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Our Partner</h2>
+               <h2 className="text-3xl font-bold mb-16 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Our Partners</h2>
              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto px-6">
                 {[1, 2, 3, 4].map((i) => (
                   <div key={i} className="flex flex-col items-center">
