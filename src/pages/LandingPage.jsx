@@ -113,11 +113,7 @@ export default function LandingPage() {
              <img 
                src={`${import.meta.env.BASE_URL}mascot.png`} 
                alt="Main Mascot" 
-               className="w-[120%] max-w-[600px] object-contain relative z-10 mix-blend-screen" 
-               style={{
-                 maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.1) 75%, rgba(0,0,0,0) 80%)',
-                 WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0.1) 75%, rgba(0,0,0,0) 80%)'
-               }}
+               className="w-[120%] max-w-[600px] object-contain relative z-10" 
                onError={(e) => e.target.style.display='none'} 
              />
           </div>
