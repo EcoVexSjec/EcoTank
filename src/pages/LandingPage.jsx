@@ -193,7 +193,7 @@ export default function LandingPage() {
                 {[
                   { name: "EcoVex", logo: "ecotank-logo.png", info: "A student-led initiative for sustainability & environmental action." },
                   { name: "Shilpa", logo: null, info: null },
-                  { name: "Agent Blazer", logo: null, info: null },
+                  { name: "AgentBlazer Club", logo: null, info: "A student-driven tech club fostering innovation in AI, prompt engineering, LLMs, and the Salesforce ecosystem through hands-on learning." },
                   { name: "NSS SJEC Unit", logo: "nss-logo.png", info: "Empowering students to serve society through community outreach, social awareness, and impactful welfare initiatives." }
                 ].map((partner, i) => {
                   const partnerIdx = i + 1;
