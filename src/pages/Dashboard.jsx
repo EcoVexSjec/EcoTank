@@ -49,7 +49,7 @@ export default function Dashboard() {
   const timelinePhases = [
     { date: "Current - May 12", title: "Team Registration", desc: "Build your team of exactly 1-4 members. The clock is ticking to securely lock in your roster." },
     { date: "May 12 - May 20", title: "PPT Submission", desc: "Submit your comprehensive pitch deck outlining your breakthrough ideas and technical diagrams." },
-    { date: "May 24 - May 25", title: "Phase 1 Result", desc: "Shortlisted teams will be announced. Only the most innovative solutions advance to the next stage." },
+    { date: "May 24 - May 25", title: "Phase 1 Selection", desc: "Shortlisted teams will be announced. Only the most innovative solutions advance to the next stage." },
     { date: "May 26 - June 1", title: "Solution Designing", desc: "Finalists refine their prototypes and prepare for the big stage. Time to build your legacy." },
     { date: "June 2, 2026", title: "Grand Finale", desc: "Final offline presentation and Q&A. Pitch your legacy and defend your vision before the master panel." }
   ];

@@ -56,7 +56,7 @@ export default function LandingPage() {
   const timelinePhases = [
     { phase: "01", date: "Current - May 12", title: "Team Registration", desc: "Build your team of exactly 1-4 members. The clock is ticking to securely lock in your roster." },
     { phase: "02", date: "May 12 - May 20", title: "PPT Submission", desc: "Submit your comprehensive pitch deck outlining your breakthrough ideas and technical diagrams." },
-    { phase: "03", date: "May 24 - May 25", title: "Phase 1 Result", desc: "Shortlisted teams will be announced. Only the most innovative solutions advance to the next stage." },
+    { phase: "03", date: "May 24 - May 25", title: "Phase 1 Selection", desc: "Shortlisted teams will be announced. Only the most innovative solutions advance to the next stage." },
     { phase: "04", date: "May 26 - June 1", title: "Solution Designing", desc: "Finalists refine their prototypes and prepare for the big stage. Time to build your legacy." },
     { phase: "05", date: "June 2, 2026", title: "Grand Finale", desc: "Final offline presentation and Q&A. Pitch your legacy and defend your vision before the master panel." }
   ];
@@ -92,9 +92,9 @@ export default function LandingPage() {
             </div>
             
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 tracking-tight leading-[1.1]">
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-lime-300">PITCH.</span>
-              <span className="block text-slate-100">IMPACT.</span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">INSPIRE.</span>
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-lime-300">PITCH</span>
+              <span className="block text-slate-100">IMPACT</span>
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">INSPIRE</span>
             </h1>
             
             <p className="text-lg sm:text-xl text-slate-400 max-w-xl mb-10 leading-relaxed font-light">
@@ -269,7 +269,7 @@ export default function LandingPage() {
                  <span className="text-2xl font-bold tracking-wide text-white">EcoTank</span>
               </div>
               <p className="text-slate-400 font-light leading-relaxed max-w-sm mb-8">
-                The ultimate hackathon platform built for elite engineers ready to solve ecological crises. Target the 17 SDGs and build the future.
+               The ultimate pitch arena for innovative engineers to solve ecological crises and build solutions aligned with the 17 SDGs.
               </p>
               <Link to="/login" className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-400 to-cyan-400 text-slate-950 font-extrabold px-8 py-4 rounded-xl hover:from-emerald-300 hover:to-cyan-300 transition-all shadow-[0_0_30px_rgba(16,185,129,0.4)]">
                 Log In <ArrowRight className="w-4 h-4 ml-1" />
