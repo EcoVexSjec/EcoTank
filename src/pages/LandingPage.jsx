@@ -111,7 +111,7 @@ export default function LandingPage() {
           <div className="hero-golem relative flex justify-center items-center min-h-[400px]">
              <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-cyan-500/20 rounded-full blur-[80px] animate-pulse pointer-events-none"></div>
              <img 
-               src={`${import.meta.env.BASE_URL}mascot-main.webp`} 
+               src={`${import.meta.env.BASE_URL}mascot.png`} 
                alt="Main Mascot" 
                className="w-[120%] max-w-[600px] object-contain relative z-10 mix-blend-screen" 
                style={{
@@ -134,28 +134,28 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Earth */}
             <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6 hover:bg-slate-800/50 hover:border-emerald-500/50 transition-all group backdrop-blur-sm">
-                 <img src={`${import.meta.env.BASE_URL}mascot-earth.webp`} alt="Earth" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
+                 <img src={`${import.meta.env.BASE_URL}mascot-earth.png`} alt="Earth" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
                  <h3 className="text-2xl font-bold mb-3 text-emerald-400">Earth Golem</h3>
                  <p className="text-slate-400 text-sm leading-relaxed font-light">Deforestation, soil pollution, and loss of green cover are damaging ecosystems and threatening biodiversity across the planet.</p>
             </div>
             
             {/* Fire */}
             <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6 hover:bg-slate-800/50 hover:border-orange-500/50 transition-all group backdrop-blur-sm">
-                 <img src={`${import.meta.env.BASE_URL}mascot-fire.webp`} alt="Fire" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
+                 <img src={`${import.meta.env.BASE_URL}mascot-fire.png`} alt="Fire" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
                  <h3 className="text-2xl font-bold mb-3 text-orange-400">Fire Golem</h3>
                  <p className="text-slate-400 text-sm leading-relaxed font-light">Rising temperatures, extreme heatwaves, and carbon emissions are accelerating global warming and climate change.</p>
             </div>
 
             {/* Water */}
             <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6 hover:bg-slate-800/50 hover:border-blue-500/50 transition-all group backdrop-blur-sm">
-                 <img src={`${import.meta.env.BASE_URL}mascot-water.webp`} alt="Water" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
+                 <img src={`${import.meta.env.BASE_URL}mascot_water.png`} alt="Water" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
                  <h3 className="text-2xl font-bold mb-3 text-blue-400">Water Golem</h3>
                  <p className="text-slate-400 text-sm leading-relaxed font-light">Melting glaciers and shrinking polar ice caps are raising sea levels and disturbing Earth’s climate balance.</p>
             </div>
 
             {/* Wind */}
             <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6 hover:bg-slate-800/50 hover:border-cyan-500/50 transition-all group backdrop-blur-sm">
-                 <img src={`${import.meta.env.BASE_URL}mascot-wind.webp`} alt="Wind" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
+                 <img src={`${import.meta.env.BASE_URL}mascot-wind.png`} alt="Wind" className="w-full h-48 object-contain mb-6 filter group-hover:-translate-y-2 transition-transform duration-500" onError={(e) => e.target.style.display='none'} />
                  <h3 className="text-2xl font-bold mb-3 text-cyan-400">Wind Golem</h3>
                  <p className="text-slate-400 text-sm leading-relaxed font-light">Air pollution and harmful emissions are reducing air quality, affecting human health, and harming the environment.</p>
             </div>
