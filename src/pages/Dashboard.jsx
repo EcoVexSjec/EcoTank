@@ -816,9 +816,9 @@ export default function Dashboard() {
     
               {error && <div className="bg-red-500/10 border border-red-500/50 text-red-400 text-sm p-4 rounded-lg mb-8 mx-auto text-center w-full max-w-2xl">{error}</div>}
     
-              <div className="grid md:grid-cols-2 gap-8 w-full">
+              <div className="flex justify-center w-full">
                 {/* Create Team Panel */}
-                <div className="bg-slate-800/40 backdrop-blur-md p-10 border border-emerald-500/30 hover:border-emerald-500/60 transition-colors rounded-3xl shadow-2xl flex flex-col">
+                <div className="bg-slate-800/40 backdrop-blur-md p-10 border border-emerald-500/30 hover:border-emerald-500/60 transition-colors rounded-3xl shadow-2xl flex flex-col w-full max-w-2xl">
                   <h3 className="text-3xl font-bold mb-3 text-white">Create a New Team</h3>
                   <p className="text-base text-slate-400 mb-8 leading-relaxed">Take charge as Team Leader. Generate an invite link for up to 3 friends.</p>
                   
@@ -835,29 +835,6 @@ export default function Dashboard() {
                     </div>
                     <button disabled={loading} className="w-full bg-gradient-to-r from-emerald-400 to-cyan-400 hover:from-emerald-300 hover:to-cyan-300 text-slate-950 font-black text-lg py-5 rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.3)] transition-all">
                       {loading ? 'Creating...' : 'Create Team'}
-                    </button>
-                  </form>
-                </div>
-    
-                {/* Join Team Panel */}
-                <div className="bg-slate-800/40 backdrop-blur-md p-10 border border-cyan-500/30 hover:border-cyan-500/60 transition-colors rounded-3xl shadow-2xl flex flex-col">
-                  <h3 className="text-3xl font-bold mb-3 text-white">Join Existing Team</h3>
-                  <p className="text-base text-slate-400 mb-8 leading-relaxed">Enter the 6-digit code provided by your Team Leader.</p>
-                  
-                  <form onSubmit={handleJoinTeam} className="space-y-6 mt-auto">
-                    <div>
-                      <input 
-                        type="text" 
-                        required
-                        className="w-full bg-slate-900/80 border border-slate-700 text-slate-100 rounded-2xl px-6 py-5 font-mono tracking-[0.3em] text-center text-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all uppercase placeholder:tracking-normal placeholder:text-slate-600"
-                        value={inviteCodeInput}
-                        onChange={(e) => setInviteCodeInput(e.target.value.toUpperCase())}
-                        placeholder="ENTER 6 DIGIT CODE"
-                        maxLength={6}
-                      />
-                    </div>
-                    <button disabled={loading} className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-black text-lg py-5 rounded-2xl shadow-[0_0_30px_rgba(6,182,212,0.3)] transition-all">
-                      {loading ? 'Joining...' : 'Secure Your Spot'}
                     </button>
                   </form>
                 </div>
