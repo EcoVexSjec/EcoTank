@@ -784,7 +784,7 @@ export default function Dashboard() {
              </a>
 
              <a 
-               href="https://drive.google.com/drive/folders/1UMKuOAQxJPV6AtSM2XZKlGpLPQyF0222?usp=drive_link" 
+               href="https://docs.google.com/presentation/d/1Wh8C3TYFL1y_SgYyk3CHI2xZA6JdQt0i5KeQnmIoRhs/edit?usp=sharing" 
                target="_blank"
                rel="noopener noreferrer"
                className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 border border-cyan-500/30 rounded-2xl transition-all duration-500 hover:border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.1)] hover:shadow-[0_0_30px_rgba(6,182,212,0.2)] overflow-hidden"

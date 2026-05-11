@@ -291,6 +291,7 @@ export default function LandingPage() {
                 <li><Link to="/login" className="text-slate-400 hover:text-emerald-400 transition-colors">Login to Hub</Link></li>
                 <li><Link to="/register" className="text-slate-400 hover:text-emerald-400 transition-colors">Sign Up</Link></li>
                 <li><a href="https://drive.google.com/drive/folders/1UMKuOAQxJPV6AtSM2XZKlGpLPQyF0222?usp=drive_link" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-emerald-400 transition-colors">Read Rulebook</a></li>
+                <li><a href="https://docs.google.com/presentation/d/1Wh8C3TYFL1y_SgYyk3CHI2xZA6JdQt0i5KeQnmIoRhs/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-emerald-400 transition-colors">PPT Template</a></li>
               </ul>
             </div>
 
