@@ -960,8 +960,8 @@ export default function Dashboard() {
                 {[
                   { name: "EcoVex", logo: "ecotank-logo.png", color: "text-emerald-400", info: "A student-led initiative for sustainability & environmental action." },
                   { name: "NexCon", logo: null, color: "text-emerald-400", info: null },
-                  { name: "AgentBlazer Club", logo: "Agent_blaser.png", color: "text-purple-400", info: "A student-driven tech club fostering innovation in AI, prompt engineering, LLMs, and the Salesforce ecosystem through hands-on learning." },
-                  { name: "NSS SJEC Unit", logo: "nss-logo.png", color: "text-blue-400", info: "Empowering students to serve society through community outreach, social awareness, and impactful welfare initiatives." }
+                  { name: "AgentBlazer Club", logo: "Agent_blaser.png", color: "text-purple-500 shadow-purple-500/50", info: "A student-driven tech club fostering innovation in AI, prompt engineering, LLMs, and the Salesforce ecosystem through hands-on learning." },
+                  { name: "NSS SJEC Unit", logo: "nss-logo.png", color: "text-blue-500 shadow-blue-500/50", info: "Empowering students to serve society through community outreach, social awareness, and impactful welfare initiatives." }
                 ].map((partner, i) => {
                   const partnerIdx = i + 1;
                   return (
