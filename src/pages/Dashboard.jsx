@@ -994,9 +994,9 @@ export default function Dashboard() {
                <h2 className="text-3xl font-bold mb-24 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Organizers</h2>
                <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
                   {[
-                    { name: "Melroy Almeida", role: "President", img: "President.png" },
-                    { name: "Roy Prince Veigas", role: "Tech Lead", img: "Tech Lead.jpeg" },
-                    { name: "Keerthana Nair", role: "Treasurer", img: "Treasurer.jpeg" }
+                    { name: "Melroy Almeida", role: "President", img: "president.png" },
+                    { name: "Roy Prince Veigas", role: "Tech Lead", img: "tech-lead.jpeg" },
+                    { name: "Keerthana Nair", role: "Treasurer", img: "treasurer.jpeg" }
                   ].map((org, i) => (
                     <div key={i} className="flex flex-col items-center group cursor-pointer">
                       <div className="w-40 h-40 sm:w-56 sm:h-56 rounded-full overflow-hidden transition-all mb-4 shadow-xl">
