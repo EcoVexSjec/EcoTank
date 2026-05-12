@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight, Leaf, Globe2, Cpu, Sparkles, ShieldCheck, Microscope, Database, Zap } from 'lucide-react';
+import { ArrowRight, Leaf, Globe2, Cpu, Sparkles, ShieldCheck, Microscope, Database, Zap, Trophy, Medal } from 'lucide-react';
 import { db } from '../firebase/firebase';
 import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 
@@ -179,6 +179,57 @@ export default function LandingPage() {
                   </div>
                 ))}
              </div>
+        </div>
+      </section>
+ 
+      {/* Prize Pool Section */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-emerald-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-24">
+            <Trophy className="w-16 h-16 text-yellow-400 mx-auto mb-6 drop-shadow-[0_0_15px_rgba(250,204,21,0.4)]" />
+            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-4">Win Amazing Prizes</h2>
+            <p className="text-slate-400 text-lg font-light max-w-2xl mx-auto uppercase tracking-widest text-sm">Total Prize Pool of ₹14,000</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end max-w-5xl mx-auto">
+            {/* 2nd Place */}
+            <div className="order-2 md:order-1 group">
+              <div className="bg-slate-900/60 border border-slate-700/50 rounded-3xl p-8 backdrop-blur-xl transition-all duration-500 group-hover:border-slate-400/50 group-hover:-translate-y-2 flex flex-col items-center text-center shadow-2xl">
+                <div className="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center mb-6 border border-slate-700 group-hover:scale-110 transition-transform">
+                  <Medal className="w-8 h-8 text-slate-400" />
+                </div>
+                <h3 className="text-slate-400 font-bold uppercase tracking-widest text-sm mb-2">Runner Up</h3>
+                <div className="text-4xl font-black text-white mb-2">₹4,000</div>
+                <div className="h-1 w-12 bg-slate-400 rounded-full opacity-30"></div>
+              </div>
+            </div>
+
+            {/* 1st Place */}
+            <div className="order-1 md:order-2 group">
+              <div className="bg-gradient-to-b from-slate-800/80 to-slate-900/80 border-2 border-yellow-500/30 rounded-[40px] p-12 backdrop-blur-xl transition-all duration-500 group-hover:border-yellow-500/60 group-hover:-translate-y-4 flex flex-col items-center text-center shadow-[0_0_50px_rgba(234,179,8,0.15)] relative">
+                <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-yellow-500 text-slate-950 font-black px-6 py-2 rounded-full text-sm uppercase tracking-widest shadow-lg">Winner</div>
+                <div className="w-24 h-24 rounded-3xl bg-yellow-500/10 flex items-center justify-center mb-8 border border-yellow-500/20 group-hover:scale-110 transition-transform">
+                  <Trophy className="w-12 h-12 text-yellow-500 drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]" />
+                </div>
+                <h3 className="text-yellow-500 font-bold uppercase tracking-widest text-sm mb-2">Grand Prize</h3>
+                <div className="text-6xl font-black text-white mb-4">₹8,000</div>
+                <div className="h-1.5 w-20 bg-yellow-500 rounded-full opacity-40"></div>
+              </div>
+            </div>
+
+            {/* 3rd Place */}
+            <div className="order-3 group">
+              <div className="bg-slate-900/60 border border-slate-700/50 rounded-3xl p-8 backdrop-blur-xl transition-all duration-500 group-hover:border-orange-700/50 group-hover:-translate-y-2 flex flex-col items-center text-center shadow-2xl">
+                <div className="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center mb-6 border border-slate-700 group-hover:scale-110 transition-transform">
+                  <Medal className="w-8 h-8 text-orange-700" />
+                </div>
+                <h3 className="text-orange-700 font-bold uppercase tracking-widest text-sm mb-2">Second Runner Up</h3>
+                <div className="text-4xl font-black text-white mb-2">₹2,000</div>
+                <div className="h-1 w-12 bg-orange-700 rounded-full opacity-30"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
