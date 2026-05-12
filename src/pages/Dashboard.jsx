@@ -943,9 +943,9 @@ export default function Dashboard() {
             {/* Partner */}
             <div className="text-center mb-32">
                <h2 className="text-3xl font-bold mb-16 tracking-tight text-slate-300 uppercase tracking-[0.2em]">Our Partners</h2>
-             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto px-6">
+             <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 max-w-4xl mx-auto px-6">
                 {[
-                  { name: "NexCon", logo: null, color: "text-emerald-400", info: null },
+                  { name: "NexCon", logo: null, color: "text-blue-500 shadow-blue-500/50", info: null },
                   { name: "AgentBlazer Club", logo: "Agent_blaser.png", color: "text-purple-500 shadow-purple-500/50", info: "A student-driven tech club fostering innovation in AI, prompt engineering, LLMs, and the Salesforce ecosystem through hands-on learning." },
                   { name: "NSS SJEC Unit", logo: "nss-logo.png", color: "text-blue-500 shadow-blue-500/50", info: "Empowering students to serve society through community outreach, social awareness, and impactful welfare initiatives." }
                 ].map((partner, i) => {
