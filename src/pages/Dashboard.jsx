@@ -4,7 +4,7 @@ import { db, storage } from '../firebase/firebase';
 import { doc, getDoc, setDoc, updateDoc, collection, query, where, getDocs, deleteDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, Users, Link as LinkIcon, Sparkles, AlertCircle, CheckCircle2, Globe2, Cpu, User, BookOpen, Camera, Trophy, ShieldCheck, Microscope, Zap, Clock, Pencil, Download, UserMinus } from 'lucide-react';
+import { LogOut, Users, Link as LinkIcon, Sparkles, AlertCircle, CheckCircle2, Globe2, Cpu, User, BookOpen, Camera, Trophy, ShieldCheck, Microscope, Zap, Clock, Pencil, Download, UserMinus, Medal } from 'lucide-react';
 import { gsap } from 'gsap';
 
 export default function Dashboard() {
@@ -787,6 +787,53 @@ export default function Dashboard() {
                  </div>
                </div>
              </a>
+          </div>
+        </div>
+      </section>
+ 
+      {/* Prize Pool Section */}
+      <section className="py-20 relative overflow-hidden bg-slate-900/20">
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter mb-4">The Prize Pool</h2>
+            <div className="inline-block h-1 w-20 bg-emerald-500 rounded-full mb-4"></div>
+            <p className="text-slate-400 text-base font-medium max-w-2xl mx-auto uppercase tracking-widest">Compete for a total of ₹14,000</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-end max-w-5xl mx-auto">
+            {/* 2nd Place */}
+            <div className="order-2 md:order-1 group">
+              <div className="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 backdrop-blur-xl transition-all duration-500 group-hover:border-slate-400/50 flex flex-col items-center text-center">
+                <div className="w-12 h-12 rounded-xl bg-slate-900 flex items-center justify-center mb-4 border border-slate-700">
+                  <Medal className="w-6 h-6 text-slate-400" />
+                </div>
+                <h3 className="text-slate-400 font-bold uppercase tracking-widest text-[10px] mb-1">Runner Up</h3>
+                <div className="text-3xl font-black text-white">₹4,000</div>
+              </div>
+            </div>
+
+            {/* 1st Place */}
+            <div className="order-1 md:order-2 group">
+              <div className="bg-gradient-to-b from-slate-800/60 to-slate-900/60 border-2 border-yellow-500/30 rounded-3xl p-10 backdrop-blur-xl transition-all duration-500 group-hover:border-yellow-500/60 group-hover:-translate-y-2 flex flex-col items-center text-center shadow-[0_0_40px_rgba(234,179,8,0.1)] relative">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-yellow-500 text-slate-950 font-black px-4 py-1 rounded-full text-[10px] uppercase tracking-widest shadow-lg">Winner</div>
+                <div className="w-20 h-20 rounded-2xl bg-yellow-500/10 flex items-center justify-center mb-6 border border-yellow-500/20">
+                  <Trophy className="w-10 h-10 text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]" />
+                </div>
+                <h3 className="text-yellow-500 font-bold uppercase tracking-widest text-[10px] mb-1">Grand Prize</h3>
+                <div className="text-5xl font-black text-white">₹8,000</div>
+              </div>
+            </div>
+
+            {/* 3rd Place */}
+            <div className="order-3 group">
+              <div className="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 backdrop-blur-xl transition-all duration-500 group-hover:border-orange-700/50 flex flex-col items-center text-center">
+                <div className="w-12 h-12 rounded-xl bg-slate-900 flex items-center justify-center mb-4 border border-slate-700">
+                  <Medal className="w-6 h-6 text-orange-700" />
+                </div>
+                <h3 className="text-orange-700 font-bold uppercase tracking-widest text-[10px] mb-1">Second Runner Up</h3>
+                <div className="text-3xl font-black text-white">₹2,000</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
